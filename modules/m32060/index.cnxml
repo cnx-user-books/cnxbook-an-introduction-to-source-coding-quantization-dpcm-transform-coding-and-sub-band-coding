@@ -1,0 +1,116 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Entropy Coding</title>
+<metadata>
+  <md:content-id>m32060</md:content-id><md:title>Entropy Coding</md:title>
+  <md:abstract>In this module, the concepts of entropy and variable-length coding are introduced, motivating the description of the Huffman encoder.</md:abstract>
+  <md:uuid>f67b3e43-b54c-44b7-bb56-d2e88d56a02a</md:uuid>
+</metadata>
+
+<content>
+ 
+        <list id="id167246" display="block" list-type="bulleted"><item id="uid41"><emphasis effect="italics"><emphasis effect="underline">Binary Scalar Encoding:</emphasis></emphasis> 
+Previously we have focused on the memoryless scalar quantizer <m:math overflow="scroll"><m:mrow><m:mi>y</m:mi><m:mo>=</m:mo><m:mi>Q</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math>,
+where <emphasis effect="italics">y</emphasis> takes a value from a set of <emphasis effect="italics">L</emphasis> reconstruction levels.
+By coding each quantizer output in binary format, we transmit
+(store) the information at a rate (cost) of
+<equation id="id167309"><m:math overflow="scroll" mode="display"><m:mrow><m:mi>R</m:mi><m:mo>=</m:mo><m:mo>⌈</m:mo><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>L</m:mi><m:mo>⌉</m:mo><m:mspace width="3.33333pt"/><m:mspace width="3.33333pt"/><m:mtext>bits/sample</m:mtext><m:mo>.</m:mo></m:mrow></m:math></equation>
+If, for example, <m:math overflow="scroll"><m:mrow><m:mi>L</m:mi><m:mo>=</m:mo><m:mn>8</m:mn></m:mrow></m:math>, then we transmit at 3 bits/sample.
+Say we can tolerate a bit more quantization error, e.g., as results
+from <m:math overflow="scroll"><m:mrow><m:mi>L</m:mi><m:mo>=</m:mo><m:mn>5</m:mn></m:mrow></m:math>.
+We hope that this reduction in fidelity reduces our transmission
+requirements, but with this simple binary encoding scheme we still
+require <m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mo>=</m:mo><m:mn>3</m:mn></m:mrow></m:math> bits/sample!
+</item>
+          <item id="uid42"><emphasis effect="italics"><emphasis effect="underline">Idea—Block Coding:</emphasis></emphasis> 
+Let's assign a symbol to each block of 3 consecutive quantizer outputs.
+We need a symbol alphabet of size <m:math overflow="scroll"><m:mrow><m:mo>≥</m:mo><m:msup><m:mn>5</m:mn><m:mn>3</m:mn></m:msup><m:mo>=</m:mo><m:mn>125</m:mn></m:mrow></m:math>, which is adequately
+represented by a 7-bit word (<m:math overflow="scroll"><m:mrow><m:msup><m:mn>2</m:mn><m:mn>7</m:mn></m:msup><m:mo>=</m:mo><m:mn>128</m:mn></m:mrow></m:math>).
+Transmitting these words requires only <m:math overflow="scroll"><m:mrow><m:mn>7</m:mn><m:mo>/</m:mo><m:mn>3</m:mn><m:mo>=</m:mo><m:mn>2</m:mn><m:mo>.</m:mo><m:mn>33</m:mn></m:mrow></m:math> bits/sample!
+</item>
+          <item id="uid43"><emphasis effect="italics"><emphasis effect="underline">Idea—Variable Length Coding:</emphasis></emphasis> 
+Assume some of the quantizer outputs occur more frequently than others.
+Could we come up with an alphabet consisting of short words for
+representing frequent outputs and longer words for infrequent outputs
+that would have a lower <emphasis effect="italics">average</emphasis> transmission rate?
+<example id="eip-id1170427589771"><title>Variable Length Coding)</title>
+<para id="eip-id1170426089736">Consider the quantizer with <m:math overflow="scroll"><m:mrow><m:mi>L</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:mrow></m:math> and output probabilities
+indicated in <link target-id="id167691"/>.
+Straightforward 2-bit encoding requires average bit rate of 2
+bits/sample, while the variable length code in <link target-id="id167691"/> gives
+average <m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msub><m:mo>∑</m:mo><m:mi>k</m:mi></m:msub><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mi>n</m:mi><m:mi>k</m:mi></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>6</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>25</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>2</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>1</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>3</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>05</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>3</m:mn><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>55</m:mn></m:mrow></m:math> bits/sample.</para>
+<table id="id167691" summary=""><tgroup cols="3"><tbody><row><entry>output</entry><entry><emphasis effect="italics">P<sub>k</sub></emphasis></entry><entry>code</entry></row><row><entry><emphasis effect="italics">y<sub>1</sub></emphasis></entry><entry>0.60</entry><entry>0</entry></row><row><entry><emphasis effect="italics">y<sub>2</sub></emphasis></entry><entry>0.25</entry><entry>01</entry></row><row><entry><emphasis effect="italics">y<sub>3</sub></emphasis></entry><entry>0.10</entry><entry>011</entry></row><row><entry><emphasis effect="italics">y<sub>4</sub></emphasis></entry><entry>0.05</entry><entry>111</entry></row></tbody></tgroup></table></example></item>
+          <item id="uid45"><emphasis effect="italics"><emphasis effect="underline">(Just enough information about) Entropy:</emphasis></emphasis> 
+
+<exercise id="eip-id45190397" print-placement="here">
+<problem id="eip-id45190399" type="Question"><label>Question</label>
+<para id="eip-id43285839">Given an arbitrarily complex coding scheme, what is
+the minimum bits/sample required to transmit (store) the sequence
+<m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo><m:mo>}</m:mo></m:mrow></m:math>?</para>
+</problem>
+
+<solution id="eip-id43285864" type="Answer"><label>Answer</label><para id="eip-id43285870">When random process <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo><m:mo>}</m:mo></m:mrow></m:math> is i.i.d., the minimum
+average bit rate is
+<equation id="id168000"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>R</m:mi><m:mo movablelimits="true" form="prefix">min</m:mo></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mo>,</m:mo></m:mrow></m:math></equation>
+where <emphasis effect="italics">H<sub>y</sub></emphasis> is the <emphasis effect="italics">entropy</emphasis> of random variable <m:math overflow="scroll"><m:mrow><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> in bits:
+<equation id="id168087"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mo>-</m:mo><m:munderover><m:mrow><m:mo>∑</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:mo>,</m:mo></m:mrow></m:math></equation>
+and <emphasis effect="italics">ϵ</emphasis> is an arbitrarily small positive constant (see textbooks by Berger and by Cover &amp; Thomas).</para>
+</solution>
+
+<commentary id="eip-id45102611"><label>Notes:</label><list id="id168192" display="block" list-type="bulleted" bullet-style="dash"><item id="uid48">Entropy obeys
+<m:math overflow="scroll"><m:mrow><m:mn>0</m:mn><m:mo>≤</m:mo><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub><m:mo>≤</m:mo><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>L</m:mi></m:mrow></m:math>. The left inequality occurs
+when <m:math overflow="scroll"><m:mrow><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math> for some <emphasis effect="italics">k</emphasis>, while the right inequality occurs
+when <m:math overflow="scroll"><m:mrow><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>L</m:mi></m:mrow></m:math> for every <emphasis effect="italics">k</emphasis>.
+</item><item id="uid49">The term <emphasis effect="italics">entropy</emphasis> refers to the average information of a
+single random variable, while the term <emphasis effect="italics">entropy rate</emphasis> refers
+to a sequence of random variables, i.e., a random process.
+</item><item id="uid50">When <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo><m:mo>}</m:mo></m:mrow></m:math> is not independent (the focus of later sections),
+a different expression for <emphasis effect="italics">R<sub><emphasis effect="normal">min</emphasis></sub></emphasis> applies.
+</item><item id="uid51">Though the minimum rate is well specified, the construction of
+a coding scheme which always achieves this rate is not.
+</item></list><example id="eip-id1165884884554"><title>Entropy of Variable Length Code</title>  
+<para id="eip-id1165884938735">Recalling the setup of <link target-id="eip-id1170427589771"/>, we find that
+<m:math overflow="scroll"><m:mrow><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub><m:mo>=</m:mo><m:mo>-</m:mo><m:mfenced separators="" open="(" close=")"><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>6</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>6</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>25</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>25</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>1</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>1</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>05</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>05</m:mn></m:mfenced><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>49</m:mn></m:mrow></m:math> bits.
+Assuming i.i.d. <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo><m:mo>}</m:mo></m:mrow></m:math>, we have <m:math overflow="scroll"><m:mrow><m:msub><m:mi>R</m:mi><m:mo movablelimits="true" form="prefix">min</m:mo></m:msub><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>49</m:mn></m:mrow></m:math> bits/sample.
+Compare to the variable length code on the right which gave
+<m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>55</m:mn></m:mrow></m:math> bits/sample.</para>
+<table id="id168644" summary=""><tgroup cols="3"><tbody><row><entry>output</entry><entry><emphasis effect="italics">P<sub>k</sub></emphasis></entry><entry>code</entry></row><row><entry><emphasis effect="italics">y<sub>1</sub></emphasis></entry><entry>0.60</entry><entry>0</entry></row><row><entry><emphasis effect="italics">y<sub>2</sub></emphasis></entry><entry>0.25</entry><entry>01</entry></row><row><entry><emphasis effect="italics">y<sub>3</sub></emphasis></entry><entry>0.10</entry><entry>011</entry></row><row><entry><emphasis effect="italics">y<sub>4</sub></emphasis></entry><entry>0.05</entry><entry>111</entry></row></tbody></tgroup></table></example></commentary>
+</exercise></item>
+          <item id="uid53"><emphasis effect="italics"><emphasis effect="underline">Huffman Encoding:</emphasis></emphasis> 
+Given quantizer outputs <emphasis effect="italics">y<sub>k</sub></emphasis> or fixed-length blocks of outputs
+<m:math overflow="scroll"><m:mrow><m:mo>(</m:mo><m:msub><m:mi>y</m:mi><m:mi>j</m:mi></m:msub><m:mspace width="0.166667em"/><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub><m:mspace width="0.166667em"/><m:msub><m:mi>y</m:mi><m:mi>ℓ</m:mi></m:msub><m:mo>)</m:mo></m:mrow></m:math>,
+the <emphasis effect="italics">Huffman</emphasis> procedure constructs variable length codes that
+are optimal in certain respects (see Cover &amp; Thomas).
+For example, when the probabilities of <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> are powers of 1/2
+(and <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo><m:mo>}</m:mo></m:mrow></m:math> is i.i.d.), the entropy rate of a Huffman encoded output
+attains <emphasis effect="italics">R<sub><emphasis effect="normal">min</emphasis></sub></emphasis>.
+<note id="eip-id6940586" type="aside"><title>Huffman Procedure (Binary Case)</title><list id="id169009" display="block" list-type="enumerated"><item id="uid55">Arrange ouput probabilities <emphasis effect="italics">P<sub>k</sub></emphasis> in decreasing order
+and consider them as leaf nodes of a tree.
+</item><item id="uid56">While there exists more than one node:
+<list id="id169052" display="block" list-type="bulleted" bullet-style="dash"><item id="uid57">Merge the two nodes with smallest probability to form
+a new node whose probability equals the sum of the two
+merged nodes.
+</item><item id="uid58">Arbitrarily assign 1 and 0 to the two branches of the
+merging pair.
+</item></list></item><item id="uid59">The code assigned to each output is obtained by reading the
+branch bits sequentially from root note to leaf node.
+</item></list>
+
+<figure id="uid60"><media id="uid60_media" alt=""><image mime-type="image/png" src="../../media/img009.png" id="uid60_onlineimage" width="306"><!-- NOTE: attribute width changes image size online (pixels). original width is 306. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img009.eps" id="uid60_printimage"/></media></figure>
+</note>
+
+<example id="eip-id1164858417304"><title>Huffman Encoder Attaining R<sub><emphasis effect="normal">min</emphasis></sub></title><para id="eip-id1164862147849">In <link target-id="eip-id6940586"/>, a Huffman code was constructed for the
+output probabilities listed below.
+Here <m:math overflow="scroll"><m:mrow><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub><m:mo>=</m:mo><m:mo>-</m:mo><m:mfenced separators="" open="(" close=")"><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>5</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>5</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>25</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>25</m:mn><m:mo>+</m:mo><m:mn>2</m:mn><m:mo>·</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>125</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>125</m:mn></m:mfenced><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>75</m:mn></m:mrow></m:math> bits,
+so that <m:math overflow="scroll"><m:mrow><m:msub><m:mi>R</m:mi><m:mo movablelimits="true" form="prefix">min</m:mo></m:msub><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>75</m:mn></m:mrow></m:math> bits/sample (with the i.i.d. assumption).
+Since the average bit rate for the Huffman code is also
+<m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>5</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>25</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>2</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>125</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>3</m:mn><m:mo>+</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>125</m:mn><m:mspace width="-0.166667em"/><m:mo>·</m:mo><m:mspace width="-0.166667em"/><m:mn>3</m:mn><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>75</m:mn></m:mrow></m:math> bits/sample, Huffman encoding
+attains <emphasis effect="italics">R<sub><emphasis effect="normal">min</emphasis></sub></emphasis> for this output distribution.</para>
+
+<table id="id169442" summary=""><tgroup cols="3"><tbody><row><entry>output</entry><entry><emphasis effect="italics">P<sub>k</sub></emphasis></entry><entry>code</entry></row><row><entry><emphasis effect="italics">y<sub>1</sub></emphasis></entry><entry>0.5</entry><entry>0</entry></row><row><entry><emphasis effect="italics">y<sub>2</sub></emphasis></entry><entry>0.25</entry><entry>01</entry></row><row><entry><emphasis effect="italics">y<sub>3</sub></emphasis></entry><entry>0.125</entry><entry>011</entry></row><row><entry><emphasis effect="italics">y<sub>4</sub></emphasis></entry><entry>0.125</entry><entry>111</entry></row></tbody></tgroup></table></example></item>
+        </list>
+      
+
+</content>
+
+</document>

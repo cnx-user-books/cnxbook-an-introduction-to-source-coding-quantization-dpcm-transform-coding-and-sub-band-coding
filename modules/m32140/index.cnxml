@@ -1,0 +1,95 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Analysis of DPCM using Rate-Distortion Theory</title>
+<metadata>
+  <md:content-id>m32140</md:content-id><md:title>Analysis of DPCM using Rate-Distortion Theory</md:title>
+  <md:abstract>Using rate-distortion theory, the optimal SNR attainable for rate-R source coding is related to R and the spectral flatness measure of the source.  The SNR of rate-R DPCM is then analyzed and compared to the optimal, and shown to suffer by only 1.53 dB.</md:abstract>
+  <md:uuid>af6452f0-9c87-4c33-a669-9fe51b887dc4</md:uuid>
+</metadata>
+
+<content>
+        <list id="id337117" display="block" list-type="bulleted"><item id="uid33">The <emphasis effect="italics">rate-distortion function</emphasis><m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mo>(</m:mo><m:mi>D</m:mi><m:mo>)</m:mo></m:mrow></m:math> specifies the minimum average
+rate <emphasis effect="italics">R</emphasis> required to transmit the source process at a mean distortion of
+<emphasis effect="italics">D</emphasis>, while the <emphasis effect="italics">distortion-rate function</emphasis><m:math overflow="scroll"><m:mrow><m:mi>D</m:mi><m:mo>(</m:mo><m:mi>R</m:mi><m:mo>)</m:mo></m:mrow></m:math> specifies the
+minimum mean distortion <emphasis effect="italics">D</emphasis> resulting from transmission of the source
+at average rate <emphasis effect="italics">R</emphasis>.
+These bounds are theoretical in the sense that coding techniques which
+attain these minimum rates or distortions are in general unknown and
+thought to be infinitely complex as well as require infinite memory.
+Still, these bounds form a reference against which any specific coding
+system can be compared.
+For a continuous-amplitude white (i.e., “memoryless”) Gaussian
+source <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> (see Berger and Jayant &amp; Noll),
+<equation id="id337247"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mi>R</m:mi><m:mo>(</m:mo><m:mi>D</m:mi><m:mo>)</m:mo></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mfenced separators="" open="{" close=""><m:mtable><m:mtr><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfrac><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mi>D</m:mi></m:mfrac></m:mrow></m:mtd><m:mtd columnalign="left"><m:mrow><m:mn>0</m:mn><m:mo>≤</m:mo><m:mi>D</m:mi><m:mo>≤</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd columnalign="left"><m:mn>0</m:mn></m:mtd><m:mtd columnalign="left"><m:mrow><m:mi>D</m:mi><m:mo>≥</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mtd></m:mtr><m:mtr><m:mtd columnalign="right"><m:mrow><m:mi>D</m:mi><m:mo>(</m:mo><m:mi>R</m:mi><m:mo>)</m:mo></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+The sources we are interested in, however, are non-white.
+It turns out that when distortion <emphasis effect="italics">D</emphasis> is “small,” non-white Gaussian
+<m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> have the following distortion-rate function: (see page 644 of Jayant &amp; Noll)
+<equation id="id337462"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mi>D</m:mi><m:mo>(</m:mo><m:mi>R</m:mi><m:mo>)</m:mo></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:mo form="prefix">exp</m:mo><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:mo form="prefix">ln</m:mo><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:munder><m:munder accentunder="true"><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mrow><m:mo form="prefix">exp</m:mo><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:mo form="prefix">ln</m:mo><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mfenced></m:mrow><m:mrow><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mrow></m:mfrac></m:mfenced><m:mo>︸</m:mo></m:munder><m:mrow><m:mtext>spectral</m:mtext><m:mspace width="4.pt"/><m:mtext>flatness</m:mtext><m:mspace width="4.pt"/><m:mtext>measure</m:mtext></m:mrow></m:munder><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Note the ratio of geometric to arithmetic PSD means, called the
+<emphasis effect="italics">spectral flatness measure</emphasis>.
+Thus optimal coding of <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> yields
+<equation id="uid34"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mi> SNR </m:mi><m:mo>(</m:mo><m:mi>R</m:mi><m:mo>)</m:mo></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mn>10</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>10</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mfrac><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:mi>D</m:mi><m:mo>(</m:mo><m:mi>R</m:mi><m:mo>)</m:mo></m:mrow></m:mfrac></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>≈</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mtable frame="solid"><m:mtr><m:mtd><m:mn>6</m:mn><m:mo>.</m:mo><m:mn>02</m:mn><m:mi>R</m:mi><m:mo>-</m:mo><m:mn>10</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>10</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:msub><m:mtext>SFM</m:mtext><m:mi>x</m:mi></m:msub><m:mo>)</m:mo></m:mrow></m:mtd></m:mtr></m:mtable><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+To summarize, <link target-id="uid34"/> (lower equation) gives the best possible SNR for <emphasis effect="italics">any</emphasis>
+arbitrarily-complex coding system that transmits/stores information
+at an average rate of <emphasis effect="italics">R</emphasis> bits/sample.
+</item>
+          <item id="uid35">Let's compare the SNR-versus-rate performance acheivable by DPCM to
+the optimal given by <link target-id="uid34"/> (lower equation).
+The structure we consider is shown in <link target-id="uid37"/>, where
+quantized DPCM outputs <m:math overflow="scroll"><m:mrow><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> are coded into binary bits
+using an entropy coder.
+Assuming that <m:math overflow="scroll"><m:mrow><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> is white (which is a good assumption
+for well-designed predictors), optimal entropy coding/decoding is able
+to transmit and recover <m:math overflow="scroll"><m:mrow><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> at <m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mo>=</m:mo><m:msub><m:mi>H</m:mi><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover></m:msub></m:mrow></m:math>
+bits/sample without any distortion.
+<m:math overflow="scroll"><m:msub><m:mi>H</m:mi><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover></m:msub></m:math> is the entropy of <m:math overflow="scroll"><m:mrow><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>, for which we
+derived the following expression assuming large-<emphasis effect="italics">L</emphasis> uniform
+quantizer:
+<equation id="id338132"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msub><m:mi>H</m:mi><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover></m:msub></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>h</m:mi><m:mi>e</m:mi></m:msub><m:mo>-</m:mo><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mn>12</m:mn><m:mtext>var</m:mtext><m:mo>(</m:mo><m:mi>e</m:mi><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mfenced><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Since <m:math overflow="scroll"><m:mrow><m:mtext>var</m:mtext><m:mrow><m:mo>(</m:mo><m:mi>e</m:mi><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:math> in DPCM,
+<m:math overflow="scroll"><m:msub><m:mi>H</m:mi><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover></m:msub></m:math> can be rewritten:
+<equation id="id338334"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msub><m:mi>H</m:mi><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover></m:msub></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>h</m:mi><m:mi>e</m:mi></m:msub><m:mo>-</m:mo><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mn>12</m:mn><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup></m:mfenced><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+If <m:math overflow="scroll"><m:mrow><m:mi>e</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> is Gaussian, it can be shown that the differential entropy
+<emphasis effect="italics">h<sub>e</sub></emphasis> takes on the value
+<equation id="id338457"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msub><m:mi>h</m:mi><m:mi>e</m:mi></m:msub></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mn>2</m:mn><m:mi>π</m:mi><m:mi>e</m:mi><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup></m:mfenced><m:mo>,</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+so that
+<equation id="id338540"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msub><m:mi>H</m:mi><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover></m:msub></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced open="(" close=")"><m:mfrac><m:mrow><m:mi>π</m:mi><m:mi>e</m:mi><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow><m:mrow><m:mn>6</m:mn><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:mfrac></m:mfenced><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Using <m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mo>=</m:mo><m:msub><m:mi>H</m:mi><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover></m:msub></m:mrow></m:math> and rearranging the previous expression, we find
+<equation id="id338668"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mrow><m:mi>π</m:mi><m:mi>e</m:mi></m:mrow><m:mn>6</m:mn></m:mfrac><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+With the optimal infinite length predictor, <emphasis effect="italics">σ<sub>e</sub><sup>2</sup></emphasis> equals
+<m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo></m:mrow></m:msub></m:mrow></m:mrow></m:math> given by <link document="m32120" target-id="uid25">equation 10 from Performance of DPCM</link>.
+Plugging <link document="m32120" target-id="uid25">equation 10 from Performance of DPCM</link> into the previous expression and
+writing the result in terms of the spectral flatness measure,
+<equation id="id338800"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mrow><m:mi>π</m:mi><m:mi>e</m:mi></m:mrow><m:mn>6</m:mn></m:mfrac><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mspace width="0.166667em"/><m:msub><m:mtext>SFM</m:mtext><m:mi>x</m:mi></m:msub><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Translating into SNR, we obtain
+<equation id="uid36"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mi> SNR </m:mi></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mn>10</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>10</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mfrac><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup></m:mfrac></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>≈</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mtable frame="solid"><m:mtr><m:mtd><m:mn>6</m:mn><m:mo>.</m:mo><m:mn>02</m:mn><m:mi>R</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>53</m:mn><m:mo>-</m:mo><m:mn>10</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>10</m:mn></m:msub><m:msub><m:mtext>SFM</m:mtext><m:mi>x</m:mi></m:msub></m:mtd></m:mtr></m:mtable><m:mspace width="3.33333pt"/><m:mspace width="3.33333pt"/><m:mtext>[dB]</m:mtext><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+To summarize, a DPCM system using a MSE-optimal infinite-length
+predictor and optimal entropy coding of <m:math overflow="scroll"><m:mrow><m:mover accent="true"><m:mi>e</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> could operate
+at an average of <emphasis effect="italics">R</emphasis> bits/sample with the SNR in <link target-id="uid36"/> (lower equation).
+<figure id="uid37"><media id="uid37_media" alt="This figure is generally similar to the flow charts in figure 5, titled A Typical Differential PCM System. The labels and structure is all identical, except that in between the two arrows labeled e-tilde(n) are two boxes labeled entropy encoder, with arrows to the left and right of them that continuing the flow-movement to the right."><image mime-type="image/png" src="../../media/img006.png" id="uid37_onlineimage" width="1139"><!-- NOTE: attribute width changes image size online (pixels). original width is 1139. --></image><image for="pdf" mime-type="application/postscript" print-width="4in" src="../../media/img006.eps" id="uid37_printimage"/></media><caption>Entropy-Encoded DPCM System.</caption></figure></item>
+          <item id="uid38">Comparing <link target-id="uid34"/> (lower equation) and <link target-id="uid36"/> (lower equation), we see that
+DPCM incurs a 1.5 dB penalty in SNR when compared to the optimal.
+From our previous discussion on optimal quantization,
+we recognize that this 1.5 dB penalty comes from the fact that the
+quantizer in the DPCM system is memoryless.
+(Note that the DPCM quantizer <emphasis effect="italics">must</emphasis> be memoryless since the
+predictor input must not be delayed.)
+</item>
+          <item id="uid39">Though we have identified a 1.5 dB DPCM penalty with respect to optimal,
+a key point to keep in mind is that the design of near-optimal
+coders for <emphasis effect="italics">non-white</emphasis> signals is extremely difficult.
+When the signal statistics are rapidly changing, such a design task
+becomes nearly impossible.
+Though still non-trivial to design, near-optimal entropy coders for
+<emphasis effect="italics">white</emphasis> signals exist and are widely used in practice.
+Thus, DPCM can be thought of as a way of pre-processing a colored signal
+that makes near-optimal coding possible.
+From this viewpoint, 1.5 dB might not be considered a high price to pay.
+</item>
+        </list>
+ 
+
+
+</content>
+
+</document>

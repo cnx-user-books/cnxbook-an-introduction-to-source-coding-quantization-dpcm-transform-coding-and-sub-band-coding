@@ -1,0 +1,1861 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Performance of DPCM</title>
+<metadata>
+  <md:content-id>m32120</md:content-id><md:title>Performance of DPCM</md:title>
+  <md:abstract>Here we characterize the performance of DPCM via the simpler surrogate known as "quantized predictive encoding", which is known to have very similar performance in practice.  To do this, we derive the optimum prediction coefficients, the resulting prediction error variance and gain over PCM.</md:abstract>
+  <md:uuid>d5cecd00-946b-409b-bd3f-3ec43fce626a</md:uuid>
+</metadata>
+
+<content>
+  
+
+
+        <list id="id332389" display="block" list-type="bulleted"><item id="uid19">As we noted earlier, the DPCM performance gain is a consequence of
+variance reduction obtained through prediction.
+Here we derive the optimal predictor coefficients, prediction error
+variance, and bit rate for the system in <link document="m32070" target-id="uid15">figure 4 from Differential Pulse Code Modulation</link>.
+This system is easier to analyze than DPCM systems with quantizer
+in loop (e.g., <link document="m32070" target-id="uid17">figure 5 from Differential Pulse Code Modulation</link>) and it is said that the difference in
+prediction-error behavior is negligible when <m:math overflow="scroll"><m:mrow><m:mi>R</m:mi><m:mo>&gt;</m:mo><m:mn>2</m:mn></m:mrow></m:math>(see page 267 of Jayant &amp; Noll).
+</item>
+          <item id="uid20">
+            <emphasis effect="underline"><emphasis effect="italics">Optimal Prediction Coefficients:</emphasis></emphasis>
+First we find coefficients <emphasis effect="bold">h</emphasis> minimizing prediction error variance:
+            <equation id="id332463"><m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:munder>
+<m:mrow>
+                    <m:mo movablelimits="true" form="prefix">min</m:mo>
+</m:mrow>        
+            <m:mi mathvariant="bold">h</m:mi>
+                  </m:munder>
+                  <m:mo form="prefix">E</m:mo>
+                  <m:mrow>
+                    <m:mo>{</m:mo>
+                    <m:msup>
+                      <m:mi>e</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msup>
+                    <m:mrow>
+                      <m:mo>(</m:mo>
+                      <m:mi>n</m:mi>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mo>}</m:mo>
+                  </m:mrow>
+                  <m:mo>.</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+            Throughout, we assume that <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> is a zero-mean stationary
+random process with autocorrelation
+            <equation id="id332541">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>r</m:mi>
+                    <m:mi>x</m:mi>
+                  </m:msub>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>k</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>:</m:mo>
+                  <m:mo>=</m:mo>
+                  <m:mo form="prefix">E</m:mo>
+                  <m:mrow>
+                    <m:mo>{</m:mo>
+                    <m:mi>x</m:mi>
+                    <m:mrow>
+                      <m:mo>(</m:mo>
+                      <m:mi>n</m:mi>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mi>x</m:mi>
+                    <m:mrow>
+                      <m:mo>(</m:mo>
+                      <m:mi>n</m:mi>
+                      <m:mo>-</m:mo>
+                      <m:mi>k</m:mi>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mo>}</m:mo>
+                  </m:mrow>
+                  <m:mo>=</m:mo>
+                  <m:msub>
+                    <m:mi>r</m:mi>
+                    <m:mi>x</m:mi>
+                  </m:msub>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mo>-</m:mo>
+                    <m:mi>k</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>.</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+            A necessary condition for optimality is the following:
+            <equation id="id332634"><m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mo>∀</m:mo>
+                        <m:mi>j</m:mi>
+                        <m:mo>∈</m:mo>
+                        <m:mo>{</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mo>⋯</m:mo>
+                        <m:mo>,</m:mo>
+                        <m:mi>N</m:mi>
+                        <m:mo>}</m:mo>
+                        <m:mo>,</m:mo>
+                        <m:mspace width="1.em"/>
+                        <m:mn>0</m:mn>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mfrac>
+                          <m:mn>1</m:mn>
+                          <m:mn>2</m:mn>
+                        </m:mfrac>
+                        <m:mspace width="0.166667em"/>
+                        <m:mfrac>
+                          <m:mi>∂</m:mi>
+                          <m:mrow>
+                            <m:mi>∂</m:mi>
+                            <m:msub>
+                              <m:mi>h</m:mi>
+                              <m:mi>j</m:mi>
+                            </m:msub>
+                          </m:mrow>
+                        </m:mfrac>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mrow>
+                          <m:mo>{</m:mo>
+                          <m:msup>
+                            <m:mi>e</m:mi>
+                            <m:mn>2</m:mn>
+                          </m:msup>
+                          <m:mrow>
+                            <m:mo>(</m:mo>
+                            <m:mi>n</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                          <m:mo>}</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd/>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mfenced separators="" open="{" close="}">
+                          <m:mi>e</m:mi>
+                          <m:mrow>
+                            <m:mo>(</m:mo>
+                            <m:mi>n</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                          <m:mfrac>
+                            <m:mrow>
+                              <m:mi>∂</m:mi>
+                              <m:mi>e</m:mi>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                            <m:mrow>
+                              <m:mi>∂</m:mi>
+                              <m:msub>
+                                <m:mi>h</m:mi>
+                                <m:mi>j</m:mi>
+                              </m:msub>
+                            </m:mrow>
+                          </m:mfrac>
+                        </m:mfenced>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd/>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mfenced separators="" open="{" close="}">
+                          <m:mi>e</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                          <m:mi>x</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>-</m:mo>
+                          <m:mi>j</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mfenced>
+                        <m:mspace width="2.em"/>
+                        <m:mo>←</m:mo>
+                        <m:mtext>The</m:mtext>
+                        
+                        <m:mtext>"Orthogonality</m:mtext>
+                        
+                        <m:mtext>Principle"</m:mtext>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd/>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mfenced separators="" open="{" close="}">
+                          <m:mfenced separators="" open="(" close=")">
+                            <m:mi>x</m:mi>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                            <m:mo>-</m:mo>
+                            <m:munderover>
+                              <m:mo>∑</m:mo>
+                              <m:mrow>
+                                <m:mi>i</m:mi>
+                                <m:mo>=</m:mo>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                              <m:mi>N</m:mi>
+                            </m:munderover>
+                            <m:msub>
+                              <m:mi>h</m:mi>
+                              <m:mi>i</m:mi>
+                            </m:msub>
+                            <m:mi>x</m:mi>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>-</m:mo>
+                              <m:mi>i</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                          </m:mfenced>
+                          <m:mi>x</m:mi>
+                          <m:mrow>
+                            <m:mo>(</m:mo>
+                            <m:mi>n</m:mi>
+                            <m:mo>-</m:mo>
+                            <m:mi>j</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                        </m:mfenced>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd/>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mfenced separators="" open="{" close="}">
+                          <m:mi>x</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                          <m:mi>x</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>-</m:mo>
+                          <m:mi>j</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mfenced>
+                        <m:mo>-</m:mo>
+                        <m:munderover>
+                          <m:mo>∑</m:mo>
+                          <m:mrow>
+                            <m:mi>i</m:mi>
+                            <m:mo>=</m:mo>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                          <m:mi>N</m:mi>
+                        </m:munderover>
+                        <m:msub>
+                          <m:mi>h</m:mi>
+                          <m:mi>i</m:mi>
+                        </m:msub>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mfenced separators="" open="{" close="}">
+                          <m:mi>x</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>-</m:mo>
+                          <m:mi>i</m:mi>
+                          <m:mo>)</m:mo>
+                          <m:mi>x</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>-</m:mo>
+                          <m:mi>j</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mfenced>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd/>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:msub>
+                          <m:mi>r</m:mi>
+                          <m:mi>x</m:mi>
+                        </m:msub>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>j</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:munderover>
+                          <m:mo>∑</m:mo>
+                          <m:mrow>
+                            <m:mi>i</m:mi>
+                            <m:mo>=</m:mo>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                          <m:mi>N</m:mi>
+                        </m:munderover>
+                        <m:msub>
+                          <m:mi>h</m:mi>
+                          <m:mi>i</m:mi>
+                        </m:msub>
+                        <m:msub>
+                          <m:mi>r</m:mi>
+                          <m:mi>x</m:mi>
+                        </m:msub>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>j</m:mi>
+                          <m:mo>-</m:mo>
+                          <m:mi>i</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            where we have used <link document="m32070" target-id="uid10"> equation 1 from Differential Pulse Code Modulation</link>.
+We can rewrite this as a system of linear equations:
+            <equation id="id333141">
+              <m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:munder>
+                          <m:munder accentunder="true">
+                            <m:mfenced separators="" open="(" close=")">
+                              <m:mtable>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>1</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>2</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mo>⋮</m:mo>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mi>N</m:mi>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                </m:mtr>
+                              </m:mtable>
+                            </m:mfenced>
+                            <m:mo>︸</m:mo>
+                          </m:munder>
+                          <m:mstyle scriptlevel="0" displaystyle="true">
+                            <m:msub>
+                              <m:mi mathvariant="bold">r</m:mi>
+                              <m:mi>x</m:mi>
+                            </m:msub>
+                          </m:mstyle>
+                        </m:munder>
+                        <m:mspace width="3.33333pt"/>
+                        <m:mo>=</m:mo>
+                        <m:mspace width="3.33333pt"/>
+                        <m:munder>
+                          <m:munder accentunder="true">
+                            <m:mfenced separators="" open="(" close=")">
+                              <m:mtable>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>0</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>1</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mo>⋯</m:mo>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mi>N</m:mi>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mo>-</m:mo>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mn>1</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>1</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>0</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mo>⋯</m:mo>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mi>N</m:mi>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mo>-</m:mo>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mn>2</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mo>⋮</m:mo>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mi>N</m:mi>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mo>-</m:mo>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mn>1</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mi>N</m:mi>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mo>-</m:mo>
+                                        <m:mspace width="-0.166667em"/>
+                                        <m:mn>2</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mo>⋯</m:mo>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>0</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                </m:mtr>
+                              </m:mtable>
+                            </m:mfenced>
+                            <m:mo>︸</m:mo>
+                          </m:munder>
+                          <m:mstyle scriptlevel="0" displaystyle="true">
+                            <m:msub>
+                              <m:mi mathvariant="bold">R</m:mi>
+                              <m:mi>N</m:mi>
+                            </m:msub>
+                          </m:mstyle>
+                        </m:munder>
+                        <m:munder>
+                          <m:munder accentunder="true">
+                            <m:mfenced separators="" open="(" close=")">
+                              <m:mtable>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:msub>
+                                      <m:mi>h</m:mi>
+                                      <m:mn>1</m:mn>
+                                    </m:msub>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:msub>
+                                      <m:mi>h</m:mi>
+                                      <m:mn>2</m:mn>
+                                    </m:msub>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mo>⋮</m:mo>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:msub>
+                                      <m:mi>h</m:mi>
+                                      <m:mi>N</m:mi>
+                                    </m:msub>
+                                  </m:mtd>
+                                </m:mtr>
+                              </m:mtable>
+                            </m:mfenced>
+                            <m:mo>︸</m:mo>
+                          </m:munder>
+                          <m:mstyle scriptlevel="0" displaystyle="true">
+                            <m:mi mathvariant="bold">h</m:mi>
+                          </m:mstyle>
+                        </m:munder>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            which yields an expression for the optimal prediction coefficients:
+          </item>
+        </list>
+        <equation id="uid21"><m:math overflow="scroll" mode="display">
+            <m:mtable displaystyle="true">
+              <m:mtr>
+                <m:mtd columnalign="right">
+                  <m:mrow>
+                    <m:msub>
+                      <m:mi mathvariant="bold">h</m:mi>
+                      <m:mo>⋆</m:mo>
+                    </m:msub>
+                    <m:mo>=</m:mo>
+                    <m:msubsup>
+                      <m:mi mathvariant="bold">R</m:mi>
+                      <m:mi>N</m:mi>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mn>1</m:mn>
+                      </m:mrow>
+                    </m:msubsup>
+                    <m:msub>
+                      <m:mi mathvariant="bold">r</m:mi>
+                      <m:mi>x</m:mi>
+                    </m:msub>
+                    <m:mo>.</m:mo>
+                  </m:mrow>
+                </m:mtd>
+              </m:mtr>
+            </m:mtable>
+          </m:math>
+        </equation>
+        <list id="id333642" display="block" list-type="bulleted"><item id="uid22"><emphasis effect="italics"><emphasis effect="underline">Error for Length-<emphasis effect="italics">N</emphasis> Predictor:</emphasis></emphasis>
+The definition
+<m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>:</m:mo><m:mo>=</m:mo><m:msup><m:mfenced separators="" open="(" close=")"><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo><m:mo>,</m:mo><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>)</m:mo><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mi>N</m:mi><m:mo>)</m:mo></m:mfenced><m:mi>t</m:mi></m:msup></m:mrow></m:math>
+and <link target-id="uid21"/> can be used to show that the minimum prediction
+error variance is
+<equation id="id333789"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup>
+<m:mrow><m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mo movablelimits="true" form="prefix">min</m:mo><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mo form="prefix">E</m:mo><m:mo>{</m:mo><m:msup><m:mi>e</m:mi><m:mn>2</m:mn></m:msup><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:msup><m:mfenced separators="" open="∥" close="∥"><m:msup><m:mi mathvariant="bold">x</m:mi><m:mi>t</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mfenced separators="" open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mn>1</m:mn></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mo>-</m:mo><m:msub><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo></m:msub></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mfenced><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfenced open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mn>1</m:mn></m:mtd><m:mtd><m:mrow><m:mo>-</m:mo><m:msubsup><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo><m:mi>t</m:mi></m:msubsup></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced><m:mo form="prefix">E</m:mo><m:mrow><m:mo>{</m:mo><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mi mathvariant="bold">x</m:mi><m:mi>t</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow><m:mfenced separators="" open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mn>1</m:mn></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mo>-</m:mo><m:msub><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo></m:msub></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfenced open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mn>1</m:mn></m:mtd><m:mtd><m:mrow><m:mo>-</m:mo><m:msubsup><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo><m:mi>t</m:mi></m:msubsup></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced><m:mfenced separators="" open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mrow><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>0</m:mn><m:mo>)</m:mo></m:mrow></m:mrow></m:mtd><m:mtd><m:msubsup><m:mi mathvariant="bold">r</m:mi><m:mi>x</m:mi><m:mi>t</m:mi></m:msubsup></m:mtd></m:mtr><m:mtr><m:mtd><m:msub><m:mi mathvariant="bold">r</m:mi><m:mi>x</m:mi></m:msub></m:mtd><m:mtd><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub></m:mtd></m:mtr></m:mtable></m:mfenced><m:mfenced separators="" open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mn>1</m:mn></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mo>-</m:mo><m:msub><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo></m:msub></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>0</m:mn><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:msubsup><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo><m:mi>t</m:mi></m:msubsup><m:msub><m:mi mathvariant="bold">r</m:mi><m:mi>x</m:mi></m:msub><m:mo>+</m:mo><m:msubsup><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo><m:mi>t</m:mi></m:msubsup><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub><m:msub><m:mi mathvariant="bold">h</m:mi><m:mo>⋆</m:mo></m:msub></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>0</m:mn><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:msubsup><m:mi mathvariant="bold">r</m:mi><m:mi>x</m:mi><m:mi>t</m:mi></m:msubsup><m:msubsup><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msubsup><m:msub><m:mi mathvariant="bold">r</m:mi><m:mi>x</m:mi></m:msub><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation></item>
+          <item id="uid23">
+            <emphasis effect="underline"><emphasis effect="italics">Error for Infinite-Length Predictor:</emphasis></emphasis>
+We now characterize 
+<m:math overflow="scroll">
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>e</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mo movablelimits="true" form="prefix">min</m:mo>
+<m:mo>,</m:mo>
+<m:mi>N</m:mi>
+</m:mrow>
+</m:msub>
+</m:math> as <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:math>.
+Note that
+            <equation id="id334398"><m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:munder>
+                          <m:munder accentunder="true">
+                            <m:mfenced separators="" open="(" close=")">
+                              <m:mtable>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:mrow>
+                                      <m:msub>
+                                        <m:mi>r</m:mi>
+                                        <m:mi>x</m:mi>
+                                      </m:msub>
+                                      <m:mrow>
+                                        <m:mo>(</m:mo>
+                                        <m:mn>0</m:mn>
+                                        <m:mo>)</m:mo>
+                                      </m:mrow>
+                                    </m:mrow>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:msubsup>
+                                      <m:mi mathvariant="bold">r</m:mi>
+                                      <m:mi>x</m:mi>
+                                      <m:mi>t</m:mi>
+                                    </m:msubsup>
+                                  </m:mtd>
+                                </m:mtr>
+                                <m:mtr>
+                                  <m:mtd>
+                                    <m:msub>
+                                      <m:mi mathvariant="bold">r</m:mi>
+                                      <m:mi>x</m:mi>
+                                    </m:msub>
+                                  </m:mtd>
+                                  <m:mtd>
+                                    <m:msub>
+                                      <m:mi mathvariant="bold">R</m:mi>
+                                      <m:mi>N</m:mi>
+                                    </m:msub>
+                                  </m:mtd>
+                                </m:mtr>
+                              </m:mtable>
+                            </m:mfenced>
+                            <m:mo>︸</m:mo>
+                          </m:munder>
+                          <m:mstyle scriptlevel="0" displaystyle="true">
+                            <m:msub>
+                              <m:mi mathvariant="bold">R</m:mi>
+                              <m:mrow>
+                                <m:mi>N</m:mi>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mo>+</m:mo>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                            </m:msub>
+                          </m:mstyle>
+                        </m:munder>
+                        <m:mfenced separators="" open="(" close=")">
+                          <m:mtable>
+                            <m:mtr>
+                              <m:mtd>
+                                <m:mn>1</m:mn>
+                              </m:mtd>
+                            </m:mtr>
+                            <m:mtr>
+                              <m:mtd>
+                                <m:mrow>
+                                  <m:mo>-</m:mo>
+                                  <m:msub>
+                                    <m:mi mathvariant="bold">h</m:mi>
+                                    <m:mo>⋆</m:mo>
+                                  </m:msub>
+                                </m:mrow>
+                              </m:mtd>
+                            </m:mtr>
+                          </m:mtable>
+                        </m:mfenced>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mfenced separators="" open="(" close=")">
+                        <m:mtable>
+                          <m:mtr>
+                            <m:mtd>
+                              <m:mrow>
+                                <m:msubsup>
+                                  <m:mi>σ</m:mi>
+                                  <m:mi>e</m:mi>
+                                  <m:mn>2</m:mn>
+                                </m:msubsup>
+                                <m:mrow>
+<m:msub>                                  
+<m:mo>|</m:mo>
+<m:mrow>
+                                  <m:mo movablelimits="true" form="prefix">min</m:mo>
+                                  <m:mo>,</m:mo>
+                                  <m:mi>N</m:mi>
+</m:mrow>
+</m:msub>
+                                </m:mrow>
+                              </m:mrow>
+                            </m:mtd>
+                          </m:mtr>
+                          <m:mtr>
+                            <m:mtd>
+                              <m:mn mathvariant="bold">0</m:mn>
+                            </m:mtd>
+                          </m:mtr>
+                        </m:mtable>
+                      </m:mfenced>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            Using Cramer's rule,
+            <equation id="id334601"><m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mn>1</m:mn>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mfrac>
+                          <m:mfenced separators="" open="|" close="|">
+                            <m:mtable>
+                              <m:mtr>
+                                <m:mtd>
+                                  <m:mrow>
+                                    <m:msubsup>
+                                      <m:mi>σ</m:mi>
+                                      <m:mi>e</m:mi>
+                                      <m:mn>2</m:mn>
+                                    </m:msubsup>
+                                    <m:mrow>
+<m:msub>
+                                      <m:mo>|</m:mo>
+<m:mrow>
+                                      <m:mo movablelimits="true" form="prefix">min</m:mo>
+                                      <m:mo>,</m:mo>
+                                      <m:mi>N</m:mi>
+</m:mrow>
+</m:msub>
+                                    </m:mrow>
+                                  </m:mrow>
+                                </m:mtd>
+                                <m:mtd>
+                                  <m:msubsup>
+                                    <m:mi mathvariant="bold">r</m:mi>
+                                    <m:mi>x</m:mi>
+                                    <m:mi>t</m:mi>
+                                  </m:msubsup>
+                                </m:mtd>
+                              </m:mtr>
+                              <m:mtr>
+                                <m:mtd>
+                                  <m:mn mathvariant="bold">0</m:mn>
+                                </m:mtd>
+                                <m:mtd>
+                                  <m:msub>
+                                    <m:mi mathvariant="bold">R</m:mi>
+                                    <m:mi>N</m:mi>
+                                  </m:msub>
+                                </m:mtd>
+                              </m:mtr>
+                            </m:mtable>
+                          </m:mfenced>
+                          <m:mfenced separators="" open="|" close="|">
+                            <m:msub>
+                              <m:mi mathvariant="bold">R</m:mi>
+                              <m:mrow>
+                                <m:mi>N</m:mi>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mo>+</m:mo>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                            </m:msub>
+                          </m:mfenced>
+                        </m:mfrac>
+                        <m:mspace width="3.33333pt"/>
+                        <m:mo>=</m:mo>
+                        <m:mspace width="3.33333pt"/>
+                        <m:msubsup>
+                          <m:mi>σ</m:mi>
+                          <m:mi>e</m:mi>
+                          <m:mn>2</m:mn>
+                        </m:msubsup>
+                        <m:mrow>
+<m:msub>
+                          <m:mrow><m:mo>|</m:mo></m:mrow>
+<m:mrow>
+                          <m:mo movablelimits="true" form="prefix">min</m:mo>
+                          <m:mo>,</m:mo>
+                          <m:mi>N</m:mi>
+</m:mrow>
+</m:msub>
+                          <m:mfrac>
+                            <m:mfenced separators="" open="|" close="|">
+                              <m:msub>
+                                <m:mi mathvariant="bold">R</m:mi>
+                                <m:mi>N</m:mi>
+                              </m:msub>
+                            </m:mfenced>
+                            <m:mfenced separators="" open="|" close="|">
+                              <m:msub>
+                                <m:mi mathvariant="bold">R</m:mi>
+                                <m:mrow>
+                                  <m:mi>N</m:mi>
+                                  <m:mspace width="-0.166667em"/>
+                                  <m:mo>+</m:mo>
+                                  <m:mspace width="-0.166667em"/>
+                                  <m:mn>1</m:mn>
+                                </m:mrow>
+                              </m:msub>
+                            </m:mfenced>
+                          </m:mfrac>
+                          <m:mspace width="2.em"/>
+                          <m:mo>⇒</m:mo>
+                          <m:mspace width="2.em"/>
+                          <m:msubsup>
+                            <m:mi>σ</m:mi>
+                            <m:mi>e</m:mi>
+                            <m:mn>2</m:mn>
+                          </m:msubsup>
+</m:mrow>
+<m:msub>
+<m:mrow>            
+              <m:mo>|</m:mo>
+</m:mrow>        
+<m:mrow>         
+               <m:mo movablelimits="true" form="prefix">min</m:mo>
+                        <m:mo>,</m:mo>
+                        <m:mi>N</m:mi>
+        </m:mrow>
+</m:msub>
+                
+                        <m:mo>=</m:mo>
+                        
+                        <m:mfrac>
+                          <m:mfenced separators="" open="|" close="|">
+                            <m:msub>
+                              <m:mi mathvariant="bold">R</m:mi>
+                              <m:mrow>
+                                <m:mi>N</m:mi>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mo>+</m:mo>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                            </m:msub>
+                          </m:mfenced>
+                          <m:mfenced separators="" open="|" close="|">
+                            <m:msub>
+                              <m:mi mathvariant="bold">R</m:mi>
+                              <m:mi>N</m:mi>
+                            </m:msub>
+                          </m:mfenced>
+                        </m:mfrac>
+                        <m:mo>.</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            <note id="eip-id1168423827881" type="aside"><title>Cramer's Rule</title><para id="eip-id1167741274103">
+Given matrix equation <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">Ay</m:mi><m:mo>=</m:mo><m:mi mathvariant="bold">b</m:mi></m:mrow></m:math>, where
+<m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">A</m:mi><m:mo>=</m:mo><m:mrow><m:mo>(</m:mo><m:msub><m:mi mathvariant="bold">a</m:mi><m:mn>1</m:mn></m:msub><m:mo>,</m:mo><m:msub><m:mi mathvariant="bold">a</m:mi><m:mn>2</m:mn></m:msub><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:msub><m:mi mathvariant="bold">a</m:mi><m:mi>N</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mo>∈</m:mo><m:msup><m:mi mathvariant="double-struck">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:msup></m:mrow></m:math>,
+            <equation id="id335019">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>y</m:mi>
+                    <m:mi>k</m:mi>
+                  </m:msub>
+                  <m:mo>=</m:mo>
+                  <m:mfrac>
+                    <m:mfenced separators="" open="|" close="|">
+                      <m:msub>
+                        <m:mi mathvariant="bold">a</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                      <m:mo>,</m:mo>
+                      <m:mo>⋯</m:mo>
+                      <m:mo>,</m:mo>
+                      <m:msub>
+                        <m:mi mathvariant="bold">a</m:mi>
+                        <m:mrow>
+                          <m:mi>k</m:mi>
+                          <m:mo>-</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mo>,</m:mo>
+                      <m:mi mathvariant="bold">b</m:mi>
+                      <m:mo>,</m:mo>
+                      <m:msub>
+                        <m:mi mathvariant="bold">a</m:mi>
+                        <m:mrow>
+                          <m:mi>k</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mo>,</m:mo>
+                      <m:mo>⋯</m:mo>
+                      <m:mo>,</m:mo>
+                      <m:msub>
+                        <m:mi mathvariant="bold">a</m:mi>
+                        <m:mi>N</m:mi>
+                      </m:msub>
+                    </m:mfenced>
+                    <m:mfenced open="|" close="|">
+                      <m:mi mathvariant="bold">A</m:mi>
+                    </m:mfenced>
+                  </m:mfrac>
+                </m:mrow>
+              </m:math>
+            </equation>
+            where <m:math overflow="scroll"><m:mrow><m:mo>|</m:mo><m:mo>·</m:mo><m:mo>|</m:mo></m:mrow></m:math> denotes determinant.</para></note>
+            A result from the theory of Toeplitz determinants (see Jayant &amp; Noll) gives the final answer:
+            <equation id="uid25"><m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:msubsup>
+                          <m:mi>σ</m:mi>
+                          <m:mi>e</m:mi>
+                          <m:mn>2</m:mn>
+                        </m:msubsup>
+                        <m:mrow>
+<m:msub>
+                          <m:mo>|</m:mo>
+<m:mrow>
+                          <m:mo movablelimits="true" form="prefix">min</m:mo>
+</m:mrow>
+</m:msub>
+                          
+                          <m:mo>=</m:mo>
+                          
+                        </m:mrow>
+                        <m:munder>
+                          <m:mo movablelimits="true" form="prefix">lim</m:mo>
+                          <m:mrow>
+                            <m:mi>N</m:mi>
+                            <m:mo>→</m:mo>
+                            <m:mi>∞</m:mi>
+                          </m:mrow>
+                        </m:munder>
+                        <m:mfrac>
+                          <m:mfenced separators="" open="|" close="|">
+                            <m:msub>
+                              <m:mi mathvariant="bold">R</m:mi>
+                              <m:mrow>
+                                <m:mi>N</m:mi>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mo>+</m:mo>
+                                <m:mspace width="-0.166667em"/>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                            </m:msub>
+                          </m:mfenced>
+                          <m:mfenced separators="" open="|" close="|">
+                            <m:msub>
+                              <m:mi mathvariant="bold">R</m:mi>
+                              <m:mi>N</m:mi>
+                            </m:msub>
+                          </m:mfenced>
+                        </m:mfrac>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mtable frame="solid">
+                          <m:mtr>
+                            <m:mtd>
+                              <m:mo form="prefix">exp</m:mo>
+                              <m:mfenced separators="" open="(" close=")">
+                                <m:mfrac>
+                                  <m:mn>1</m:mn>
+                                  <m:mrow>
+                                    <m:mn>2</m:mn>
+                                    <m:mi>π</m:mi>
+                                  </m:mrow>
+                                </m:mfrac>
+                                <m:msubsup>
+                                  <m:mo>∫</m:mo>
+                                  <m:mrow>
+                                    <m:mo>-</m:mo>
+                                    <m:mi>π</m:mi>
+                                  </m:mrow>
+                                  <m:mi>π</m:mi>
+                                </m:msubsup>
+                                <m:mo form="prefix">ln</m:mo>
+                                <m:msub>
+                                  <m:mi>S</m:mi>
+                                  <m:mi>x</m:mi>
+                                </m:msub>
+                                <m:mrow>
+                                  <m:mo>(</m:mo>
+                                  <m:msup>
+                                    <m:mi>e</m:mi>
+                                    <m:mrow>
+                                      <m:mi>j</m:mi>
+                                      <m:mi>ω</m:mi>
+                                    </m:mrow>
+                                  </m:msup>
+                                  <m:mo>)</m:mo>
+                                </m:mrow>
+                                <m:mi>d</m:mi>
+                                <m:mi>ω</m:mi>
+                              </m:mfenced>
+                            </m:mtd>
+                          </m:mtr>
+                        </m:mtable>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            where <m:math overflow="scroll"><m:mrow><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow></m:mrow></m:math> is the 
+            <emphasis effect="italics">
+              power spectral density</emphasis>
+            
+             of
+the WSS random process <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>:
+            <equation id="id335451">
+              <m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:msub>
+                          <m:mi>S</m:mi>
+                          <m:mi>x</m:mi>
+                        </m:msub>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:msup>
+                            <m:mi>e</m:mi>
+                            <m:mrow>
+                              <m:mi>j</m:mi>
+                              <m:mi>ω</m:mi>
+                            </m:mrow>
+                          </m:msup>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>:</m:mo>
+                        <m:mo>=</m:mo>
+                        <m:munderover>
+                          <m:mo>∑</m:mo>
+                          <m:mrow>
+                            <m:mi>n</m:mi>
+                            <m:mo>=</m:mo>
+                            <m:mo>-</m:mo>
+                            <m:mi>∞</m:mi>
+                          </m:mrow>
+                          <m:mi>∞</m:mi>
+                        </m:munderover>
+                        <m:msub>
+                          <m:mi>r</m:mi>
+                          <m:mi>x</m:mi>
+                        </m:msub>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:msup>
+                          <m:mi>e</m:mi>
+                          <m:mrow>
+                            <m:mo>-</m:mo>
+                            <m:mi>j</m:mi>
+                            <m:mi>ω</m:mi>
+                            <m:mi>n</m:mi>
+                          </m:mrow>
+                        </m:msup>
+                        <m:mo>.</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            (Note that, because <m:math overflow="scroll"><m:mrow><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> is conjugate symmetric for stationary <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>,
+<m:math overflow="scroll"><m:mrow><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow></m:mrow></m:math> will always be non-negative and real.)
+          </item>
+          <item id="uid26">
+            <emphasis effect="underline"><emphasis effect="italics">ARMA Source Model:</emphasis></emphasis>
+If the random process <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> can be modelled as a 
+            <emphasis effect="italics">
+              general linear process</emphasis>
+            
+            , i.e., white noise <m:math overflow="scroll"><m:mrow><m:mi>v</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> driving a
+causal LTI system <m:math overflow="scroll"><m:mrow><m:mi>B</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow></m:math>:
+            <equation id="id335703"><m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:mi>x</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>n</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  
+                  <m:mo>=</m:mo>
+                  
+                  <m:mi>v</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>n</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>+</m:mo>
+                  <m:munderover>
+                    <m:mrow><m:mo>∑</m:mo></m:mrow>
+                    <m:mrow>
+                      <m:mi>k</m:mi>
+                      <m:mo>=</m:mo>
+                      <m:mn>1</m:mn>
+                    </m:mrow>
+                    <m:mi>∞</m:mi>
+                  </m:munderover>
+                  <m:msub>
+                    <m:mi>b</m:mi>
+                    <m:mi>k</m:mi>
+                  </m:msub>
+                  <m:mi>v</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>n</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mi>k</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mspace width="1.em"/>
+                  <m:mspace width="4.pt"/>
+                  <m:mtext>with</m:mtext>
+                  <m:mspace width="4.pt"/>
+                  <m:mspace width="1.em"/>
+                  <m:munder>
+<m:mrow>
+                    <m:mo>∑</m:mo>
+</m:mrow>
+<m:mrow>        
+            <m:mi>k</m:mi>
+</m:mrow>        
+          </m:munder>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>|</m:mo>
+                      <m:msub>
+                        <m:mi>b</m:mi>
+                        <m:mi>k</m:mi>
+                      </m:msub>
+                      <m:mo>|</m:mo>
+                    </m:mrow>
+                    <m:mn>2</m:mn>
+                  </m:msup>
+                  <m:mo>&lt;</m:mo>
+                  <m:mi>∞</m:mi>
+                  <m:mo>,</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+            then it can be shown that
+            <equation id="id335838">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:msubsup>
+                    <m:mi>σ</m:mi>
+                    <m:mi>v</m:mi>
+                    <m:mn>2</m:mn>
+                  </m:msubsup>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>=</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo form="prefix">exp</m:mo>
+                  <m:mfenced separators="" open="(" close=")">
+                    <m:mfrac>
+                      <m:mn>1</m:mn>
+                      <m:mrow>
+                        <m:mn>2</m:mn>
+                        <m:mi>π</m:mi>
+                      </m:mrow>
+                    </m:mfrac>
+                    <m:msubsup>
+                      <m:mo>∫</m:mo>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mi>π</m:mi>
+                      </m:mrow>
+                      <m:mi>π</m:mi>
+                    </m:msubsup>
+                    <m:mo form="prefix">ln</m:mo>
+                    <m:msub>
+                      <m:mi>S</m:mi>
+                      <m:mi>x</m:mi>
+                    </m:msub>
+                    <m:mrow>
+                      <m:mo>(</m:mo>
+                      <m:msup>
+                        <m:mi>e</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mi>ω</m:mi>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mi>d</m:mi>
+                    <m:mi>ω</m:mi>
+                  </m:mfenced>
+                  <m:mo>.</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+            Thus the MSE-optimal prediction error variance equals that of the
+driving noise <m:math overflow="scroll"><m:mrow><m:mi>v</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> when <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mi>∞</m:mi></m:mrow></m:math>.
+          </item>
+          <item id="uid27">
+            <emphasis effect="underline"><emphasis effect="italics">Prediction Error Whiteness:</emphasis></emphasis>
+We can also demonstrate that the MSE-optimal prediction error is
+white when <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mi>∞</m:mi></m:mrow></m:math>.
+This is a simple fact of the orthogonality principle seen earlier:
+            <equation id="id336010">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:mtable frame="solid">
+                    <m:mtr>
+                      <m:mtd>
+                        <m:mn>0</m:mn>
+                        <m:mspace width="3.33333pt"/>
+                        <m:mo>=</m:mo>
+                        <m:mspace width="3.33333pt"/>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mo>{</m:mo>
+                        <m:mi>e</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                        <m:mi>x</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>-</m:mo>
+                        <m:mi>k</m:mi>
+                        <m:mo>)</m:mo>
+                        <m:mo>}</m:mo>
+                        <m:mo>,</m:mo>
+                        <m:mspace width="1.em"/>
+                        <m:mi>k</m:mi>
+                        <m:mo>=</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mn>2</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mo>⋯</m:mo>
+                      </m:mtd>
+                    </m:mtr>
+                  </m:mtable>
+                  <m:mo>.</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+            The prediction error has autocorrelation
+            <equation id="id336098"><m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mo>{</m:mo>
+                        <m:mi>e</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                        <m:mi>e</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>-</m:mo>
+                        <m:mi>k</m:mi>
+                        <m:mo>)</m:mo>
+                        <m:mo>}</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mo form="prefix">E</m:mo>
+                        <m:mfenced separators="" open="{" close="}">
+                          <m:mi>e</m:mi>
+                          <m:mrow>
+                            <m:mo>(</m:mo>
+                            <m:mi>n</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                          <m:mfenced separators="" open="(" close=")">
+                            <m:mi>x</m:mi>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>-</m:mo>
+                              <m:mi>k</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                            <m:mo>+</m:mo>
+                            <m:munderover>
+                              <m:mo>∑</m:mo>
+                              <m:mrow>
+                                <m:mi>i</m:mi>
+                                <m:mo>=</m:mo>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                              <m:mi>∞</m:mi>
+                            </m:munderover>
+                            <m:msub>
+                              <m:mi>h</m:mi>
+                              <m:mi>i</m:mi>
+                            </m:msub>
+                            <m:mi>x</m:mi>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>-</m:mo>
+                              <m:mi>k</m:mi>
+                              <m:mo>-</m:mo>
+                              <m:mi>i</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                          </m:mfenced>
+                        </m:mfenced>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd/>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:munder>
+                          <m:munder accentunder="true">
+                            <m:mrow>
+                              <m:mo form="prefix">E</m:mo>
+                              <m:mo>{</m:mo>
+                              <m:mi>e</m:mi>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>)</m:mo>
+                              <m:mi>x</m:mi>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>-</m:mo>
+                              <m:mi>k</m:mi>
+                              <m:mo>)</m:mo>
+                              <m:mo>}</m:mo>
+                            </m:mrow>
+                            <m:mo>︸</m:mo>
+                          </m:munder>
+                          <m:mrow>
+                            <m:mo>→</m:mo>
+                            <m:mn>0</m:mn>
+                            <m:mspace width="1pt"/>
+                            <m:mtext>for</m:mtext>
+                            <m:mspace width="1pt"/>
+                            <m:mi>k</m:mi>
+                            <m:mo>&gt;</m:mo>
+                            <m:mn>0</m:mn>
+                          </m:mrow>
+                        </m:munder>
+                        <m:mo>+</m:mo>
+                        <m:munderover>
+                          <m:mo>∑</m:mo>
+                          <m:mrow>
+                            <m:mi>i</m:mi>
+                            <m:mo>=</m:mo>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                          <m:mi>∞</m:mi>
+                        </m:munderover>
+                        <m:msub>
+                          <m:mi>h</m:mi>
+                          <m:mi>i</m:mi>
+                        </m:msub>
+                        <m:munder>
+                          <m:munder accentunder="true">
+                            <m:mrow>
+                              <m:mo form="prefix">E</m:mo>
+                              <m:mo>{</m:mo>
+                              <m:mi>e</m:mi>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>)</m:mo>
+                              <m:mi>x</m:mi>
+                              <m:mo>(</m:mo>
+                              <m:mi>n</m:mi>
+                              <m:mo>-</m:mo>
+                              <m:mi>k</m:mi>
+                              <m:mo>-</m:mo>
+                              <m:mi>i</m:mi>
+                              <m:mo>)</m:mo>
+                              <m:mo>}</m:mo>
+                            </m:mrow>
+                            <m:mo>︸</m:mo>
+                          </m:munder>
+                          <m:mrow>
+                            <m:mo>→</m:mo>
+                            <m:mn>0</m:mn>
+                          </m:mrow>
+                        </m:munder>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd/>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:msubsup>
+                          <m:mi>σ</m:mi>
+                          <m:mi>e</m:mi>
+                          <m:mn>2</m:mn>
+                        </m:msubsup>
+                        <m:mrow>
+<m:msub>
+                          <m:mo>|</m:mo>
+<m:mrow>
+                          <m:mo movablelimits="true" form="prefix">min</m:mo>
+</m:mrow>
+</m:msub>
+                          <m:mi>δ</m:mi>
+                          <m:mrow>
+                            <m:mo>(</m:mo>
+                            <m:mi>k</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                          <m:mo>.</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+          </item>
+          <item id="uid28">
+            <emphasis effect="underline"><emphasis effect="italics">AR Source Model:</emphasis></emphasis>
+When the input can be modelled as an autoregressive (AR) process of
+order <emphasis effect="italics">N</emphasis>:
+            <equation id="id336459">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:mi>X</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>=</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mfrac>
+                    <m:mn>1</m:mn>
+                    <m:mrow>
+                      <m:mn>1</m:mn>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>2</m:mn>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>2</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mo>+</m:mo>
+                      <m:mo>⋯</m:mo>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mi>N</m:mi>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mi>N</m:mi>
+                        </m:mrow>
+                      </m:msup>
+                    </m:mrow>
+                  </m:mfrac>
+                  <m:mi>V</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>,</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+            then MSE-optimal
+results (i.e., <m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>=</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo></m:mrow></m:msub></m:mrow></m:mrow></m:math> and whitening)
+may be obtained with a forward predictor of order <emphasis effect="italics">N</emphasis>.
+Specifically, the prediction coefficients <emphasis effect="italics">h<sub>i</sub></emphasis> can be chosen
+as <m:math overflow="scroll"><m:mrow><m:msub><m:mi>h</m:mi><m:mi>i</m:mi></m:msub><m:mo>=</m:mo><m:msub><m:mi>a</m:mi><m:mi>i</m:mi></m:msub></m:mrow></m:math> and so the prediction error <m:math overflow="scroll"><m:mrow><m:mi>E</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow></m:math> becomes
+            <equation id="id336687">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:mi>E</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>=</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mfenced separators="" open="(" close=")">
+                    <m:mn>1</m:mn>
+                    <m:mo>-</m:mo>
+                    <m:mi>H</m:mi>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mfenced>
+                  <m:mi>X</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>=</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mfrac>
+                    <m:mrow>
+                      <m:mn>1</m:mn>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>2</m:mn>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>2</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mo>+</m:mo>
+                      <m:mo>⋯</m:mo>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mi>N</m:mi>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mi>N</m:mi>
+                        </m:mrow>
+                      </m:msup>
+                    </m:mrow>
+                    <m:mrow>
+                      <m:mn>1</m:mn>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mn>2</m:mn>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>2</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mo>+</m:mo>
+                      <m:mo>⋯</m:mo>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>a</m:mi>
+                        <m:mi>N</m:mi>
+                      </m:msub>
+                      <m:msup>
+                        <m:mi>z</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mi>N</m:mi>
+                        </m:mrow>
+                      </m:msup>
+                    </m:mrow>
+                  </m:mfrac>
+                  <m:mi>V</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>=</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mi>V</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>,</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+          </item>
+          <item id="uid29">
+            <emphasis effect="underline"><emphasis effect="italics">Efficiency Gain over PCM:</emphasis></emphasis>
+Prediction reduces the variance at the quantizer input without changing
+the variance of the reconstructed signal.
+            <list id="id336945" display="block" list-type="bulleted">
+              <item id="uid30">
+                By keeping the number of quantization levels fixed, could
+reduce quantization step width and obtain lower quantization error
+than PCM at the same bit rate.
+              </item>
+              <item id="uid31">
+                By keeping the decision levels fixed, could reduce the number
+of quantization levels and obtain a lower bit rate than PCM at the
+same quantization error level.
+              </item>
+            </list>
+            Assuming that <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mi>e</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> are distributed similarly, use of
+the same style of quantizer on DPCM vs. PCM systems yields
+            <equation id="id337024">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:msub>
+                    <m:mi> SNR </m:mi>
+                    <m:mtext>DPCM</m:mtext>
+                  </m:msub>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>=</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:msub>
+                    <m:mi> SNR </m:mi>
+                    <m:mtext>PCM</m:mtext>
+                  </m:msub>
+                  <m:mo>+</m:mo>
+                  <m:mn>10</m:mn>
+                  <m:msub>
+                    <m:mo form="prefix">log</m:mo>
+                    <m:mn>10</m:mn>
+                  </m:msub>
+                  <m:mfrac>
+                    <m:msubsup>
+                      <m:mi>σ</m:mi>
+                      <m:mi>x</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msubsup>
+                    <m:msubsup>
+                      <m:mi>σ</m:mi>
+                      <m:mi>e</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msubsup>
+                  </m:mfrac>
+                  <m:mo>.</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+          </item>
+        </list>
+
+
+
+
+</content>
+
+</document>

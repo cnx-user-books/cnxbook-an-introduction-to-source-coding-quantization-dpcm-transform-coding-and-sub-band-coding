@@ -1,0 +1,137 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Introduction and Motivation</title>
+  <metadata>
+  <md:content-id>m32106</md:content-id><md:title>Introduction and Motivation</md:title>
+  <md:abstract>In this module, we give a brief introduction to sub-band coding, its relation to transform coding, and its use in MPEG-style audio coding.</md:abstract>
+  <md:uuid>e4a256f2-3058-4b93-a07f-95a1a3a424d3</md:uuid>
+</metadata>
+
+<content>
+      
+        <list id="id2675318" display="block" list-type="bulleted"><item id="uid2">Sub-band coding is a popular compression tool used in, for example, MPEG-style audio
+coding schemes (see <link target-id="uid3"/>).
+<figure id="uid3"><media id="uid3_media" alt="This is a flowchart that will be described from left to right. Beginning on the far left is an arrow pointing to the right, labeled input. This arrow points at a rounded box labeled sub-band analysis. Breaking off downward from the input arrow is a second arrow that points down, then to the right at a rounded box labeled psycho-acoustic model. To the right of the box labeled sub-band analysis is a larger arrow pointing to the right labeled freq. data. This arrow points at another box labeled bit alloc and quantization. The freq. data arrow also breaks off to point down at the aforementioned box, psycho-acoustic model. From the right of the psycho-acoustic model is another arrow pointing back up at the bit alloc and quantization box. To the right of that box is another arrow pointing directly to the right, labeled quant. data. This arrow points at a box labeled stream formatting. To the right of this box is a final arrow pointing to the right, labeled output."><image mime-type="image/png" src="../../media/img015.png" id="uid3_onlineimage" width="908"><!-- NOTE: attribute width changes image size online (pixels). original width is 908. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img015.eps" id="uid3_printimage"/></media><caption>Simplified MPEG-style audio coding system.</caption></figure></item>
+          
+<item id="uid4"><link target-id="uid5"/> illustrates a generic subband coder.
+In short, the input signal is passed through a parallel bank of
+analysis filters <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>H</m:mi><m:mi>i</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:math> and the outputs are “downsampled”
+by a factor of <emphasis effect="italics">N</emphasis>.
+Downsampling-by-<emphasis effect="italics">N</emphasis> is a process which passes every <m:math overflow="scroll"><m:msup><m:mi>N</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> sample
+and ignores the rest, effectively decreasing the data rate by factor <emphasis effect="italics">N</emphasis>.
+The downsampled outputs are quantized (using a potentially different
+number of bits per branch—as in transform coding) for storage
+or transmission.
+Downsampling ensures that the number of data samples to store is not
+any larger than the number of data samples entering the coder;
+in <link target-id="uid5"/>, <emphasis effect="italics">N</emphasis> sub-band outputs are generated for every <emphasis effect="italics">N</emphasis>
+system inputs.
+<figure id="uid5"><media id="uid5_media" alt="This is a large, complex flowchart which will be described from left to right, as this is the flow of the diagram. The diagram begins with the expression x(n), and from this expression is a line that splits into a series of arrows each pointing to the right at boxes containing the expressions H_0(z), H_1(z), and so on to a final box H_(N-1)(z). From the ends of each of these boxes are more arrows pointing to the right, this time each at an identical circle containing a down arrow and the variable N. To the right of these circles again are a series of arrows, labeled from top to bottom s_0(m), s_1(m), and so on to the final arrow, s_(N-1)(m). These arrows each point at boxes containing the variable Q. To the right of these boxes are another series of arrows pointing to the right, labeled s-tilde_0 (m). There is then a gap in the diagram, followed by a series of identical arrows to those preceding it, with the s-tilde variables. These arrows each point at circles containing an up arrow and the variable N. To the right of these circles are more arrows pointing at boxes containing the labels K_0(z), K_1(z), and so on to a final box containing K_(N-1)(z). Each of these boxes point with arrows to the right at a single circle containing a plus sign. From the plus sign is a final arrow pointing to the right, labeled u(n)."><image mime-type="image/png" src="../../media/img016.png" id="uid5_onlineimage" width="1076"><!-- NOTE: attribute width changes image size online (pixels). original width is 1076. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img016.eps" id="uid5_printimage"/></media><caption>Sub-band coder/decoder with scalar quantization.</caption></figure></item>
+          <item id="uid6"><emphasis effect="italics"><emphasis effect="underline">Relationship to Transform Coding:</emphasis></emphasis> 
+Conceptually, sub-band coding (SC) is very similar to transform coding
+(TC).
+Like TC, SC analyzes a block of input data and produces a set of
+linearly transformed outputs, now called “subband outputs.”
+Like TC, these transformed outputs are independently quantized in
+a way that yields coding gain over straightforward PCM.
+And like TC, it is possible to derive an optimal bit allocation which
+minimizes reconstruction error variance for a specified average bit rate.
+In fact, an <emphasis effect="italics">N</emphasis>-band SC system with length-<emphasis effect="italics">N</emphasis> filters is equivalent
+to a TC system with <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:math> transformation matrix <emphasis effect="bold">T</emphasis>:
+the decimated convolution operation which defines the <m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math>
+analysis branch of <link target-id="uid5"/> is identical to an inner product
+between an <emphasis effect="italics">N</emphasis>-length input block and <m:math>
+<m:msubsup>
+<m:mi mathvariant="bold-sans-serif">t</m:mi>
+<m:mi>i</m:mi>
+<m:mi>t</m:mi>
+</m:msubsup>
+</m:math>, the <m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math>
+row of <emphasis effect="bold">T</emphasis>. (See <link target-id="uid7"/>.)
+<figure id="uid7"><media id="uid7_media" alt="This is a two-part figure. part a contains a series of horizontally connected boxes in a single row, labeled h_0, h_1, h_2, h_3 from left to right, followed by a long arrow that points at the expression s_i(m). In a second row of this part of the figure, a series of horizontally connected boxes continues at the same vertical position that the first row's boxes end. These boxes are also labeled h_0, h_1, h_2, and h_3. To the right of these is a short arrow that ends at the same part of the page that the upper row ends, pointing at the variable s_i(m-1) Below these is a final row of the first part of the figure, containing a series of connected boxes that span the entire width of the page. From left to right, the expressions inside the boxes are x(Nm), x(Nm-1), x(Nm-2), x(Nm-3), x(Nm-4), x(Nm-5), x(Nm-6), and x(Nm-7). The second part of the figure is drawn in a similar fashion, except that there is one large box in place of the connected boxes from the first part. The large box in the first row contains the expression t_i^t, and the arrow points at the expression y_i(m). In the second row, the box contains the same expression as the first row, and its arrow points at the expression y_i(m-1). The bottom row contains two connected boxes rather than the eight connected boxes in the first part of this figure. The two boxes contain the expressions x(m) on the left, and x(m-1) on the right."><image mime-type="image/png" src="../../media/img017.png" id="uid7_onlineimage" width="676"><!-- NOTE: attribute width changes image size online (pixels). original width is 676. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img017.eps" id="uid7_printimage"/></media><caption>Equivalence between (a) <emphasis effect="italics">N</emphasis>-band sub-band coding with length-<emphasis effect="italics">N</emphasis> filters and (b) <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:math> transform coding (shown for <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn><m:mo>)</m:mo></m:mrow></m:math>. Note: impulse response coefficients <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>h</m:mi><m:mi>n</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> correspond to filter <m:math overflow="scroll"><m:mrow><m:msub><m:mi>H</m:mi><m:mi>i</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>.</caption></figure>
+
+
+
+
+So what kind of frequency responses characterize the most-commonly
+used transformation matrices?
+Lets look at the DFT first.
+For the <m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> row, we have
+<equation id="id2676659"><m:math overflow="scroll" mode="display"><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi>H</m:mi><m:mi>i</m:mi></m:msub><m:mrow><m:mrow><m:mo>(</m:mo><m:mi>ω</m:mi><m:mo>)</m:mo></m:mrow><m:mo>|</m:mo><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/></m:mrow><m:mfenced separators="" open="|" close="|"><m:munderover><m:mrow><m:mo>∑</m:mo></m:mrow><m:mrow><m:mi>n</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msup><m:mi>e</m:mi><m:mrow><m:mo>-</m:mo><m:mi>j</m:mi><m:mfrac><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow><m:mi>N</m:mi></m:mfrac><m:mi>i</m:mi><m:mi>n</m:mi></m:mrow></m:msup><m:msup><m:mi>e</m:mi><m:mrow><m:mo>-</m:mo><m:mi>j</m:mi><m:mi>ω</m:mi><m:mi>n</m:mi></m:mrow></m:msup></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfenced separators="" open="|" close="|"><m:munderover><m:mrow><m:mo>∑</m:mo></m:mrow><m:mrow><m:mi>n</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msup><m:mi>e</m:mi><m:mrow><m:mo>-</m:mo><m:mi>j</m:mi><m:mo>(</m:mo><m:mi>ω</m:mi><m:mo>+</m:mo><m:mfrac><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow><m:mi>N</m:mi></m:mfrac><m:mi>i</m:mi><m:mo>)</m:mo><m:mi>n</m:mi></m:mrow></m:msup></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfenced separators="" open="|" close="|"><m:mfrac><m:mrow><m:mo form="prefix">sin</m:mo><m:mo>(</m:mo><m:mfrac><m:mi>N</m:mi><m:mn>2</m:mn></m:mfrac><m:mrow><m:mo>(</m:mo><m:mi>ω</m:mi><m:mo>+</m:mo><m:mfrac><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi><m:mi>i</m:mi></m:mrow><m:mi>N</m:mi></m:mfrac><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mrow><m:mrow><m:mo form="prefix">sin</m:mo><m:mo>(</m:mo><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:mrow><m:mo>(</m:mo><m:mi>ω</m:mi><m:mo>+</m:mo><m:mfrac><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi><m:mi>i</m:mi></m:mrow><m:mi>N</m:mi></m:mfrac><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mrow></m:mfrac></m:mfenced><m:mo>.</m:mo></m:mrow></m:math></equation>
+
+
+<link target-id="uid8"/> plots these magnitude responses.
+Note that the <m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> DFT row acts as a bandpass filter with center
+frequency <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi><m:mi>i</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math> and stopband attenuation of <m:math overflow="scroll"><m:mrow><m:mo>≈</m:mo><m:mn>6</m:mn></m:mrow></m:math> dB.
+<link target-id="uid9"/> plots the magnitude responses of DCT filters, where
+
+
+
+
+we see that they have even less stopband attenuation.
+
+<figure id="uid8"><media id="uid8_media" alt="This figure is a cartesian graph, plotting the horizontal axis omega of values -3 to 3, and vertical axis dB of values -20 to 0. The figure contains seven disconnected peaks, each approximately one horizontal unit in width, with the exception of the fourth peak, which is nearly two units wide. The vertical values at the waves' peak are the following from left to right: -9, -8, -6, 0, -6, -8, -9. Beyond these curves are a series of dashed peaks of varying heights that are even in width and alignment with the aforementioned solid peaks, but are of different heights as if each peak's different height is drawn over every other peak in the chart."><image mime-type="image/png" src="../../media/img018.png" id="uid8_onlineimage" width="458"><!-- NOTE: attribute width changes image size online (pixels). original width is 458. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img018.eps" id="uid8_printimage"/></media><caption>Magnitude responses of DFT basis vectors for <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>8</m:mn></m:mrow></m:math>.</caption></figure>
+
+
+<figure id="uid9"><media id="uid9_media" alt="This figure is a cartesian graph, plotting the horizontal axis omega of values -3 to 3, and vertical axis dB of values -20 to 2. The figure contains six disconnected peaks, although the figure is exactly symmetrical about a vertical line at omega=0. The first wave is approximately one unit wide, and reaches a vertical value of -4. The second wave is approximately 1.5 units wide and reaches a vertical value of 0. The third wave is approximately 0.5 units wide and reaches a vertical value of -9. The latter three waves follow the same progression after the reflection of symmetry."><image mime-type="image/png" src="../../media/img019.png" id="uid9_onlineimage" width="463"><!-- NOTE: attribute width changes image size online (pixels). original width is 463. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img019.eps" id="uid9_printimage"/></media><caption>Magnitude responses of DCT basis vectors for <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>8</m:mn></m:mrow></m:math>.</caption></figure></item>
+          
+
+
+<item id="uid10"><emphasis effect="italics"><emphasis effect="underline">Psycho-acoustic Motivations:</emphasis></emphasis> 
+We have seen that <emphasis effect="italics">N</emphasis>-band SC with length-<emphasis effect="italics">N</emphasis> filters is equivalent
+to <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:math> transform coding.
+But is transform coding the best technique to use in high quality
+audio coders?
+It turns out that <emphasis effect="italics">the key to preserving sonic quality under high
+levels of compression is to shape the reconstruction error so that the
+ear will not hear it</emphasis>.
+When we talk about psychoacoustics later in the course, we'll see that
+the properties of noise tolerated by the ear/brain are most easily
+described in the frequency domain.
+Hence, <emphasis effect="italics">bitrate allocation based on psychoacoustic models is most
+conveniently performed when SC outputs represent signal components
+in isolated frequency bands</emphasis>.
+In other words, instead of allocating fewer bits to sub-band outputs
+having a smaller effect on reconstruction error variance, we will
+allocate fewer bits to sub-band outputs having a smaller contribution
+to <emphasis effect="italics">perceived</emphasis> reconstruction error.
+We have seen that length-<emphasis effect="italics">N</emphasis> DFT and DCT filters give a <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math>
+bandwidth with no better than 6 dB of stopband attenuation.
+The SC filters required for high-quality audio coding require much
+better stopband performance, say <m:math overflow="scroll"><m:mrow><m:mo>&gt;</m:mo><m:mn>90</m:mn></m:mrow></m:math> dB.
+It turns out that filters with passband width <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math>, narrow transition
+bands, and descent stopband attenuation require impulse response
+lengths <m:math overflow="scroll"><m:mrow><m:mo>≫</m:mo><m:mi>N</m:mi></m:mrow></m:math>.
+In <emphasis effect="italics">N</emphasis>-band SC there is no constraint on filter length, unlike
+<emphasis effect="italics">N</emphasis>-band TC.
+This is the advantage of SC over TC when it comes to audio
+coding<footnote id="uid11">A similar conclusion resulted from our comparison of DPCM
+and TC of equal dimension <emphasis effect="italics">N</emphasis>; it was reasoned that the
+longer “effective” input length of DPCM with <emphasis effect="italics">N</emphasis>-length
+prediction filtering gave performance improvement relative to TC.</footnote>.
+</item>
+          <item id="uid12">To summarize, the key differences between transform and sub-band coding
+are the following.
+<list id="id2677265" display="block" list-type="enumerated"><item id="uid13">SC outputs measure relative signal strength in different
+frequency bands, while TC outputs might not have a strict
+bandpass correspondence.
+</item><item id="uid14">The TC input window length is equal to the number
+of TC outputs, while the SC input window length
+is usually much greater than number of SC outputs
+(16<m:math overflow="scroll"><m:mo>×</m:mo></m:math> greater in MPEG).
+</item></list></item>
+          <item id="uid15">At first glance SC implementation complexity is a valid concern.
+Recall that in TC, fast <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:math> transforms such as the DCT and
+DFT could be performed using <m:math overflow="scroll"><m:mrow><m:mo>∼</m:mo><m:mi>N</m:mi><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>N</m:mi></m:mrow></m:math> multiply/adds! Must
+we give up this computational efficiency for better frequency resolution?
+Fortunately the answer is <emphasis effect="italics">no</emphasis>; clever SC implementations are built
+around fast DFT or DCT transforms and are very efficient as a result.
+Fast sub-band coding, in fact, lies at the heart of MPEG
+audio compression (see ISO/IEC 13818-3).
+</item>
+       </list>
+    
+
+
+</content>
+
+    </document>

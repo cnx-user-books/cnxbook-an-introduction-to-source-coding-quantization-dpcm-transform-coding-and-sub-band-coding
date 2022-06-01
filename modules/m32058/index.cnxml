@@ -1,0 +1,109 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Memoryless Scalar Quantization</title>
+<metadata>
+  <md:content-id>m32058</md:content-id><md:title>Memoryless Scalar Quantization</md:title>
+  <md:abstract>Memoryless scalar quantization is discussed, with a focus on the uniform quantizer.  Uniform quantizer error variance is derived under the assumption of many quantization levels, and several examples are provided.</md:abstract>
+  <md:uuid>b9fe873f-5b26-49ce-b350-9ee3eb44e936</md:uuid>
+</metadata>
+
+<content>
+ 
+        <list id="id158241" display="block" list-type="bulleted"><item id="uid5"><emphasis effect="italics">Memoryless scalar quantization</emphasis> of continuous-amplitude variable <emphasis effect="italics">x</emphasis>
+is the mapping of <emphasis effect="italics">x</emphasis> to output <emphasis effect="italics">y<sub>k</sub></emphasis> when <emphasis effect="italics">x</emphasis> lies within interval
+<equation id="id158298"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi mathvariant="script">X</m:mi><m:mi>k</m:mi></m:msub><m:mo>:</m:mo><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub><m:mo>&lt;</m:mo><m:mi>x</m:mi><m:mo>≤</m:mo><m:msub><m:mi>x</m:mi><m:mrow><m:mi>k</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>}</m:mo></m:mrow><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mn>2</m:mn><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mi>L</m:mi><m:mo>.</m:mo></m:mrow></m:math></equation>
+The <emphasis effect="italics">x<sub>k</sub></emphasis> are called <emphasis effect="italics">decision thresholds</emphasis>, and the number of
+quantization levels is <emphasis effect="italics">L</emphasis>.
+The quantization operation is written <m:math overflow="scroll"><m:mrow><m:mi>y</m:mi><m:mo>=</m:mo><m:mi>Q</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math>.
+</item>
+          <item id="uid6">When <m:math overflow="scroll"><m:mrow><m:mn>0</m:mn><m:mo>∈</m:mo><m:mo>{</m:mo><m:msub><m:mi>y</m:mi><m:mn>1</m:mn></m:msub><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:msub><m:mi>y</m:mi><m:mi>L</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math>, quantizer is called <emphasis effect="italics">midtread</emphasis>,
+else <emphasis effect="italics">midrise</emphasis>.
+</item>
+          <item id="uid7"><emphasis effect="italics">Quantization error</emphasis> defined <m:math overflow="scroll"><m:mrow><m:mi>q</m:mi><m:mo/><m:mo>:=</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>Q</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math><figure id="uid8"><media id="uid8_media" alt=""><image mime-type="image/png" src="../../media/img007.png" id="uid8_onlineimage" width="483"><!-- NOTE: attribute width changes image size online (pixels). original width is 483. --></image><image for="pdf" mime-type="application/postscript" print-width="3.5in" src="../../media/img007.eps" id="uid8_printimage"/></media><caption>(a) Uniform and (b) non-uniform quantization Q(x) and quantization error q(x)</caption></figure></item>
+          <item id="uid9">If <emphasis effect="italics">x</emphasis> is a r.v. with pdf <m:math overflow="scroll"><m:mrow><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mo>·</m:mo><m:mo>)</m:mo></m:mrow></m:mrow></m:math> and likewise for <emphasis effect="italics">q</emphasis>,
+then quantization error variance is
+
+<equation id="uid10"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>=</m:mo><m:mo form="prefix">E</m:mo><m:mrow><m:mo>{</m:mo><m:msup><m:mi>q</m:mi><m:mn>2</m:mn></m:msup><m:mo>}</m:mo></m:mrow></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>∞</m:mi></m:mrow><m:mi>∞</m:mi></m:msubsup><m:msup><m:mi>q</m:mi><m:mn>2</m:mn></m:msup><m:msub><m:mi>p</m:mi><m:mi>q</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>q</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>q</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>∞</m:mi></m:mrow><m:mi>∞</m:mi></m:msubsup><m:msup><m:mfenced separators="" open="(" close=")"><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>Q</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mfenced><m:mn>2</m:mn></m:msup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:msubsup><m:mo>∫</m:mo><m:mrow><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mrow><m:mi>k</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:msubsup><m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mn>2</m:mn></m:msup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation></item>
+          <item id="uid11">A special quantizer is the <emphasis effect="italics">uniform quantizer</emphasis>:
+<equation id="id159062"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msub><m:mi>y</m:mi><m:mrow><m:mi>k</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>-</m:mo><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mi>Δ</m:mi><m:mo>,</m:mo><m:mspace width="1.em"/><m:mtext>for</m:mtext><m:mspace width="4.pt"/><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mn>2</m:mn><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mi>L</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>,</m:mo></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd columnalign="right"><m:mrow><m:msub><m:mi>x</m:mi><m:mrow><m:mi>k</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mi>Δ</m:mi><m:mo>,</m:mo><m:mspace width="1.em"/><m:mtext>for</m:mtext><m:mspace width="4.pt"/><m:mtext>finite</m:mtext><m:mspace width="4.pt"/><m:mrow><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub><m:mo>,</m:mo><m:msub><m:mi>x</m:mi><m:mrow><m:mi>k</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:mrow><m:mtext>,</m:mtext></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd columnalign="right"><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mn>1</m:mn></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msub><m:mi>x</m:mi><m:mrow><m:mi>L</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mi>∞</m:mi><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation></item>
+          <item id="uid12"><emphasis effect="italics"><emphasis effect="underline">Uniform Quantizer Performance for large <emphasis effect="italics">L</emphasis>:</emphasis></emphasis> 
+For bounded input <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>∈</m:mo><m:mo>(</m:mo><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>,</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>)</m:mo></m:mrow></m:math>, uniform quantization
+with <m:math overflow="scroll"><m:mrow><m:msub><m:mi>x</m:mi><m:mn>2</m:mn></m:msub><m:mo>=</m:mo><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>+</m:mo><m:mi>Δ</m:mi></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:msub><m:mi>x</m:mi><m:mi>L</m:mi></m:msub><m:mo>=</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>-</m:mo><m:mi>Δ</m:mi></m:mrow></m:math>, and with
+<m:math overflow="scroll"><m:mrow><m:msub><m:mi>y</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:msub><m:mi>x</m:mi><m:mn>2</m:mn></m:msub><m:mo>-</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub><m:mo>=</m:mo><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub><m:mo>+</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow></m:math> (for <m:math overflow="scroll"><m:mrow><m:mi>k</m:mi><m:mo>&gt;</m:mo><m:mn>1</m:mn></m:mrow></m:math>),
+the quantization
+error is well approximated by a uniform distribution for large <emphasis effect="italics">L</emphasis>:
+<equation id="id159494"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msub><m:mi>p</m:mi><m:mi>q</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>q</m:mi><m:mo>)</m:mo></m:mrow><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfenced separators="" open="{" close=""><m:mtable><m:mtr><m:mtd columnalign="left"><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>Δ</m:mi></m:mrow></m:mtd><m:mtd columnalign="left"><m:mrow><m:mo>|</m:mo><m:mi>q</m:mi><m:mo>|</m:mo><m:mo>≤</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn><m:mo>,</m:mo></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd columnalign="left"><m:mn>0</m:mn></m:mtd><m:mtd columnalign="left"><m:mrow><m:mtext>else</m:mtext><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Why?
+<list id="id159594" display="block" list-type="bulleted" bullet-style="dash"><item id="uid13">As <m:math overflow="scroll"><m:mrow><m:mi>L</m:mi><m:mspace width="-0.166667em"/><m:mo>→</m:mo><m:mspace width="-0.166667em"/><m:mi>∞</m:mi></m:mrow></m:math>, <m:math overflow="scroll"><m:mrow><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> is constant over <emphasis effect="italics">X<sub>k</sub></emphasis>
+for any <emphasis effect="italics">k</emphasis>.
+Since 
+<m:math overflow="scroll">
+<m:mrow>
+<m:mi>q</m:mi>
+<m:mo>=</m:mo>
+<m:mi>x</m:mi>
+<m:mo>-</m:mo>
+<m:msub>
+<m:mi>y</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+
+<m:mrow>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+</m:mrow>
+</m:mrow>
+
+</m:math>, it follows that
+<m:math overflow="scroll"><m:mrow><m:msub><m:mi>p</m:mi><m:mi>q</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>q</m:mi><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>∈</m:mo><m:msub><m:mi mathvariant="script">X</m:mi><m:mi>k</m:mi></m:msub><m:mo>)</m:mo></m:mrow></m:mrow></m:math> will have uniform distribution for any <emphasis effect="italics">k</emphasis>.
+</item><item id="uid14">With <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>∈</m:mo><m:mo>(</m:mo><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>,</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>)</m:mo></m:mrow></m:math> and with <emphasis effect="italics">x<sub>k</sub></emphasis> and <emphasis effect="italics">y<sub>k</sub></emphasis> as
+specified, <m:math overflow="scroll"><m:mrow><m:mi>q</m:mi><m:mo>∈</m:mo><m:mo>(</m:mo><m:mo>-</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn><m:mo>,</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn><m:mo>]</m:mo></m:mrow></m:math> for all <emphasis effect="italics">x</emphasis>
+(see <link target-id="uid15"/>). Hence, for any <emphasis effect="italics">k</emphasis>,
+<equation id="id159893"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>p</m:mi><m:mi>q</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>q</m:mi><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>∈</m:mo><m:msub><m:mi mathvariant="script">X</m:mi><m:mi>k</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfenced separators="" open="{" close=""><m:mtable><m:mtr><m:mtd columnalign="left"><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>Δ</m:mi></m:mrow></m:mtd><m:mtd columnalign="left"><m:mrow><m:mi>q</m:mi><m:mo>∈</m:mo><m:mo>(</m:mo><m:mo>-</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn><m:mo>,</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn><m:mo>]</m:mo><m:mo>,</m:mo></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd columnalign="left"><m:mn>0</m:mn></m:mtd><m:mtd columnalign="left"><m:mrow><m:mtext>else</m:mtext><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:math></equation></item></list><figure id="uid15"><media id="uid15_media" alt="This figure is a cartesian graph, with horizontal axis x and vertical axis q. The graph shows a series of seven zig-zags, centered at the origin as in figure one. The first zig-zag on the right begins at a horizontal value of -x_max, and the final zig-zag ends at the horizontal value x_max. The height or amplitude of the zig-zags ranges from -Δ/2 to Δ/2, and the width between peaks is measured to be Δ."><image mime-type="image/png" src="../../media/img008.png" id="uid15_onlineimage" width="452"><!-- NOTE: attribute width changes image size online (pixels). original width is 452. --></image><image for="pdf" mime-type="application/postscript" print-width="2.75in" src="../../media/img008.eps" id="uid15_printimage"/></media><caption>Quantization error for bounded input and midpoint <emphasis effect="italics">y<sub>k</sub></emphasis></caption></figure>
+In this case, from <link target-id="uid10"/> (upper equation),
+<equation id="uid16"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow><m:mrow><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow></m:msubsup><m:msup><m:mi>q</m:mi><m:mn>2</m:mn></m:msup><m:mfrac><m:mn>1</m:mn><m:mi>Δ</m:mi></m:mfrac><m:mspace width="0.166667em"/><m:mi>d</m:mi><m:mi>q</m:mi><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mi>Δ</m:mi></m:mfrac><m:msubsup><m:mfenced separators="" open="[" close="]"><m:mfrac><m:msup><m:mi>q</m:mi><m:mn>3</m:mn></m:msup><m:mn>3</m:mn></m:mfrac></m:mfenced><m:mrow><m:mo>-</m:mo><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow><m:mrow><m:mi>Δ</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow></m:msubsup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mi>Δ</m:mi></m:mfrac><m:mfenced separators="" open="(" close=")"><m:mfrac><m:msup><m:mi>Δ</m:mi><m:mn>3</m:mn></m:msup><m:mrow><m:mn>3</m:mn><m:mo>·</m:mo><m:mn>8</m:mn></m:mrow></m:mfrac><m:mo>+</m:mo><m:mfrac><m:msup><m:mi>Δ</m:mi><m:mn>3</m:mn></m:msup><m:mrow><m:mn>3</m:mn><m:mo>·</m:mo><m:mn>8</m:mn></m:mrow></m:mfrac></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mtable frame="solid"><m:mtr><m:mtd><m:mfrac><m:msup><m:mi>Δ</m:mi><m:mn>2</m:mn></m:msup><m:mn>12</m:mn></m:mfrac></m:mtd></m:mtr></m:mtable><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+If we use <emphasis effect="italics">R</emphasis> bits to represent each discrete output <emphasis effect="italics">y</emphasis> and
+choose <m:math overflow="scroll"><m:mrow><m:mi>L</m:mi><m:mo>=</m:mo><m:msup><m:mn>2</m:mn><m:mi>R</m:mi></m:msup></m:mrow></m:math>, then
+<equation id="id160315"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:msup><m:mi>Δ</m:mi><m:mn>2</m:mn></m:msup><m:mn>12</m:mn></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mn>12</m:mn></m:mfrac><m:msup><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mrow><m:mn>2</m:mn><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:mi>L</m:mi></m:mfrac></m:mfenced><m:mn>2</m:mn></m:msup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mn>3</m:mn></m:mfrac><m:msubsup><m:mi>x</m:mi><m:mrow><m:mo movablelimits="true" form="prefix">max</m:mo></m:mrow><m:mn>2</m:mn></m:msubsup><m:mspace width="0.166667em"/><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+and
+<equation id="id160463"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mi> SNR </m:mi><m:mspace width="3.33333pt"/><m:mtext>[dB]</m:mtext><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>10</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>10</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mfrac><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup></m:mfrac></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>10</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>10</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mn>3</m:mn><m:mfrac><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msubsup><m:mi>x</m:mi><m:mrow><m:mo movablelimits="true" form="prefix">max</m:mo></m:mrow><m:mn>2</m:mn></m:msubsup></m:mfrac><m:msup><m:mn>2</m:mn><m:mrow><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mtable frame="solid"><m:mtr><m:mtd><m:mn>6</m:mn><m:mo>.</m:mo><m:mn>02</m:mn><m:mi>R</m:mi><m:mo>-</m:mo><m:mn>10</m:mn><m:msub><m:mo form="prefix">log</m:mo><m:mn>10</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mn>3</m:mn><m:mfrac><m:msubsup><m:mi>x</m:mi><m:mrow><m:mo movablelimits="true" form="prefix">max</m:mo></m:mrow><m:mn>2</m:mn></m:msubsup><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup></m:mfrac></m:mfenced></m:mtd></m:mtr></m:mtable><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Recall that the expression above is only valid for <emphasis effect="italics">σ<sub>x</sub><sup>2</sup></emphasis> small
+enough to ensure <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>∈</m:mo><m:mo>(</m:mo><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>,</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>)</m:mo></m:mrow></m:math>.
+For larger <emphasis effect="italics">σ<sub>x</sub><sup>2</sup></emphasis>, the quantizer <emphasis effect="italics">overloads</emphasis> and the SNR
+decreases rapidly.
+<example id="eip-id1167379039360"><title>SNR for Uniform Quantization of Uniformly-Distributed Input</title> 
+<para id="eip-id1167372603288">
+For uniformly distributed <emphasis effect="italics">x</emphasis>, can show <m:math overflow="scroll"><m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>/</m:mo><m:msub><m:mi>σ</m:mi><m:mi>x</m:mi></m:msub><m:mo>=</m:mo><m:msqrt><m:mn>3</m:mn></m:msqrt></m:mrow></m:math>,
+so that <m:math overflow="scroll"><m:mrow><m:mi> SNR </m:mi><m:mo>=</m:mo><m:mn>6</m:mn><m:mo>.</m:mo><m:mn>02</m:mn><m:mi>R</m:mi></m:mrow></m:math>.
+</para></example>
+<example id="eip-id1167374890907"><title>SNR for Uniform Quantization of Sinusoidal Input)</title> 
+<para id="eip-id1167377302606">
+For a sinusoidal <emphasis effect="italics">x</emphasis>, can show <m:math overflow="scroll"><m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>/</m:mo><m:msub><m:mi>σ</m:mi><m:mi>x</m:mi></m:msub><m:mo>=</m:mo><m:msqrt><m:mn>2</m:mn></m:msqrt></m:mrow></m:math>,
+so that <m:math overflow="scroll"><m:mrow><m:mi> SNR </m:mi><m:mo>=</m:mo><m:mn>6</m:mn><m:mo>.</m:mo><m:mn>02</m:mn><m:mi>R</m:mi><m:mo>+</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>76</m:mn></m:mrow></m:math>.
+(Interesting since sine waves are often used as test signals).
+</para></example>
+<example id="eip-id1167374999796"><title>SNR for Uniform Quantization of Gaussian Input</title> 
+<para id="eip-id1167377311053">
+Though not truly bounded, Gaussian <emphasis effect="italics">x</emphasis> might be considered as
+approximately bounded if we choose <m:math overflow="scroll"><m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>=</m:mo><m:mn>4</m:mn><m:msub><m:mi>σ</m:mi><m:mi>x</m:mi></m:msub></m:mrow></m:math> and
+ignore residual clipping.
+In this case <m:math overflow="scroll"><m:mrow><m:mi> SNR </m:mi><m:mo>=</m:mo><m:mn>6</m:mn><m:mo>.</m:mo><m:mn>02</m:mn><m:mi>R</m:mi><m:mo>-</m:mo><m:mn>7</m:mn><m:mo>.</m:mo><m:mn>27</m:mn></m:mrow></m:math>.
+</para></example>
+</item>
+        </list>
+
+
+</content>
+
+</document>

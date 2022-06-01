@@ -1,0 +1,139 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Performance</title>
+<metadata>
+  <md:content-id>m32087</md:content-id><md:title>Performance</md:title>
+  <md:abstract>Here we analyze the optimal reconstruction error for transform coding.  As the number of channels grows to infinity, the performance gain over PCM is shown to depend on the spectral flatness measure. Meanwhile, the performance of transform coding with an infinite number of channels is shown to equal that of DPCM with an infinite-length predictor.  However, when the DPCM predictor length is equal to the number of transform coding channels, we show that DPCM always yields better performance.</md:abstract>
+  <md:uuid>4c0d66fc-e7dc-473d-8ff5-662e1ceacc59</md:uuid>
+</metadata>
+
+<content>
+<section id="uid33">
+        <title>Asymptotic Performance Analysis</title>
+        <list id="id210199" display="block" list-type="bulleted"><item id="uid34">For an <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:math> transform coder, <link document="m32146" target-id="uid19">Equation 1 from "Gain over PCM"</link> presented an
+expression for the reconstruction error variance
+<m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext></m:mrow></m:msub></m:mrow></m:mrow></m:math> written in terms of the quantizer
+input variances <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mo>}</m:mo></m:mrow></m:math>.
+Noting the <emphasis effect="italics">N</emphasis>-dependence on 
+<m:math overflow="scroll">
+
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>r</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:msub>
+<m:mo>|</m:mo>
+<m:mrow>
+<m:mi>T</m:mi>
+<m:mi>C</m:mi>
+</m:mrow>
+</m:msub>
+</m:math>
+ in
+<link document="m32146" target-id="uid19">Equation 1 from "Gain over PCM"</link> and rewriting it as <m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:math>,
+a reasonable question might be: What is <m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:math>
+as <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>→</m:mo><m:mspace width="-0.166667em"/><m:mi>∞</m:mi></m:mrow></m:math>?
+</item>
+          <item id="uid35">When using the KLT, we know that <m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mo>=</m:mo><m:msub><m:mi>λ</m:mi><m:mi>k</m:mi></m:msub></m:mrow></m:math> where
+<emphasis effect="italics">λ<sub>k</sub></emphasis> denotes the <m:math overflow="scroll"><m:msup><m:mi>k</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> eigenvalue of <m:math>
+<m:msub>
+<m:mi mathvariant="bold">R</m:mi>
+<m:mi>x</m:mi>
+</m:msub>
+</m:math>.
+If we plug these <m:math overflow="scroll"><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup></m:math> into <link document="m32146" target-id="uid19">Equation 1 from "Gain over PCM"</link>, we get
+<equation id="id210551"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msup><m:mfenced separators="" open="(" close=")"><m:munderover><m:mo>∏</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msub><m:mi>λ</m:mi><m:mi>k</m:mi></m:msub></m:mfenced><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Writing <m:math overflow="scroll"><m:mrow><m:msup><m:mrow><m:mo>(</m:mo><m:msub><m:mo>∏</m:mo><m:mi>k</m:mi></m:msub><m:msub><m:mi>λ</m:mi><m:mi>k</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup><m:mo>=</m:mo><m:mo form="prefix">exp</m:mo><m:mrow><m:mo>(</m:mo><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:msub><m:mo>∑</m:mo><m:mi>k</m:mi></m:msub><m:mo form="prefix">ln</m:mo><m:msub><m:mi>λ</m:mi><m:mi>k</m:mi></m:msub><m:mo>)</m:mo></m:mrow></m:mrow></m:math>
+and using the Toeplitz Distribution Theorem (see Grenander &amp; Szego) <equation id="id210754"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mtext>For</m:mtext><m:mspace width="4.pt"/><m:mtext>any</m:mtext><m:mspace width="4.pt"/><m:mrow><m:mi>f</m:mi><m:mo>(</m:mo><m:mo>·</m:mo><m:mo>)</m:mo></m:mrow><m:mtext>,</m:mtext><m:mspace width="1.em"/><m:munder><m:mo movablelimits="true" form="prefix">lim</m:mo><m:mrow><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:munder><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:munder><m:mo>∑</m:mo><m:mi>k</m:mi></m:munder><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo><m:msub><m:mi>λ</m:mi><m:mi>k</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+with <m:math overflow="scroll"><m:mrow><m:mi>f</m:mi><m:mo>(</m:mo><m:mo>·</m:mo><m:mo>)</m:mo><m:mo>=</m:mo><m:mo form="prefix">ln</m:mo><m:mo>(</m:mo><m:mo>·</m:mo><m:mo>)</m:mo></m:mrow></m:math>, we find that
+<equation id="id210951"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:munder><m:mo movablelimits="true" form="prefix">lim</m:mo><m:mrow><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:munder><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:mo form="prefix">exp</m:mo><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:mo form="prefix">ln</m:mo><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mspace width="0.166667em"/><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:mspace width="0.166667em"/><m:msub><m:mtext>SFM</m:mtext><m:mi>x</m:mi></m:msub></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+where <m:math overflow="scroll"><m:msub><m:mtext>SFM</m:mtext><m:mi>x</m:mi></m:msub></m:math> denotes the spectral flatness measure of <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>,
+redefined below for convenience:
+<equation id="id211196"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msub><m:mtext>SFM</m:mtext><m:mi>x</m:mi></m:msub></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mrow><m:mo form="prefix">exp</m:mo><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:mo form="prefix">ln</m:mo><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mfenced></m:mrow><m:mrow><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mrow></m:mfrac><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Thus, with optimal transform and optimal bit allocation, asymptotic
+gain over uniformly quantized PCM is
+<equation id="id211362"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mtable frame="solid"><m:mtr><m:mtd><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:msub><m:mo>=</m:mo><m:mfrac><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>PCM</m:mtext></m:mrow></m:msub></m:mrow></m:mrow><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:mrow></m:mfrac><m:mo>=</m:mo><m:mfrac><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup></m:mrow><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msub><m:mtext>SFM</m:mtext><m:mi>x</m:mi></m:msub></m:mrow></m:mfrac><m:mo>=</m:mo><m:mfrac><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub></m:mfrac><m:msubsup><m:mtext>SFM</m:mtext><m:mi>x</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msubsup></m:mtd></m:mtr></m:mtable><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation></item>
+          <item id="uid36">Recall that, for the optimal DPCM system,
+<equation id="id211609"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>PCM</m:mtext></m:mrow></m:msub></m:mrow></m:mrow><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo></m:mrow></m:msub></m:mrow></m:mrow></m:mfrac><m:mo>,</m:mo></m:mrow></m:math></equation>
+where we assumed that the signal applied to DPCM quantizer
+is distributed similarly to the signal applied to PCM quantizer
+and where 
+<m:math overflow="scroll">
+
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>e</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mo movablelimits="true" form="prefix">min</m:mo>
+</m:mrow>
+</m:msub>
+
+</m:math>
+ denotes the prediction
+error variance resulting from use of the optimal infinite-length
+linear predictor:
+<equation id="id211774"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo></m:mrow></m:msub><m:mo>=</m:mo><m:mo form="prefix">exp</m:mo></m:mrow><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mn>1</m:mn><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:mi>π</m:mi></m:mrow><m:mi>π</m:mi></m:msubsup><m:mo form="prefix">ln</m:mo><m:msub><m:mi>S</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mi>ω</m:mi></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>ω</m:mi></m:mfenced><m:mo>.</m:mo></m:mrow></m:math></equation>
+Making this latter assumption for the transform coder (implying
+<m:math overflow="scroll"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:mo>=</m:mo><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub></m:mrow></m:math>) and plugging in <m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub>
+<m:mrow><m:mo>|</m:mo></m:mrow>
+<m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo></m:mrow>
+</m:msub></m:mrow></m:mrow></m:math>
+yields the following asymptotic result:
+<equation id="id211945"><m:math overflow="scroll" mode="display"><m:mrow><m:mtable frame="solid"><m:mtr><m:mtd><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:msub><m:mo>=</m:mo><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:msub><m:mo>=</m:mo><m:msubsup><m:mtext>SFM</m:mtext><m:mi>x</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msubsup></m:mtd></m:mtr></m:mtable><m:mo>.</m:mo></m:mrow></m:math></equation>
+In other words, transform coding with infinite-dimensional optimal
+transformation and optimal bit allocation performs equivalently to
+DPCM with infinite-length optimal linear prediction.
+</item>
+        
+        </list>
+      </section><section id="eip-928"><title>Finite-Dimensional Analysis: Comparison to DPCM</title><list id="eip-734"><item id="uid37">The fact that optimal transform coding performs as well as
+DPCM in the limiting case does not tell us the relative performance
+of these methods at practical levels of implementation, e.g., when
+transform dimension and predictor length are equal and <m:math overflow="scroll"><m:mrow><m:mo>≪</m:mo><m:mi>∞</m:mi></m:mrow></m:math>.
+Below we compare the reconstruction error variances of TC and DPCM
+when the transform dimension <emphasis effect="italics">equals</emphasis> the predictor length.
+Recalling that
+<equation id="id212073"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:mrow></m:mrow></m:mfrac></m:mrow></m:math></equation>
+and
+<equation id="id212158"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>=</m:mo></m:mrow><m:mfrac><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow></m:mfrac></m:mrow></m:math></equation>
+where <m:math>
+<m:msub>
+<m:mi mathvariant="bold">R</m:mi>
+<m:mi>N</m:mi></m:msub></m:math> denotes the <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:math> autocorrelation
+matrix of <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>, we find
+<equation id="id212309"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>=</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mfrac><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow></m:mfrac><m:mo>,</m:mo><m:mspace width="1.em"/><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msub><m:mo>=</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mfrac><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow></m:mfrac><m:mo>,</m:mo><m:mspace width="1.em"/><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>3</m:mn></m:mrow></m:msub><m:mo>=</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mfrac><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>3</m:mn></m:mrow></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow></m:mfrac><m:mo>,</m:mo><m:mspace width="1.em"/><m:mspace width="3.33333pt"/><m:mo>⋯</m:mo><m:mspace width="3.33333pt"/></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Recursively applying the equations above, we find
+<equation id="id212584"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:munderover><m:mo>∏</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msup><m:mrow><m:mo>(</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>)</m:mo></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mfrac><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mn>1</m:mn></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:msup><m:mrow><m:mo>(</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>)</m:mo></m:mrow><m:mi>N</m:mi></m:msup><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub><m:mrow><m:mo>|</m:mo></m:mrow></m:mrow></m:mfrac></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+which means that we can write
+<equation id="id212764"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mrow><m:mo>|</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub><m:mrow><m:mo>|</m:mo><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/></m:mrow><m:msup><m:mrow><m:mo>(</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>)</m:mo></m:mrow><m:mi>N</m:mi></m:msup><m:msup><m:mfenced separators="" open="(" close=")"><m:munderover><m:mo>∏</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+If in the previously derived TC reconstruction error variance expression
+<equation id="id212885"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msup><m:mfenced separators="" open="(" close=")"><m:munderover><m:mo>∏</m:mo><m:mrow><m:mi>ℓ</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msub><m:mi>λ</m:mi><m:mi>ℓ</m:mi></m:msub></m:mfenced><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+we assume that <m:math overflow="scroll"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:mo>=</m:mo><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub></m:mrow></m:math> and apply the eigenvalue property
+<m:math overflow="scroll"><m:mrow><m:msub><m:mo>∏</m:mo><m:mi>ℓ</m:mi></m:msub><m:msub><m:mi>λ</m:mi><m:mi>ℓ</m:mi></m:msub><m:mo>=</m:mo><m:mrow><m:mo>|</m:mo><m:msub><m:mi mathvariant="bold">R</m:mi><m:mi>N</m:mi></m:msub><m:mo>|</m:mo></m:mrow></m:mrow></m:math>, the TC gain over PCM becomes
+<equation id="id213071"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>PCM</m:mtext></m:mrow></m:msub></m:mrow></m:mrow><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub></m:mrow></m:mrow></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup></m:mrow><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:mo>·</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msup><m:mfenced separators="" open="(" close=")"><m:msubsup><m:mrow><m:mo>∏</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msubsup><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup></m:mrow></m:mfrac></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:msup><m:mfenced separators="" open="(" close=")"><m:munderover><m:mrow><m:mo>∏</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>&lt;</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>N</m:mi></m:mrow></m:msub><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+The strict inequality follows from the fact that <m:math overflow="scroll"><m:msub><m:mi>G</m:mi><m:mrow><m:mtext>DPCM</m:mtext><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:math>
+is monotonically increasing with <emphasis effect="italics">k</emphasis>.
+To summarize, DPCM with optimal length-<emphasis effect="italics">N</emphasis> prediction performs better
+than TC with optimal <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>×</m:mo><m:mspace width="-0.166667em"/><m:mi>N</m:mi></m:mrow></m:math> transformation and optimal bit
+allocation for any finite value of <emphasis effect="italics">N</emphasis>.
+There is an intuitive explanation for this:
+the propagation of memory in the DPCM prediction loop makes
+the <emphasis effect="italics">effective</emphasis> memory of DPCM greater than <emphasis effect="italics">N</emphasis>, while in TC the
+effective memory is exactly <emphasis effect="italics">N</emphasis>.
+</item></list></section>
+      
+
+
+
+
+
+</content>
+
+</document>

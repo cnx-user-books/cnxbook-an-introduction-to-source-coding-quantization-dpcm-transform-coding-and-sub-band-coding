@@ -1,0 +1,309 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Quantizer Design for Entropy Coded Sytems</title>
+<metadata>
+  <md:content-id>m32061</md:content-id><md:title>Quantizer Design for Entropy Coded Sytems</md:title>
+  <md:abstract>Motivated by the cascade of memoryless quantization and entropy coding, the entropy-minimizing scalar memoryless quantizer is derived.  Using a compander formulation and tools from the calculus of variations, it is shown that the entropy-minimizing quantizer is the simple uniform quantizer.  The penalty associated with memoryless quantization is then analyzed in the asymptotic case of many quantization levels.</md:abstract>
+  <md:uuid>76ece71b-7f0b-4963-b199-94b739e8a671</md:uuid>
+</metadata>
+
+<content>
+      <list id="id144238" display="block" list-type="bulleted"><item id="srt2">Say that we are designing a system with a memoryless quantizer
+followed by an entropy coder, and our goal is to minimize the
+average transmission rate for a given <emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis> (or vice versa).
+Is it optimal to cascade a <emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis>-minimizing (Lloyd-Max)
+quantizer with a rate-minimizing code?
+In other words, what is the optimal memoryless quantizer if
+the quantized outputs are to be entropy coded?
+</item>
+        <item id="srt3"><emphasis effect="italics"><emphasis effect="underline">A Compander Formulation:</emphasis></emphasis> 
+
+To determine the optimal quantizer,
+
+<list id="id144321" display="block" list-type="enumerated"><item id="srt4">consider a <emphasis effect="italics">companding</emphasis> system: a memoryless nonlinearity
+<m:math overflow="scroll"><m:mrow><m:mi>c</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math> followed by uniform quantizer,
+</item><item id="srt5">find <m:math overflow="scroll"><m:mrow><m:mi>c</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math> minimizing entropy <emphasis effect="italics">H<sub>y</sub></emphasis> for a fixed
+error variance <emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis>.
+</item></list><figure id="srt6"><media id="srt6_media" alt=""><image mime-type="image/png" src="../../media/img010.png" id="srt6_onlineimage" width="543"><!-- NOTE: attribute width changes image size online (pixels). original width is 543. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img010.eps" id="srt6_printimage"/></media><caption>Compander curve: nonuniform input regions mapped to uniform output regions (for subsequent uniform quantization)</caption></figure></item>
+        <item id="srt7">First we must express <emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis> and <emphasis effect="italics">H<sub>y</sub></emphasis> in terms of <m:math overflow="scroll"><m:mrow><m:mi>c</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math>.
+<link target-id="srt6"/> suggests that, for large <emphasis effect="italics">L</emphasis>, the slope
+<m:math overflow="scroll"><m:mrow><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>:</m:mo><m:mo>=</m:mo><m:mi>d</m:mi><m:mi>c</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>/</m:mo><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:math> obeys
+<equation id="id144716"><m:math overflow="scroll" mode="display"><m:mrow><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+</m:mrow>
+<m:mo>=</m:mo><m:mfrac><m:mrow><m:mn>2</m:mn><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>/</m:mo><m:mi>L</m:mi></m:mrow><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub></m:mfrac><m:mo>,</m:mo></m:mrow></m:math></equation>
+so that we may write
+<equation id="id144794"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub><m:mo>=</m:mo><m:mfrac><m:mrow><m:mn>2</m:mn><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:mrow><m:mi>L</m:mi><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:mfrac><m:mrow>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi><m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+
+</m:msub>
+</m:mrow>
+</m:msub>
+</m:mrow>
+<m:mo>.</m:mo></m:mrow></m:math></equation>
+Assuming large <emphasis effect="italics">L</emphasis>, the <emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis>-approximation
+<link document="m32059" target-id="uid34">equation 9 from MSE-Optimal Memoryless Scalar Quantization</link> (lower equation) can be transformed as follows.
+<equation id="id144898"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mn>12</m:mn></m:mfrac><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:msubsup><m:mi>Δ</m:mi><m:mi>k</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:msubsup><m:mi>x</m:mi><m:mrow><m:mo movablelimits="true" form="prefix">max</m:mo></m:mrow><m:mn>2</m:mn></m:msubsup><m:mrow><m:mn>3</m:mn><m:msup><m:mi>L</m:mi><m:mn>2</m:mn></m:msup></m:mrow></m:mfrac><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:mfrac><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:mrow><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mrow></m:mfrac>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+</m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:msubsup><m:mi>x</m:mi><m:mrow><m:mo movablelimits="true" form="prefix">max</m:mo></m:mrow><m:mn>2</m:mn></m:msubsup><m:mrow><m:mn>3</m:mn><m:msup><m:mi>L</m:mi><m:mn>2</m:mn></m:msup></m:mrow></m:mfrac><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:mfrac><m:mrow><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow><m:mrow><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mrow></m:mfrac><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub>
+
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+<m:mspace width="1"/>
+<m:mtext>since</m:mtext>
+<m:mspace width="1"/>
+<m:msub>
+<m:mi>P</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+<m:mo>=</m:mo>
+<m:msub>
+<m:mi>p</m:mi>
+<m:mi>x</m:mi>
+</m:msub>
+<m:mrow>
+<m:mo>(</m:mo>
+<m:mi>x</m:mi>
+<m:mo>)</m:mo>
+</m:mrow>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+
+<m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub><m:mspace width="1.em"/><m:mtext>for</m:mtext><m:mspace width="4.pt"/><m:mtext>large</m:mtext><m:mspace width="4.pt"/><m:mi>L</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:msubsup><m:mi>x</m:mi><m:mrow><m:mo movablelimits="true" form="prefix">max</m:mo></m:mrow><m:mn>2</m:mn></m:msubsup><m:mrow><m:mn>3</m:mn><m:msup><m:mi>L</m:mi><m:mn>2</m:mn></m:msup></m:mrow></m:mfrac><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:mfrac><m:mrow><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow><m:mrow><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mrow></m:mfrac><m:mi>d</m:mi><m:mi>x</m:mi><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Similarly,
+<equation id="srt8"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mo>-</m:mo><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msub><m:mi>P</m:mi><m:mi>k</m:mi></m:msub></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mo>-</m:mo><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub></m:mfenced>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+</m:mrow>
+</m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mo>-</m:mo><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow>
+
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+</m:mrow>
+<m:mo>-</m:mo><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>L</m:mi></m:munderover><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>x</m:mi>
+<m:mo>∈</m:mo>
+<m:msub>
+<m:mi mathvariant="script">X</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:mrow>
+</m:msub>
+</m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:munder><m:munder accentunder="true"><m:mrow><m:mo>-</m:mo><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow><m:mo>︸</m:mo></m:munder><m:mrow><m:msub><m:mi>h</m:mi><m:mi>x</m:mi></m:msub><m:mo>:</m:mo><m:mtext>``differential</m:mtext><m:mspace width="4.pt"/><m:mtext>entropy''</m:mtext></m:mrow></m:munder><m:mspace width="3.33333pt"/><m:mo>-</m:mo><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:munder><m:munder accentunder="true"><m:mfrac><m:mrow><m:mn>2</m:mn><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:mrow><m:mi>L</m:mi><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:mfrac><m:mo>︸</m:mo></m:munder><m:msub><m:mi>Δ</m:mi><m:mi>k</m:mi></m:msub></m:munder><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msub><m:mi>h</m:mi><m:mi>x</m:mi></m:msub><m:mo>-</m:mo><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfrac><m:mrow><m:mn>2</m:mn><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:mi>L</m:mi></m:mfrac><m:munder><m:munder accentunder="true"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow><m:mo>︸</m:mo></m:munder><m:mrow><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:munder><m:mspace width="0.277778em"/><m:mo>+</m:mo><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mtext>constant</m:mtext><m:mspace width="0.222222em"/><m:mo>+</m:mo><m:mspace width="0.222222em"/><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation></item>
+        <item id="srt9"><emphasis effect="italics"><emphasis effect="underline">Entropy-Minimizing Quantizer:</emphasis></emphasis> 
+Our goal is to choose <m:math overflow="scroll"><m:mrow><m:mi>c</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math> which minimizes the entropy rate <emphasis effect="italics">H<sub>y</sub></emphasis>
+subject to fixed error variance <emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis>.
+We employ a Lagrange technique again, minimizing
+the cost <m:math overflow="scroll"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:math>
+under the constraint that the quantity
+<m:math overflow="scroll"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msup><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:math>
+equals a constant <emphasis effect="italics">C</emphasis>.
+This yields the unconstrained cost function
+<equation id="srt10"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:msub><m:mi>J</m:mi><m:mi>u</m:mi></m:msub><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>λ</m:mi></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:munder><m:munder accentunder="true"><m:mfenced separators="" open="[" close="]"><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>λ</m:mi><m:mfenced separators="" open="(" close=")"><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msup><m:mo>-</m:mo><m:mi>C</m:mi></m:mfenced></m:mfenced><m:mo>︸</m:mo></m:munder><m:mrow><m:mi>φ</m:mi><m:mo>(</m:mo><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>λ</m:mi><m:mo>)</m:mo></m:mrow></m:munder><m:mi>d</m:mi><m:mi>x</m:mi><m:mo>,</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+with scalar <emphasis effect="italics">λ</emphasis>, and the unconstrained optimization problem becomes
+<equation id="id146780"><m:math overflow="scroll" mode="display"><m:mrow><m:munder><m:mrow><m:mo movablelimits="true" form="prefix">min</m:mo></m:mrow><m:mrow><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>λ</m:mi></m:mrow></m:munder><m:msub><m:mi>J</m:mi><m:mi>u</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>λ</m:mi><m:mo>)</m:mo></m:mrow><m:mo>.</m:mo></m:mrow></m:math></equation>
+The following technique is common in variational calculus (see, e.g., Optimal Systems Control by Sage &amp; White).
+Say <m:math overflow="scroll"><m:mrow><m:msup><m:mi>a</m:mi><m:mo>⋆</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> minimizes a (scalar) cost <m:math overflow="scroll"><m:mrow><m:mi>J</m:mi><m:mfenced separators="" open="(" close=")"><m:mi>a</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mfenced></m:mrow></m:math>.
+Then for <emphasis effect="italics">any</emphasis> (well-behaved) variation <m:math overflow="scroll"><m:mrow><m:mi>η</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math> from this optimal
+<m:math overflow="scroll"><m:mrow><m:msup><m:mi>a</m:mi><m:mo>⋆</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>, we must have
+<equation id="id146963"><m:math overflow="scroll" mode="display"><m:mrow><m:mfrac><m:mi>∂</m:mi><m:mrow><m:mi>∂</m:mi><m:mi>ϵ</m:mi></m:mrow></m:mfrac><m:mi>J</m:mi><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>a</m:mi><m:mo>⋆</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>ϵ</m:mi>
+<m:mo>=</m:mo>
+<m:mn>0</m:mn>
+</m:mrow>
+</m:msub>
+<m:mo>=</m:mo><m:mn>0</m:mn></m:mrow></m:math></equation>
+where <emphasis effect="italics">ϵ</emphasis> is a scalar.
+Applying this principle to our optimization problem, we search for
+<m:math overflow="scroll"><m:mrow><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> such that
+<equation id="id147081"><m:math overflow="scroll" mode="display"><m:mrow><m:mo>∀</m:mo><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mspace width="3.33333pt"/><m:mfrac><m:mi>∂</m:mi><m:mrow><m:mi>∂</m:mi><m:mi>ϵ</m:mi></m:mrow></m:mfrac><m:msub><m:mi>J</m:mi><m:mi>u</m:mi></m:msub><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>λ</m:mi></m:mfenced>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>ϵ</m:mi>
+<m:mo>=</m:mo>
+<m:mn>0</m:mn>
+</m:mrow>
+</m:msub><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>.</m:mo></m:mrow></m:math></equation>
+From <link target-id="srt10"/> we find (using <m:math overflow="scroll"><m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>a</m:mi><m:mo>=</m:mo><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>e</m:mi><m:mo>·</m:mo><m:msub><m:mo form="prefix">log</m:mo><m:mi>e</m:mi></m:msub><m:mi>a</m:mi></m:mrow></m:math>)
+<equation id="id147252"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mfrac><m:mrow><m:mi>∂</m:mi><m:msub><m:mi>J</m:mi><m:mi>u</m:mi></m:msub></m:mrow><m:mrow><m:mi>∂</m:mi><m:mi>ϵ</m:mi></m:mrow></m:mfrac>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>ϵ</m:mi>
+<m:mo>=</m:mo>
+<m:mn>0</m:mn>
+</m:mrow>
+</m:msub></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:mfrac><m:mi>∂</m:mi><m:mrow><m:mi>∂</m:mi><m:mi>ϵ</m:mi></m:mrow></m:mfrac><m:mi>φ</m:mi><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>λ</m:mi></m:mfenced>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>ϵ</m:mi>
+<m:mo>=</m:mo>
+<m:mn>0</m:mn>
+</m:mrow>
+</m:msub>
+<m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:mfrac><m:mi>∂</m:mi><m:mrow><m:mi>∂</m:mi><m:mi>ϵ</m:mi></m:mrow></m:mfrac><m:mfenced separators="" open="[" close="]"><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi>e</m:mi><m:mo>)</m:mo></m:mrow><m:mspace width="0.166667em"/><m:msub><m:mo form="prefix">log</m:mo><m:mi>e</m:mi></m:msub><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mo>+</m:mo><m:mi>λ</m:mi><m:mfenced separators="" open="(" close=")"><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msup><m:mo>-</m:mo><m:mi>C</m:mi></m:mfenced></m:mfenced>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>ϵ</m:mi>
+<m:mo>=</m:mo>
+<m:mn>0</m:mn>
+</m:mrow>
+</m:msub>
+<m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:mfenced separators="" open="[" close="]"><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi>e</m:mi><m:mo>)</m:mo></m:mrow><m:mspace width="0.166667em"/><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>λ</m:mi><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>ϵ</m:mi><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>3</m:mn></m:mrow></m:msup><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mi>ϵ</m:mi>
+<m:mo>=</m:mo>
+<m:mn>0</m:mn>
+</m:mrow>
+</m:msub>
+<m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msubsup><m:mo>∫</m:mo><m:mrow><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:msubsup><m:msub><m:mi>p</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mfenced separators="" open="[" close="]"><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi>e</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>λ</m:mi><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msup></m:mfenced><m:mspace width="0.166667em"/><m:mi>η</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mspace width="0.166667em"/><m:mi>d</m:mi><m:mi>x</m:mi></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+and to allow for any <m:math overflow="scroll"><m:mrow><m:mi>η</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math> we require
+<equation id="id148135"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi>e</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>λ</m:mi><m:msup><m:mfenced separators="" open="(" close=")"><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn></m:mrow></m:msup><m:mo>=</m:mo><m:mn>0</m:mn><m:mspace width="1.em"/><m:mo>⇔</m:mo><m:mspace width="1.em"/><m:msup><m:mi>c</m:mi><m:mo>'</m:mo></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:munder><m:munder accentunder="true"><m:msqrt><m:mfrac><m:mrow><m:mn>2</m:mn><m:mi>λ</m:mi></m:mrow><m:mrow><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>e</m:mi></m:mrow></m:mfrac></m:msqrt><m:mo>︸</m:mo></m:munder><m:mrow><m:mtext>a</m:mtext><m:mspace width="4.pt"/><m:mtext>constant!</m:mtext></m:mrow></m:munder><m:mo>.</m:mo></m:mrow></m:math></equation>
+Applying the boundary conditions,
+<equation id="id148279"><m:math overflow="scroll" mode="display"><m:mrow><m:mfenced separators="" open="{" close="}"><m:mtable><m:mtr><m:mtd><m:mrow><m:mi>c</m:mi><m:mrow><m:mo>(</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mi>c</m:mi><m:mrow><m:mo>(</m:mo><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mo>-</m:mo><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced><m:mspace width="1.em"/><m:mo>→</m:mo><m:mspace width="1.em"/><m:mtable frame="solid"><m:mtr><m:mtd><m:mi>c</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo><m:mo>=</m:mo><m:mi>x</m:mi></m:mtd></m:mtr></m:mtable><m:mo>.</m:mo></m:mrow></m:math></equation>
+Thus, for large-<emphasis effect="italics">L</emphasis>, <emphasis effect="italics">the quantizer that minimizes
+entropy rate <emphasis effect="italics">H<sub>y</sub></emphasis> for a given quantization error variance <emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis>
+is the uniform quantizer.</emphasis>
+Plugging <m:math overflow="scroll"><m:mrow><m:mi>c</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo><m:mo>=</m:mo><m:mi>x</m:mi></m:mrow></m:math> into <link target-id="srt8"/>, the rightmost integral disappears
+and we have
+<equation id="id148486"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mtext>uniform</m:mtext>
+</m:mrow>
+</m:msub>
+<m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/></m:mrow><m:msub><m:mi>h</m:mi><m:mi>x</m:mi></m:msub><m:mo>-</m:mo><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:munder><m:munder accentunder="true"><m:mfrac><m:mrow><m:mn>2</m:mn><m:msub><m:mi>x</m:mi><m:mo movablelimits="true" form="prefix">max</m:mo></m:msub></m:mrow><m:mi>L</m:mi></m:mfrac><m:mo>︸</m:mo></m:munder><m:mi>Δ</m:mi></m:munder><m:mo>,</m:mo></m:math></equation>
+and using the large-<emphasis effect="italics">L</emphasis> uniform quantizer error variance approximation
+<link document="m32058" target-id="uid16">equation 6 from Memoryless Scalar Quantization</link>,
+<equation id="id148589"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>H</m:mi><m:mi>y</m:mi></m:msub>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mtext>uniform</m:mtext>
+</m:mrow>
+</m:msub>
+<m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/></m:mrow><m:msub><m:mi>h</m:mi><m:mi>x</m:mi></m:msub><m:mo>-</m:mo><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mn>12</m:mn><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup></m:mfenced><m:mo>.</m:mo></m:math></equation>
+It is interesting to compare this result to the information-theoretic
+minimal average rate for transmission of a continuous-amplitude
+memoryless source <emphasis effect="italics">x</emphasis> of differential entropy <emphasis effect="italics">h<sub>x</sub></emphasis> at average distortion
+<emphasis effect="italics">σ<sub>q</sub><sup>2</sup></emphasis>(see Jayant &amp; Noll or Berger):
+<equation id="id148725"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>R</m:mi><m:mo movablelimits="true" form="prefix">min</m:mo></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msub><m:mi>h</m:mi><m:mi>x</m:mi></m:msub><m:mo>-</m:mo><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mn>2</m:mn><m:mi>π</m:mi><m:mi>e</m:mi><m:mspace width="0.166667em"/><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup></m:mfenced><m:mo>.</m:mo></m:mrow></m:math></equation>
+Comparing the previous two equations, we find that (for a
+continous-amplitude memoryless source) uniform quantization
+prior to entropy coding requires
+<equation id="id148822"><m:math overflow="scroll" mode="display"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mrow><m:mi>π</m:mi><m:mi>e</m:mi></m:mrow><m:mn>6</m:mn></m:mfrac></m:mfenced><m:mspace width="3.33333pt"/><m:mo>≈</m:mo><m:mspace width="3.33333pt"/><m:mtable frame="solid"><m:mtr><m:mtd><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>255</m:mn><m:mspace width="3.33333pt"/><m:mspace width="3.33333pt"/><m:mtext>bits/sample</m:mtext></m:mtd></m:mtr></m:mtable></m:mrow></m:math></equation>
+more than the theoretically optimum transmission scheme, regardless
+of the distribution of <emphasis effect="italics">x</emphasis>.
+Thus, <emphasis effect="italics">0.255 bits/sample (or <m:math overflow="scroll"><m:mrow><m:mo>∼</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>5</m:mn></m:mrow></m:math> dB using the <m:math overflow="scroll"><m:mrow><m:mn>6</m:mn><m:mo>.</m:mo><m:mn>02</m:mn><m:mi>R</m:mi></m:mrow></m:math>
+relationship) is the price paid for memoryless quantization</emphasis>.
+</item>
+      </list>
+</content>
+
+</document>

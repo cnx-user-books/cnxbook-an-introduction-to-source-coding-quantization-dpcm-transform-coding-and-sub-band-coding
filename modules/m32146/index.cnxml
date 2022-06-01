@@ -1,0 +1,80 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Gain over PCM</title>
+<metadata>
+  <md:content-id>m32146</md:content-id><md:title>Gain over PCM</md:title>
+  <md:abstract>The total reconstruction error of transform coding with optimal bit allocation is compared to that of uniformly quantized PCM, and the ratio is found to depend on a type of spectral flatness measure.</md:abstract>
+  <md:uuid>e65b3c09-6cdc-499d-a5fe-2402563cf063</md:uuid>
+</metadata>
+
+<content>
+ 
+
+
+
+
+        <list id="id205671" display="block" list-type="bulleted"><item id="uid18">With an orthogonal transform and the optimal bit allocation
+<link document="m32123" target-id="uid11">equation 8 from Optimal Bit Allocation</link> (lower equation), the total reconstruction error equals
+<equation id="uid19"><m:math overflow="scroll" mode="display"><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mi>T</m:mi><m:mi>C</m:mi></m:mrow></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:munderover><m:mrow><m:mo>∑</m:mo></m:mrow><m:mrow><m:mi>ℓ</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>q</m:mi><m:mi>ℓ</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup><m:msup><m:mfenced separators="" open="(" close=")"><m:munderover><m:mrow><m:mo>∏</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup></m:mfenced><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup><m:mo>.</m:mo></m:mrow></m:math></equation>
+We can compare to uniformly quantized PCM, where
+<m:math overflow="scroll">
+
+<m:mrow>
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>r</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:msub>
+<m:mrow>
+<m:mi>|</m:mi>
+</m:mrow>
+<m:mrow>
+<m:mi>P</m:mi>
+<m:mi>C</m:mi>
+<m:mi>M</m:mi>
+</m:mrow>
+</m:msub>
+<m:mo>=</m:mo><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup></m:mrow></m:math>.
+Since an orthogonal transform implies
+<equation id="id205975"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>x</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>=</m:mo><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:munderover><m:mrow><m:mo>∑</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mo>,</m:mo></m:mrow></m:math></equation>
+we have the following gain over PCM:
+
+<equation id="id206080"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>G</m:mi><m:mtext>TC</m:mtext></m:msub><m:mo>=</m:mo>
+
+<m:mfrac>
+<m:mrow>
+<m:msubsup>
+<m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow><m:mi>P</m:mi><m:mi>C</m:mi><m:mi>M</m:mi></m:mrow>
+</m:msub>
+</m:mrow><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup>
+
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow><m:mi>T</m:mi><m:mi>C</m:mi></m:mrow></m:msub>
+</m:mrow></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub></m:mfrac><m:mfrac><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:msubsup><m:mrow><m:mo>∑</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msubsup><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mspace width="2.em"/></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:msubsup><m:mrow><m:mo>∏</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msubsup><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup></m:mfenced><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup></m:mfrac><m:mo>.</m:mo></m:mrow></m:math></equation>
+Note that the gain is proportional to the ratio between arithmetic
+and geometric means of the transform coefficient variances.
+(Note similarities to the spectral flatness measure.)
+The factor <m:math overflow="scroll"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:mo>/</m:mo><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub></m:mrow></m:math> accounts for changes in distribution
+which affect uniform-quantizer efficiency.
+For example, if <emphasis effect="bold">T</emphasis> caused uniformly distributed <emphasis effect="italics">x</emphasis> to become
+Gaussian distributed <emphasis effect="italics">y<sub>k</sub></emphasis>, <m:math overflow="scroll"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:mo>/</m:mo><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub></m:mrow></m:math> would contribute a 7 dB
+loss in TC-to-PCM performance.
+If, on the other hand, <emphasis effect="italics">x</emphasis> was Gaussian, then <emphasis effect="italics">y<sub>k</sub></emphasis> would also be
+Gaussian and <m:math overflow="scroll"><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>y</m:mi></m:msub><m:mo>/</m:mo><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>.
+</item>
+        </list>
+
+
+
+</content>
+
+</document>

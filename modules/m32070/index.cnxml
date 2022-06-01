@@ -1,0 +1,945 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Differential Pulse Code Modulation</title>
+<metadata>
+  <md:content-id>m32070</md:content-id><md:title>Differential Pulse Code Modulation</md:title>
+  <md:abstract>Differential pulse code modulation (DPCM) is described.  First, quantized predictive encoding is motivated but then shown to suffer from amplification of quantization error at the decoder.  This problem is avoided by DPCM, which places the quantizer in the prediction loop.</md:abstract>
+  <md:uuid>2baf7378-f83a-4547-b60d-a79f580808dd</md:uuid>
+</metadata>
+
+<content>
+  
+        <list id="id329967" display="block" list-type="bulleted"><item id="uid8">Many information signals, including audio, exhibit significant
+redundancy between successive samples.
+In these situations, it is advantageous to transmit only the difference
+between predicted and true versions of the signal:
+with a “good” predictions, the quantizer input will have variance
+less than the original signal, allowing a quantizer with smaller
+decision regions and hence higher SNR.
+(See <link target-id="uid15"/> for an example of such a structure.)
+</item>
+          <item id="uid9"><emphasis effect="underline"><emphasis effect="italics">Linear Prediction:</emphasis></emphasis>
+There are various methods of prediction, but we focus on <emphasis effect="italics">forward
+linear prediction of order <emphasis effect="italics">N</emphasis></emphasis>, illustrated by <link target-id="uid11"/>
+and described by the following equation, where <m:math overflow="scroll"><m:mrow><m:mover accent="true"><m:mi>x</m:mi><m:mo>^</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> is a
+linear estimate of <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> based on <emphasis effect="italics">N</emphasis> previous versions of <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>:
+<equation id="uid10"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mover accent="true"><m:mi>x</m:mi><m:mo>^</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>N</m:mi></m:munderover><m:msub><m:mi>h</m:mi><m:mi>i</m:mi></m:msub><m:mi>x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>-</m:mo><m:mi>i</m:mi><m:mo>)</m:mo></m:mrow><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+It will be convenient to collect the <emphasis effect="italics">prediction coefficients</emphasis>
+into the vector <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">h</m:mi><m:mo>=</m:mo><m:msup><m:mrow><m:mo>(</m:mo><m:msub><m:mi>h</m:mi><m:mn>1</m:mn></m:msub><m:mo>,</m:mo><m:msub><m:mi>h</m:mi><m:mn>2</m:mn></m:msub><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:msub><m:mi>h</m:mi><m:mi>N</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mi>t</m:mi></m:msup></m:mrow></m:math>.
+<figure id="uid11"><media id="uid11_media" alt="This flowchart begins with the variable x(n), which is followed by a series of boxes labeled z^(-1), each followed by arrows pointing to the right at an identical box. A dashed line along this level of the flowchart indicates an infinite or large number of boxes. In between the boxes are arrows pointing down at smaller circles labeled h1, h2, and presumably continuing to a final hN. Connected to these circles, below the row, is a large rounded box labeled with a plus sign. To the right of this box is an arrow pointing towards the right at a final expression, xhat(n)."><image mime-type="image/png" src="../../media/img005.png" id="uid11_onlineimage" width="500"><!-- NOTE: attribute width changes image size online (pixels). original width is 753. --></image><image for="pdf" mime-type="application/postscript" print-width="3.25in" src="../../media/img005.eps" id="uid11_printimage"/></media><caption>Linear Prediction</caption></figure></item>
+          <item id="uid12"><emphasis effect="underline"><emphasis effect="italics">
+            Lossless Predictive Encoding:</emphasis></emphasis>
+Consider first the system in <link target-id="uid13"/>.
+            <figure id="uid13"><media id="uid13_media" alt="This figure contains two separate flow charts. The first begins with a horizontal arrow pointing to the right. To the left of the arrow is the variable x(n). A line connected near the origin of the horizontal arrow points down and to the right at a large box, labeled predictor h. This box is followed by an arrow, labeled xhat(n), that points to the right and then up at a small circle containing a plus sign. Near the end of this arrow is a second label, a minus sign.  The original horizontal arrow points at the same small circle. An arrow from the small circle points to the right at the second flowchart, and is labeled e(n). The second flowchart is identical except that the movement of the arrows is to the left, and x(n) and xhat(n) are replaced with y(n) and yhat(n). There is also no minus sign labeling the arrow that points at the small circle. Finally, while the majority of the second flowchart points in the opposite direction of the first flowchart, the large horizontal line points again to the right, this time away from the small circle.">
+                <image mime-type="image/png" src="../../media/img001.png" id="uid13_onlineimage" width="820"><!-- NOTE: attribute width changes image size online (pixels). original width is 820. --></image>
+                <image for="pdf" mime-type="application/postscript" print-width="3.25in" src="../../media/img001.eps" id="uid13_printimage"/>
+              </media>
+              
+            <caption>Lossless Predictive Data Transmission System
+              </caption></figure>
+            The system equations are
+            <equation id="id330530">
+              <m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>e</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>=</m:mo>
+                        <m:mi>x</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mover accent="true">
+                          <m:mi>x</m:mi>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>y</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>=</m:mo>
+                        <m:mi>e</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mover accent="true">
+                          <m:mi>y</m:mi>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            In the <emphasis effect="italics">z</emphasis>-domain (i.e., <m:math overflow="scroll"><m:mstyle scriptlevel="0" displaystyle="true"><m:mrow><m:mi>X</m:mi><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub><m:mo>∑</m:mo><m:mi>n</m:mi></m:msub><m:mi>x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mi>z</m:mi><m:mrow><m:mo>-</m:mo><m:mi>n</m:mi></m:mrow></m:msup></m:mrow></m:mstyle></m:math> and
+<m:math overflow="scroll"><m:mstyle scriptlevel="0" displaystyle="true"><m:mrow><m:mi>H</m:mi><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub><m:mo>∑</m:mo><m:mi>i</m:mi></m:msub><m:msub><m:mi>h</m:mi><m:mi>i</m:mi></m:msub><m:msup><m:mi>z</m:mi><m:mrow><m:mo>-</m:mo><m:mi>i</m:mi></m:mrow></m:msup></m:mrow></m:mstyle></m:math>),
+            <equation id="id330746"><m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>E</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>z</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mover accent="true">
+                          <m:mi>X</m:mi>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mfenced separators="" open="(" close=")">
+                          <m:mn>1</m:mn>
+                          <m:mo>-</m:mo>
+                          <m:mi>H</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mfenced>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>Y</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>z</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mi>E</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mover accent="true">
+                          <m:mi>Y</m:mi>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mi>E</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mi>H</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mi>Y</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            We call this transmission system lossless because, from above,
+            <equation id="id330946">
+              <m:math overflow="scroll" mode="display">
+                <m:mrow>
+                  <m:mi>Y</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>=</m:mo>
+                  <m:mfrac>
+                    <m:mrow>
+                      <m:mi>E</m:mi>
+                      <m:mo>(</m:mo>
+                      <m:mi>z</m:mi>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mrow>
+                      <m:mn>1</m:mn>
+                      <m:mo>-</m:mo>
+                      <m:mi>H</m:mi>
+                      <m:mo>(</m:mo>
+                      <m:mi>z</m:mi>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                  </m:mfrac>
+                  <m:mo>=</m:mo>
+                  <m:mi>X</m:mi>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>z</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                </m:mrow>
+              </m:math>
+            </equation>
+            Without quantization, however, the prediction error <m:math overflow="scroll"><m:mrow><m:mi>e</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> takes on a
+continuous range of values, and so this scheme is not applicable to
+digital transmission.
+          </item>
+          <item id="uid14"><emphasis effect="underline"><emphasis effect="italics">
+            Quantized Predictive Encoding:</emphasis></emphasis>
+Quantizing the prediction error in <link target-id="uid13"/>, we get the
+system of <link target-id="uid15"/>.
+            <figure id="uid15"><media id="uid15_media" alt="This figure is generally similar in shape and construction to the previous figure, Lossless Predictive Data Transmission System, with one exception: the arrow that points to the right from the small circle now points to a new box, labeled Quantizer. This box is now followed by a new arrow pointing to the right, labeled e-tilde(n).">
+                <image mime-type="image/png" src="../../media/img002.png" id="uid15_onlineimage" width="1019"><!-- NOTE: attribute width changes image size online (pixels). original width is 1019. --></image>
+                <image for="pdf" mime-type="application/postscript" print-width="3.75in" src="../../media/img002.eps" id="uid15_printimage"/>
+              </media>
+              
+            <caption>Quantized Predictive Coding System
+              </caption></figure>
+            Here the equations are
+            <equation id="id331073">
+              <m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>q</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>e</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mi>e</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>e</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mi>x</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mover accent="true">
+                          <m:mi>x</m:mi>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>y</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>e</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mover accent="true">
+                          <m:mi>y</m:mi>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            In the <emphasis effect="italics">z</emphasis>-domain we find that
+            <equation id="id331252"><m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>E</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mfenced separators="" open="(" close=")">
+                          <m:mn>1</m:mn>
+                          <m:mo>-</m:mo>
+                          <m:mi>H</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mfenced>
+                        <m:mo>+</m:mo>
+                        <m:mi>Q</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>Y</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>z</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mfrac>
+                          <m:mrow>
+                            <m:mover accent="true">
+                              <m:mi>E</m:mi>
+                              <m:mo>˜</m:mo>
+                            </m:mover>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>z</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                          </m:mrow>
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                            <m:mo>-</m:mo>
+                            <m:mi>H</m:mi>
+                            <m:mo>(</m:mo>
+                            <m:mi>z</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                        </m:mfrac>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mfrac>
+                          <m:mrow>
+                            <m:mi>Q</m:mi>
+                            <m:mo>(</m:mo>
+                            <m:mi>z</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                            <m:mo>-</m:mo>
+                            <m:mi>H</m:mi>
+                            <m:mo>(</m:mo>
+                            <m:mi>z</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                        </m:mfrac>
+                        <m:mo>.</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            Thus the reconstructed output is corrupted by a filtered version of
+the quantization error where the filter <m:math overflow="scroll"><m:msup><m:mfenced separators="" open="(" close=")"><m:mn>1</m:mn><m:mo>-</m:mo><m:mi>H</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup></m:math>
+is expected to amplify the quantization error; recall that
+<m:math overflow="scroll"><m:mrow><m:mi>Y</m:mi><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:mn>1</m:mn><m:mo>-</m:mo><m:mi>H</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mfenced><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup></m:mrow></m:math> where the goal of prediction
+was to make <m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>e</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>&lt;</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>y</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:math>.
+This problem results from the fact that the quantization noise appears
+at the decoder's predictor input but not at the encoder's predictor
+input.
+But we can avoid this...
+          </item>
+          <item id="uid16">
+            <emphasis effect="italics"><emphasis effect="underline">DPCM:</emphasis></emphasis>
+Including quantization in the encoder's prediction loop, we obtain the
+system in <link target-id="uid17"/>, known as 
+            <emphasis effect="italics">
+              differential pulse code modulation</emphasis>            
+            .
+            <figure id="uid17"><media id="uid17_media" alt="This figure contains two flowcharts, with one on the left pointing to a second on the right. The first flowchart begins with an arrow, labeled x(n), pointing to the right at a small circle containing a plus sign. To the right of the circle is another arrow pointing to the right, labeled e(n). This arrow points at a larger box, labeled quantizer. This box is followed to the right by a longer arrow that points at the second flowchart, and the arrow is labeled e-tilde(n). Before the end of the arrow, however, is a new arrow pointing downward at a second circle containing a plus sign. To the left of this circle is an arrow, labeled x-tilde(n), that points at a box labeled predictor h. To the left of this box is a line segment that connects the box to a large arrow pointing back at both small circles. The intersection between the short line extending from the box and the long line pointing at both circles is labeled x-tilde-hat(n). The side of the long arrow that points back at the first circle is labeled with a minus sign. To the right of the aforementioned arrow labeled e-tilde(n) is the second flowchart, which begins with another arrow pointing to the right, labeled e-tilde(n). This arrow points at another small circle containing a plus sign. To the right of the circle is a long arrow that points to the right, labeled y(n). Before the completion of this arrow is a segment drown downward and back to the left at a box labeled predictor h. From the left side of this box and pointing back up and to the left at the small circle is a final arrow, labeled y-hat(n).">
+                <image mime-type="image/png" src="../../media/img003.png" id="uid17_onlineimage" width="919"><!-- NOTE: attribute width changes image size online (pixels). original width is 919. --></image>
+                <image for="pdf" mime-type="application/postscript" print-width="3.75in" src="../../media/img003.eps" id="uid17_printimage"/>
+              </media>
+              
+            <caption>A Typical Differential PCM System
+              </caption></figure>
+            System equations are
+            <equation id="id331636">
+              <m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>q</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>e</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mi>e</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>e</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mi>x</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mover accent="true">
+                          <m:mover accent="true">
+                            <m:mi>x</m:mi>
+                            <m:mo>˜</m:mo>
+                          </m:mover>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>x</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>e</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mover accent="true">
+                          <m:mover accent="true">
+                            <m:mi>x</m:mi>
+                            <m:mo>˜</m:mo>
+                          </m:mover>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>y</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>n</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>e</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mover accent="true">
+                          <m:mi>y</m:mi>
+                          <m:mo>^</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>n</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>.</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            In the <emphasis effect="italics">z</emphasis>-domain we find that
+            <equation id="id331892">
+              <m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>E</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mi>H</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>X</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mi>Q</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mover accent="true">
+                          <m:mi>X</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mfenced separators="" open="(" close=")">
+                          <m:mi>Q</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                          <m:mo>+</m:mo>
+                          <m:mi>E</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mfenced>
+                        <m:mo>+</m:mo>
+                        <m:mo>(</m:mo>
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mi>E</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>)</m:mo>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mi>Q</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>Y</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>z</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mfrac>
+                        <m:mrow>
+                          <m:mover accent="true">
+                            <m:mi>E</m:mi>
+                            <m:mo>˜</m:mo>
+                          </m:mover>
+                          <m:mrow>
+                            <m:mo>(</m:mo>
+                            <m:mi>z</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                        </m:mrow>
+                        <m:mrow>
+                          <m:mn>1</m:mn>
+                          <m:mo>-</m:mo>
+                          <m:mi>H</m:mi>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                      </m:mfrac>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            so that
+            <equation id="id332163">
+              <m:math overflow="scroll" mode="display">
+                <m:mtable displaystyle="true">
+                  <m:mtr>
+                    <m:mtd columnalign="right">
+                      <m:mrow>
+                        <m:mi>Y</m:mi>
+                        <m:mo>(</m:mo>
+                        <m:mi>z</m:mi>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                    <m:mtd>
+                      <m:mo>=</m:mo>
+                    </m:mtd>
+                    <m:mtd columnalign="left">
+                      <m:mrow>
+                        <m:mfrac>
+                          <m:mrow>
+                            <m:mi>X</m:mi>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>z</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                            <m:mo>-</m:mo>
+                            <m:mi>H</m:mi>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>z</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                            <m:mfenced separators="" open="(" close=")">
+                              <m:mi>X</m:mi>
+                              <m:mo>(</m:mo>
+                              <m:mi>z</m:mi>
+                              <m:mo>)</m:mo>
+                              <m:mo>+</m:mo>
+                              <m:mi>Q</m:mi>
+                              <m:mo>(</m:mo>
+                              <m:mi>z</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mfenced>
+                            <m:mo>+</m:mo>
+                            <m:mi>Q</m:mi>
+                            <m:mrow>
+                              <m:mo>(</m:mo>
+                              <m:mi>z</m:mi>
+                              <m:mo>)</m:mo>
+                            </m:mrow>
+                          </m:mrow>
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                            <m:mo>-</m:mo>
+                            <m:mi>H</m:mi>
+                            <m:mo>(</m:mo>
+                            <m:mi>z</m:mi>
+                            <m:mo>)</m:mo>
+                          </m:mrow>
+                        </m:mfrac>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mi>X</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>+</m:mo>
+                        <m:mi>Q</m:mi>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        
+                        <m:mo>=</m:mo>
+                        
+                        <m:mover accent="true">
+                          <m:mi>X</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mi>z</m:mi>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>.</m:mo>
+                      </m:mrow>
+                    </m:mtd>
+                  </m:mtr>
+                </m:mtable>
+              </m:math>
+            </equation>
+            Thus, the reconstructed output is corrupted only by the quantization error.
+            Another significant advantage to placing the quantizer inside the
+prediction loop is realized if the predictor made self-adaptive
+(in the same spirit as the adaptive quantizers we studied).
+As illustrated in <link target-id="adaptive"/>, adaptation of the prediction
+coefficients can take place simulateously at the encoder and
+decoder with no transmission of side-information (e.g. <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">h</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>)!
+This is a consequence of the fact that both algorithms have access
+to identical signals.
+<figure id="adaptive"><media id="adaptive_online" alt="This figure is generally similar to the flowcharts in the previous figure, titled A Typical Differential PCM System. None of the labels or arrows have changed, except for two new rounded boxes, labeled adapt, that include large arrows that point directly at the two boxes labeled predictor h. There are also two dashed lines pointing at each of the adapt boxes, one extending from the middle of an arrow pointing at a small circle, and one extending from the middle of an arrow pointing at the predictor h boxes."><image mime-type="image/png" src="../../media/adaptive.png" id="adaptive_png" width="500"><!-- NOTE: attribute width changes image size online (pixels). original width is 753. --></image><image for="pdf" mime-type="application/postscript" print-width="3.5in" src="../../media/adaptive.png" id="adaptive_print"/></media><caption>Adaptive DPCM System</caption></figure>
+          </item>
+        </list>
+
+
+
+      </content>
+
+</document>

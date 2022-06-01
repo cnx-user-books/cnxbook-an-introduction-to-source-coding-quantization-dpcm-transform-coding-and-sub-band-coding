@@ -1,0 +1,33 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Pulse Code Modulation</title>
+  <metadata>
+  <md:content-id>m32063</md:content-id><md:title>Pulse Code Modulation</md:title>
+  <md:abstract>This module prefaces the subsequent modules on differential pulse code modulation (DPCM).  In this module, the standard technique known as pulse code modulation (PCM) is described.</md:abstract>
+  <md:uuid>dc4cbd40-cb54-4db8-ae37-ab84d5a89b07</md:uuid>
+</metadata>
+
+<content>
+    
+       <list id="id329881" display="block" list-type="bulleted"><item id="uid2">PCM is the “standard” sampling method taught in introductory
+DSP courses. The input signal is
+<list id="id329897" display="block" list-type="enumerated"><item id="uid3">filtered to prevent aliasing,
+</item><item id="uid4">discretized in time by a sampler, and
+</item><item id="uid5">quantized in amplitude by a quantizer
+</item></list>
+before transmission (or storage).
+Finally, the received samples are interpolated in time and
+amplitude to reconstruct an approximation of the input signal.
+Note that transmission may employ the use of additional
+encoding and decoding, as with entropy codes.
+
+PCM is the most widespread and well-understood digital coding system
+for reasons of simplicity, though not efficiency (as we shall see).
+<figure id="uid6"><media id="uid6_media" alt="This flowchart begins with an arrow, labeled x(t), pointing to the right at a box labeled anti-alias filter. The box is followed by a broken line pointed upward, and continuing down with an arc pointing back down to the main lines of the flowchart. The arc contains an arrow, and the expression t=nT is shown to the right of the arc. The arc is followed by a second arrow pointing to the right. This arrow is labeled x(n), and it points at a box labeled quantize. The quantize box is followed by another arrow pointing to the right, labeled y(n). This arrow points at a dashed box labeled encode, which is followed by an arrow pointing to the right at a rounded box labeled transmit/store. This box is followed by an arrow pointing at another dashed box, labeled decode. The decode box is followed by an arrow, labeled yhat(n), that points at a final box labeled interp. This final box is followed by a final arrow pointing to the right, labeled xhat(t)."><image mime-type="image/png" src="../../media/img004.png" id="uid6_onlineimage" width="1075"><!-- NOTE: attribute width changes image size online (pixels). original width is 1075. --></image><image for="pdf" mime-type="application/postscript" print-width="3.75in" src="../../media/img004.eps" id="uid6_printimage"/></media><caption>Standard PCM system</caption></figure></item>
+        </list>
+      
+</content>
+
+
+
+
+</document>

@@ -1,0 +1,232 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Transform Coding: Background and Motivation</title>
+  <metadata>
+  <md:content-id>m32135</md:content-id><md:title>Transform Coding: Background and Motivation</md:title>
+  <md:abstract>Transform coding is described and an analysis is performed for the simple 2-dimensional case, including a comparison to PCM.</md:abstract>
+  <md:uuid>c3ef9a2d-848d-452d-b6c9-ffba0872f3d5</md:uuid>
+</metadata>
+
+<content>
+    
+        <list id="id199492" display="block" list-type="bulleted"><item id="uid2">In transform coding (TC), blocks of <emphasis effect="italics">N</emphasis> input samples are
+transformed to <emphasis effect="italics">N</emphasis> transform coefficients which are then
+quantized and transmitted. At the decoder, an inverse transform
+is applied to the quantized coefficients, yielding a reconstruction
+of the original waveform.
+By designing individual quantizers in accordance with the
+statistics of their inputs, it is possible to allocate
+bits in a more optimal manner, e.g., encoding the “more
+important” coefficients at a higher bit rate.
+<figure id="uid3"><media id="uid3_media" alt="This figure is a flowchart. Beginning on the left is an arrow labeled, x_0, ..., x_(n-1), pointing to the right at a large box labeled N x N transform. To the right of this large box are a series of short arrows pointing to the right labeled from top to bottom y_0, y_2, ..., y_(N-1). to the right of each of these arrows is a box labeled with a capital Q. To the right of each of the Q-boxes is another arrow labeled ytilde_0, ytilde_1, ..., ytilde_(N-1). At this point in the graph there is a large separation, as if the preceding arrows do not point at anything directly. To the left of the separation are a series of identical ytilde arrows, all pointing at a single large box labeled Inverse Transform. To the right of the large box is a final arrow pointing to the right labeled xtilde_0, ..., xtilde_(N-1)."><image mime-type="image/png" src="../../media/tcfig1.png" id="uid3_onlineimage" width="674"><!-- NOTE: attribute width changes image size online (pixels). original width is 674. --></image><image for="pdf" mime-type="application/postscript" print-width="3.75in" src="../../media/tcfig1.eps" id="uid3_printimage"/></media><caption><m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:math> Transform Coder/Decoder with Scalar Quantization</caption></figure></item>
+          <item id="uid4"><emphasis effect="italics"><emphasis effect="underline">Orthogonal Transforms:</emphasis></emphasis> 
+From our perspective, an <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>×</m:mo><m:mspace width="-0.166667em"/><m:mi>N</m:mi></m:mrow></m:math> “transform” will be any
+real-valued linear operation taking <emphasis effect="italics">N</emphasis> input samples to <emphasis effect="italics">N</emphasis> output
+samples, or transform coefficients.
+This operation can always be written in matrix form
+<equation id="id199612"><m:math overflow="scroll" mode="display"><m:mrow><m:mi mathvariant="bold">y</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi mathvariant="bold">T</m:mi><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mspace width="1.em"/><m:mi mathvariant="bold">T</m:mi><m:mo>∈</m:mo><m:msup><m:mi mathvariant="double-struck">R</m:mi><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>N</m:mi></m:mrow></m:msup></m:mrow></m:math></equation>
+where <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">x</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">y</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:math> are vectors representing
+<m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mn>1</m:mn></m:mrow></m:math> blocks of input/output elements:
+<equation id="id199908"><m:math overflow="scroll" mode="display"><m:mtable><m:mtr><m:mtd columnalign="right"><m:mrow><m:mi mathvariant="bold">x</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:msup><m:mfenced separators="" open="(" close=")"><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mi>N</m:mi><m:mo>)</m:mo><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>)</m:mo><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>+</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>)</m:mo></m:mfenced><m:mi>t</m:mi></m:msup></m:mtd></m:mtr><m:mtr><m:mtd columnalign="right"><m:mrow><m:mi mathvariant="bold">y</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:mtd><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:msup><m:mfenced separators="" open="(" close=")"><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mi>N</m:mi><m:mo>)</m:mo><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>)</m:mo><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mspace width="3.33333pt"/><m:mi>y</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>+</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>)</m:mo></m:mfenced><m:mi>t</m:mi></m:msup><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+Intuition comes from considering the transform's <emphasis effect="italics">basis vectors</emphasis><m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> defined by the rows of the matrix
+<equation id="id200253"><m:math overflow="scroll" mode="display"><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mo>=</m:mo><m:mfenced open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mrow><m:mtext>---</m:mtext><m:mspace width="3.33333pt"/><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mn>0</m:mn><m:mi>t</m:mi></m:msubsup><m:mspace width="3.33333pt"/><m:mtext>---</m:mtext></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mtext>---</m:mtext><m:mspace width="3.33333pt"/><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mn>1</m:mn><m:mi>t</m:mi></m:msubsup><m:mspace width="3.33333pt"/><m:mtext>---</m:mtext></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mo>⋮</m:mo></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mtext>--</m:mtext><m:mspace width="3.33333pt"/><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mrow><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn></m:mrow><m:mi>t</m:mi></m:msubsup><m:mspace width="3.33333pt"/><m:mtext>--</m:mtext></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:math></equation>
+since the coefficient <m:math overflow="scroll"><m:mrow><m:msub><m:mi>y</m:mi><m:mi>k</m:mi></m:msub><m:mo>=</m:mo><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi><m:mi>t</m:mi></m:msubsup><m:mi mathvariant="bold">x</m:mi></m:mrow></m:math> can be thought of as
+the result of a
+“comparison” between the <m:math overflow="scroll"><m:msup><m:mi>k</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> basis vector and the input <emphasis effect="bold">x</emphasis>.
+These comparisons are defined by the inner product
+<m:math overflow="scroll"><m:mrow><m:mspace width="2.84526pt"/><m:mo>&lt;</m:mo><m:mspace width="-2.84526pt"/><m:msub><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi></m:msub><m:mo>,</m:mo><m:mi mathvariant="bold">x</m:mi><m:mspace width="-2.84526pt"/><m:mo>&gt;</m:mo><m:mo>=</m:mo><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi><m:mi>t</m:mi></m:msubsup><m:mi mathvariant="bold">x</m:mi></m:mrow></m:math>
+which has a geometrical interpretation involving the angle <emphasis effect="italics">θ<sub>k</sub></emphasis>
+between vectors <m:math>
+<m:msub>
+<m:mi mathvariant="bold-sans-serif">t</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+</m:math> and <emphasis effect="bold">x</emphasis>.
+<equation id="id200529"><m:math overflow="scroll" mode="display"><m:mrow><m:mspace width="2.84526pt"/><m:mo>&lt;</m:mo><m:mspace width="-2.84526pt"/><m:msub><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi></m:msub><m:mo>,</m:mo><m:mi mathvariant="bold">x</m:mi><m:mspace width="-2.84526pt"/><m:mo>&gt;</m:mo><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mo form="prefix">cos</m:mo><m:mrow><m:mo>(</m:mo><m:msub><m:mi>θ</m:mi><m:mi>k</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mrow><m:mspace width="0.166667em"/><m:mo>∥</m:mo></m:mrow><m:msub><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mrow><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msub><m:mspace width="0.166667em"/><m:msub><m:mrow><m:mo>∥</m:mo><m:mi mathvariant="bold">x</m:mi><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msub><m:mo>.</m:mo></m:mrow></m:math></equation>
+When the vectors <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> are mutually orthogonal, i.e.,
+<m:math overflow="scroll"><m:mrow><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mi>k</m:mi><m:mi>t</m:mi></m:msubsup><m:msub><m:mi mathvariant="bold">t</m:mi><m:mi>ℓ</m:mi></m:msub><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow></m:math> for <m:math overflow="scroll"><m:mrow><m:mi>k</m:mi><m:mo>≠</m:mo><m:mi>ℓ</m:mi></m:mrow></m:math>, the transform
+coefficients represent separate, unrelated features of the input.
+This property is convenient if the transform coefficients are
+independently quantized, as is typical in TC schemes.
+
+<example id="eip-id3064433"><title><m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mspace width="-0.166667em"/><m:mo>×</m:mo><m:mspace width="-0.166667em"/><m:mn>2</m:mn></m:mrow></m:math> Transform Coder</title><para id="eip-id1166543519842">Say that stationary zero-mean Gaussian source <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:math> has
+autocorrelation <m:math overflow="scroll"><m:mrow><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>0</m:mn><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>, <m:math overflow="scroll"><m:mrow><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>ρ</m:mi></m:mrow></m:math>, and <m:math overflow="scroll"><m:mrow><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>k</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow></m:math> for <m:math overflow="scroll"><m:mrow><m:mi>k</m:mi><m:mo>&gt;</m:mo><m:mn>1</m:mn></m:mrow></m:math>.
+For a bit rate of <emphasis effect="italics">R</emphasis> bits per sample, uniformly-quantized PCM
+implies a mean-squared reconstruction error of</para>
+<equation id="id200847"><m:math overflow="scroll" mode="display">
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>r</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:mrow>
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+<m:mrow>
+<m:mtext>PCM</m:mtext>
+</m:mrow>
+</m:msub>
+<m:mo>=</m:mo>
+<m:mfrac>
+<m:mrow>
+<m:msup>
+<m:mrow>
+<m:mi>Δ</m:mi>
+</m:mrow>
+<m:mrow>
+<m:mn>2</m:mn>
+</m:mrow>
+</m:msup>
+</m:mrow>
+<m:mrow>
+<m:mn>12</m:mn>
+</m:mrow>
+</m:mfrac>
+
+<m:msub>
+<m:mrow>
+<m:mo>|</m:mo>
+</m:mrow>
+
+<m:mrow>
+<m:mtable>
+<m:mtr>
+<m:mtd columnalign="left">
+<m:mstyle scriptlevel="1" displaystyle="false">
+
+<m:mrow>
+<m:mi>Δ</m:mi>
+<m:mo>=</m:mo>
+<m:mn>2</m:mn>
+<m:msub>
+<m:mi>x</m:mi>
+<m:mo movablelimits="true" form="prefix">max</m:mo>
+</m:msub>
+<m:mo>/</m:mo>
+<m:mi>L</m:mi>
+</m:mrow>
+</m:mstyle>
+</m:mtd>
+</m:mtr>
+<m:mtr>
+<m:mtd columnalign="left">
+<m:mstyle scriptlevel="1" displaystyle="false">
+<m:mrow>
+<m:mi>L</m:mi>
+<m:mo>=</m:mo>
+<m:msup>
+<m:mn>2</m:mn>
+<m:mi>R</m:mi>
+</m:msup>
+</m:mrow>
+</m:mstyle>
+</m:mtd>
+</m:mtr>
+</m:mtable>
+</m:mrow>
+</m:msub>
+<m:mspace width="3.33333pt"/>
+<m:mo>=</m:mo>
+<m:mspace width="3.33333pt"/>
+<m:munder>
+<m:munder accentunder="true">
+<m:mrow>
+<m:mfrac>
+<m:mn>1</m:mn>
+<m:mn>3</m:mn>
+</m:mfrac>
+<m:mfrac>
+<m:msubsup>
+<m:mi>x</m:mi>
+<m:mrow>
+<m:mo movablelimits="true" form="prefix">max</m:mo>
+</m:mrow>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>x</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+</m:mfrac>
+</m:mrow>
+<m:mo>︸</m:mo>
+</m:munder>
+<m:msub>
+<m:mi>γ</m:mi>
+<m:mi>x</m:mi>
+</m:msub>
+</m:munder>
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>x</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:msup>
+<m:mn>2</m:mn>
+<m:mrow>
+<m:mo>-</m:mo>
+<m:mn>2</m:mn>
+<m:mi>R</m:mi>
+</m:mrow>
+</m:msup>
+<m:mspace width="3.33333pt"/>
+<m:mo>=</m:mo>
+<m:mspace width="3.33333pt"/>
+<m:msub>
+<m:mi>γ</m:mi>
+<m:mi>x</m:mi>
+</m:msub>
+<m:msubsup>
+<m:mi>σ</m:mi>
+<m:mi>x</m:mi>
+<m:mn>2</m:mn>
+</m:msubsup>
+<m:msup>
+<m:mn>2</m:mn>
+<m:mrow>
+<m:mo>-</m:mo>
+<m:mn>2</m:mn>
+<m:mi>R</m:mi>
+</m:mrow>
+</m:msup>
+<m:mo>.</m:mo>
+</m:mrow>
+</m:math></equation>
+<para id="eip-id3779903">For transform coding, say we choose linear transform</para>
+<equation id="id201084"><m:math overflow="scroll" mode="display"><m:mrow><m:mi mathvariant="bold">T</m:mi><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfenced open="(" close=")"><m:mtable><m:mtr><m:mtd><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mn>0</m:mn><m:mi>t</m:mi></m:msubsup></m:mtd></m:mtr><m:mtr><m:mtd><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mn>1</m:mn><m:mi>t</m:mi></m:msubsup></m:mtd></m:mtr></m:mtable></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:msqrt><m:mn>2</m:mn></m:msqrt></m:mfrac><m:mfenced open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mn>1</m:mn></m:mtd><m:mtd><m:mn>1</m:mn></m:mtd></m:mtr><m:mtr><m:mtd><m:mn>1</m:mn></m:mtd><m:mtd><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:math></equation>
+<para id="eip-id1166543084691">Setting <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msup><m:mfenced open="(" close=")"><m:mtable><m:mtr><m:mtd><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mn>2</m:mn><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:mtd><m:mtd><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mn>2</m:mn><m:mi>m</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced><m:mi>t</m:mi></m:msup></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mi mathvariant="bold">y</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo><m:mo>=</m:mo><m:mi mathvariant="bold">Tx</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:math>,
+we find that the transformed coefficients have variance</para>
+<equation id="id201280"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mn>0</m:mn></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mrow><m:mspace width="3.33333pt"/><m:mo form="prefix">E</m:mo><m:mo>{</m:mo><m:mo>|</m:mo></m:mrow><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mn>0</m:mn><m:mi>t</m:mi></m:msubsup><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mrow><m:msup><m:mo>|</m:mo><m:mn>2</m:mn></m:msup><m:mo>}</m:mo></m:mrow><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:msup><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mrow><m:mo>(</m:mo><m:mn>2</m:mn><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>x</m:mi><m:mrow><m:mo>(</m:mo><m:mn>2</m:mn><m:mi>m</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow><m:mo>|</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:mfenced separators="" open="(" close=")"><m:mn>2</m:mn><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>0</m:mn><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mn>2</m:mn><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>1</m:mn><m:mo>+</m:mo><m:mi>ρ</m:mi></m:mrow></m:math></equation><equation id="id201509"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>y</m:mi><m:mn>1</m:mn></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mo>=</m:mo><m:mrow><m:mo form="prefix">E</m:mo><m:mo>{</m:mo><m:mo>|</m:mo></m:mrow><m:msubsup><m:mi mathvariant="bold">t</m:mi><m:mn>1</m:mn><m:mi>t</m:mi></m:msubsup><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mrow><m:msup><m:mo>|</m:mo><m:mn>2</m:mn></m:msup><m:mo>}</m:mo></m:mrow><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:msup><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mrow><m:mo>(</m:mo><m:mn>2</m:mn><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mi>x</m:mi><m:mrow><m:mo>(</m:mo><m:mn>2</m:mn><m:mi>m</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow><m:mo>|</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:mfenced separators="" open="(" close=")"><m:mn>2</m:mn><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>0</m:mn><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:msub><m:mi>r</m:mi><m:mi>x</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow></m:mfenced><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>1</m:mn><m:mo>-</m:mo><m:mi>ρ</m:mi></m:mrow></m:math></equation>
+<para id="eip-id1166546968101">and using uniformly-quantized PCM on each coefficient we get
+mean-squared reconstruction errors</para>
+<equation id="id201738"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>q</m:mi><m:mn>0</m:mn></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>+</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub></m:mrow></m:msup></m:mrow></m:math></equation><equation id="id201812"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>q</m:mi><m:mn>1</m:mn></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>-</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:msub><m:mi>R</m:mi><m:mn>1</m:mn></m:msub></m:mrow></m:msup><m:mo>.</m:mo></m:mrow></m:math></equation>
+<para id="eip-id1166545508091">We use the same quantizer performance factor <emphasis effect="italics">γ<sub>x</sub></emphasis> as before
+since linear operations preserve Gaussianity.
+<newline/>
+For orthogonal matrices <emphasis effect="bold">T</emphasis>, i.e., <m:math overflow="scroll"><m:mrow><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mo>=</m:mo><m:msup><m:mi mathvariant="bold">T</m:mi><m:mi>t</m:mi></m:msup></m:mrow></m:math>,
+we can show that the mean-squared reconstruction error <emphasis effect="italics">σ<sub>r</sub><sup>2</sup></emphasis>
+equals the mean-squared quantization error:</para>
+<equation id="id201975"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup></m:mtd><m:mtd><m:mrow><m:mo>:</m:mo><m:mo>=</m:mo></m:mrow></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:mo form="prefix">E</m:mo><m:mfenced open="{" close="}"><m:msup><m:mfenced separators="" open="(" close=")"><m:mover accent="true"><m:mi>x</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mo>(</m:mo><m:mi>N</m:mi><m:mi>m</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mi>x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>N</m:mi><m:mi>m</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mn>2</m:mn></m:msup></m:mfenced><m:mspace width="2.em"/><m:mrow><m:mo>(</m:mo><m:mtext>here</m:mtext><m:mspace width="3.33333pt"/><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>2</m:mn><m:mo>)</m:mo></m:mrow></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:mrow><m:mo>∥</m:mo></m:mrow><m:mover accent="true"><m:mi mathvariant="bold">x</m:mi><m:mo>˜</m:mo></m:mover><m:msup><m:mrow><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:mrow><m:mo>∥</m:mo></m:mrow><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mover accent="true"><m:mi mathvariant="bold">y</m:mi><m:mo>˜</m:mo></m:mover><m:msup><m:mrow><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:mrow><m:mo>∥</m:mo></m:mrow><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mfenced separators="" open="(" close=")"><m:mi mathvariant="bold">y</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo><m:mo>+</m:mo><m:mi mathvariant="bold">q</m:mi><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mfenced><m:msup><m:mrow><m:mo>-</m:mo><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:mrow><m:mo>∥</m:mo></m:mrow><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mi mathvariant="bold">Tx</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:msup><m:mrow><m:mi mathvariant="bold">q</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:mi mathvariant="bold">x</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:mrow><m:mo>∥</m:mo></m:mrow><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:msup><m:mrow><m:mi mathvariant="bold">q</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:msup><m:mi mathvariant="bold">q</m:mi><m:mi>t</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:munder><m:munder accentunder="true"><m:mrow><m:msup><m:mrow><m:mo>(</m:mo><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mo>)</m:mo></m:mrow><m:mi>t</m:mi></m:msup><m:msup><m:mi mathvariant="bold">T</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup></m:mrow><m:mo>︸</m:mo></m:munder><m:mi mathvariant="bold">I</m:mi></m:munder><m:mi mathvariant="bold">q</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:mo form="prefix">E</m:mo><m:mfenced separators="" open="{" close="}"><m:msup><m:mrow><m:mo>∥</m:mo><m:mi mathvariant="bold">q</m:mi><m:mrow><m:mo>(</m:mo><m:mi>m</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∥</m:mo></m:mrow><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd/><m:mtd><m:mo>=</m:mo></m:mtd><m:mtd columnalign="left"><m:mrow><m:mfrac><m:mn>1</m:mn><m:mi>N</m:mi></m:mfrac><m:munderover><m:mo>∑</m:mo><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:munderover><m:msubsup><m:mi>σ</m:mi><m:mrow><m:msub><m:mi>q</m:mi><m:mi>k</m:mi></m:msub></m:mrow><m:mn>2</m:mn></m:msubsup><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+<para id="eip-id1166542397095">Since our <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mspace width="-0.166667em"/><m:mo>×</m:mo><m:mspace width="-0.166667em"/><m:mn>2</m:mn></m:mrow></m:math> matrix is indeed orthogonal, we have mean-squared
+reconstruction error</para>
+<equation id="id202803"><m:math overflow="scroll" mode="display"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mrow><m:msub><m:mo>|</m:mo><m:mrow><m:mtext>TC</m:mtext></m:mrow></m:msub><m:mo>=</m:mo></m:mrow><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:mfenced separators="" open="(" close=")"><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>+</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub></m:mrow></m:msup><m:mo>+</m:mo><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>-</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:msub><m:mi>R</m:mi><m:mn>1</m:mn></m:msub></m:mrow></m:msup></m:mfenced></m:mrow></m:math></equation>
+<para id="eip-id1166546356513">at bit rate of <m:math overflow="scroll"><m:mrow><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub><m:mo>+</m:mo><m:msub><m:mi>R</m:mi><m:mn>1</m:mn></m:msub></m:mrow></m:math> bits per two samples.
+Comparing TC to PCM at equal bit rates (i.e. <m:math overflow="scroll"><m:mrow><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub><m:mo>+</m:mo><m:msub><m:mi>R</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:math>),</para>
+
+<equation id="id203020"><m:math overflow="scroll" mode="display"><m:mrow><m:mfrac><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:msub><m:mo>|</m:mo><m:mtext>TC</m:mtext></m:msub><m:mrow/></m:mrow><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:msub><m:mo>|</m:mo><m:mtext>PCM</m:mtext></m:msub><m:mrow/></m:mrow></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mfrac><m:mn>1</m:mn><m:mn>2</m:mn></m:mfrac><m:mfrac><m:mrow><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>+</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub></m:mrow></m:msup><m:mo>+</m:mo><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>-</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mo>(</m:mo><m:mn>2</m:mn><m:mi>R</m:mi><m:mo>-</m:mo><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub><m:mo>)</m:mo></m:mrow></m:msup></m:mrow><m:mrow><m:msub><m:mi>γ</m:mi><m:mi>x</m:mi></m:msub><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mn>2</m:mn><m:mi>R</m:mi></m:mrow></m:msup></m:mrow></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>+</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mn>2</m:mn><m:mo>(</m:mo><m:mi>R</m:mi><m:mo>-</m:mo><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub><m:mo>)</m:mo><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mo>+</m:mo><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>-</m:mo><m:mi>ρ</m:mi><m:mo>)</m:mo></m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mn>2</m:mn><m:mo>(</m:mo><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub><m:mo>-</m:mo><m:mi>R</m:mi><m:mo>)</m:mo><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mo>.</m:mo></m:mrow></m:math></equation>
+<para id="eip-id1166542826789"><link target-id="uid5"/> shows that (i) allocating a higher bit rate to the quantizer
+with stronger input signal can reduce the average reconstruction error
+relative to PCM, and (ii) the gain over PCM is higher when the input
+signal exhibits stronger correlation <emphasis effect="italics">ρ</emphasis>.
+Also note that when <m:math overflow="scroll"><m:mrow><m:msub><m:mi>R</m:mi><m:mn>0</m:mn></m:msub><m:mo>=</m:mo><m:msub><m:mi>R</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mi>R</m:mi></m:mrow></m:math>, there is no gain over PCM—a
+verification of the fact that <m:math overflow="scroll"><m:mrow><m:msubsup><m:mi>σ</m:mi><m:mi>r</m:mi><m:mn>2</m:mn></m:msubsup><m:mo>=</m:mo><m:msubsup><m:mi>σ</m:mi><m:mi>q</m:mi><m:mn>2</m:mn></m:msubsup></m:mrow></m:math> when
+<emphasis effect="bold">T</emphasis> is orthogonal.</para>
+<figure id="uid5"><media id="uid5_media" alt="This figure is composed of two cartesian graphs. Both graphs plot a horizontal axis, R_0/R, and a vertical axis, (σ^2_τ|TC)/(σ^2_τ|PCM). The vertical values range from 0 to 5, and the horizontal values range from 0 to 2. The graph on the left is titled ρ=0.8, and the graph on the right is labeled ρ=0.2. There are two curves on each graph, both parabolic in shape. On the ρ=0.8 graph, a curve labeled R=1 enters the page at (0, 3.5) and continues downward to a vertex at (1.75, 0.5). A sharper parabola labeled R=2 enters the graph at (0.4, 5) with a sharp downward slope to a vertex at (1.5, 0.5), where it then curves sharply upward and terminates at approximately (2, 1.6). On the ρ=0.2 graph, the R=1 curve enters at (0, 2.5) with a shallow downward slope  to a vertex at approximately (1.25, 1). A second curve, R=2, begins at (0.25, 5) with a strong downward slope to a vertex at approximately (1.1, 1), where it then continues upward to terminate at (1.9, 5)."><image mime-type="image/png" src="../../media/tcfig2.png" id="uid5_onlineimage" width="468"><!-- NOTE: attribute width changes image size online (pixels). original width is 468. --></image><image for="pdf" mime-type="application/postscript" print-width="3.75in" src="../../media/tcfig2.eps" id="uid5_printimage"/></media><caption>Ratio of TC to PCM mean-squared reconstruction errors versus bit rate <emphasis effect="italics">R<sub>0</sub></emphasis> for two values of <emphasis effect="italics">ρ</emphasis>.</caption></figure></example></item>
+        </list>
+      
+</content>
+
+
+</document>

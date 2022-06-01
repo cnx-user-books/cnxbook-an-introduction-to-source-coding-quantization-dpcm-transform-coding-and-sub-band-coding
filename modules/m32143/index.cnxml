@@ -1,0 +1,182 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Uniformly-Modulated Filterbanks</title>
+<metadata>
+  <md:content-id>m32143</md:content-id><md:title>Uniformly-Modulated Filterbanks</md:title>
+  <md:abstract>Filterbanks with uniform sub-band bandwidth are described, and the tradeoff between reconstruction error and frequency-selectivity is discussed.  The polyphase/DFT filterbank implementaiton is also discussed, along with its computational cost.</md:abstract>
+  <md:uuid>ccec0f64-6b16-473d-9373-661f5d736116</md:uuid>
+</metadata>
+
+<content>
+
+
+      <list id="id2680415" display="block" list-type="bulleted"><item id="uid33"><emphasis effect="italics">Perfect Reconstruction Filterbanks:</emphasis> 
+Recall that in our study of transform coding, we restricted our attention
+to orthogonal transformation matrices.
+Orthogonal matrices had the property that, in the absence of
+quantization error, the reconstruction error was zero.
+For sub-band coding, “perfect reconstruction” (PR) filterbanks (FBs)
+are analogous to orthogonal matrices.
+Specifically, a PR-FB is defined as an analysis/synthesis
+structure which gives zero reconstruction error when synthesis stage
+is fed exact (unquantized) copies of analysis outputs.
+Initially we consider the design of <emphasis effect="italics">ideal</emphasis> sub-band analysis and
+synthesis FBs and later the design of practical FBs.
+For the purpose of FB design we ignore the effects of quantization error.
+Our rational is as follows:
+the absence of quantization error corresponds to the high bit-rate
+scenario, in which case we desire that the filtering operations inherent
+to sub-band coding introduce little or no error of their own.
+Removing the quantizers from <link document="m32106" target-id="uid5">Figure 2 from "Introduction and Motivation"</link>, we obtain the analysis/synthesis
+FBs in <link target-id="uid34"/>.
+<figure id="uid34"><media id="uid34_media" alt="This is a large, complex flowchart which will be described from left to right, as this is the flow of the diagram. The diagram begins with the expression x(n), and from this expression is a line that splits into a series of arrows each pointing to the right at boxes containing the expressions H_0(z), H_1(z), and so on to a final box H_(N-1)(z). From the ends of each of these boxes are more arrows pointing to the right, this time each at an identical circle containing a down arrow and the variable N. The arrows pointing at these circles are labeled from top to bottom x_0(n), x_1(n), to x_(N-1)(n). To the right of these circles again are a series of arrows that point to the right. There is then a gap in the diagram, followed by a series of identical arrows to those preceding it. These arrows each point at circles containing an up arrow and the variable N. To the right of these circles are more arrows pointing at boxes containing the labels K_0(z), K_1(z), and so on to a final box containing K_(N-1)(z). The arrows pointing at these boxes are labeled from top to bottom y_0(n), y_1(n), to y_(N-1)(n). Each of these boxes point with arrows to the right at a single circle containing a plus sign. The arrows are labeled from top to bottom u_0(n), u_1(n), to u_(N-1)(n). From the plus sign is a final arrow pointing to the right, labeled u(n)."><image mime-type="image/png" src="../../media/img028.png" id="uid34_onlineimage" width="973"><!-- NOTE: attribute width changes image size online (pixels). original width is 973. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img028.eps" id="uid34_printimage"/></media><caption><emphasis effect="italics">N</emphasis>-band analysis and synthesis filterbanks.</caption></figure></item>
+          <item id="uid35"><emphasis effect="italics"><emphasis effect="underline">Uniform Modulation:</emphasis></emphasis> 
+The most conceptually straightforward FB is known as the
+“uniformly modulated” FB.
+Uniform modulation means that all branches isolate signal components
+in non-overlapping frequency bands of equal width <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math>.
+We will assume that the <m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> branch has its frequency band centered
+at <m:math overflow="scroll"><m:mrow><m:msub><m:mi>ω</m:mi><m:mi>i</m:mi></m:msub><m:mo>=</m:mo><m:mn>2</m:mn><m:mi>i</m:mi><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math>. (See <link target-id="uid36"/>.)
+<figure id="uid36"><media id="uid36_media" alt="This figure is a graph with horizontal axis ω, plotting a series of rectangles. Above the figure is a large equation that reads ω_i = 2πi/N. The horizontal values on the axis range from 0 to 2π. There are two arrows pointing up from these two furthest points on the horizontal axis. The arrow pointing directly up from the horizontal value 0 is labeled ω_0. Along the axis are four identical, connected rectangles that lie on the horizontal axis from approximately -π/4 to 7π/4, each with a width of π/2. There are dashed vertical lines crossing the midpoint of the base of these rectangles and extending through the height of the rectangle. These dashed lines continue in aligned succession with ω_0, and are subsequently labeled ω_1, ω_2, and ω_3. Above these rectangles is a horizontal arrow pointing in both directions, labeled 2π/N."><image mime-type="image/png" src="../../media/img029.png" id="uid36_onlineimage" width="511"><!-- NOTE: attribute width changes image size online (pixels). original width is 511. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img029.eps" id="uid36_printimage"/></media><caption>Frequency bands for the uniformly-modulated filterbank (<m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:mrow></m:math>).</caption></figure></item>
+          <item id="uid37"><emphasis effect="italics"><emphasis effect="underline">Analysis FB:</emphasis></emphasis> 
+The <m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> frequency range may be isolated by modulating the input
+spectrum down by <emphasis effect="italics">ω<sub>i</sub></emphasis> and lowpass filtering the result.
+(See the first two stages of the analysis bank in <link target-id="uid40"/>.)
+The ideal lowpass filter has linear phase and magnitude response that
+is unity for <m:math overflow="scroll"><m:mrow><m:mi>ω</m:mi><m:mo>∈</m:mo><m:mo>(</m:mo><m:mo>-</m:mo><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi><m:mo>)</m:mo></m:mrow></m:math> and zero elsewhere.
+(See <link target-id="uid38"/>.)
+<figure id="uid38"><media id="uid38_media" alt="This figure is a graph with horizontal axis ω, ranging in value from -π to π, and vertical axis |H(π)|. There is one dashed rectangle with its base sitting on the horizontal axis, and  with its width measured from horizontal position -π/N to π/N. The height is not measured or labeled. There is also a solid curve that, in a calmly wavelike distortion follows the horizontal axis to the bottom-left vertex of the rectangle. The curve then sharply increases to follow the boundary of the dashed rectangle, until at the bottom-right vertex it flattens to continue following the horizontal axis to the edge of the graph."><image mime-type="image/png" src="../../media/img030.png" id="uid38_onlineimage" width="547"><!-- NOTE: attribute width changes image size online (pixels). original width is 547. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img030.eps" id="uid38_printimage"/></media><caption>Ideal (dashed) and typical (solid) prototype-filter magnitude responses for the uniformly modulated filterbank.</caption></figure>
+With ideal lowpass filtering, the resulting signals have (double-sided)
+bandwidths that are <emphasis effect="italics">N</emphasis> times smaller than the sampling rate.
+Nyquist's sampling theorem (see Oppenheim &amp; Schafer) says that it is
+possible to sample signals with this bandwidth at <m:math overflow="scroll"><m:mrow><m:mn>1</m:mn><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math> times
+the filter output rate without loss of information.
+This sample rate change can implemented via downsampling-by-<emphasis effect="italics">N</emphasis>,
+resulting in the analysis FB of <link target-id="uid40"/>.
+Note that the downsampling operation does not induce aliasing
+when the analysis filter is the ideal lowpass filter described above.
+</item>
+          <item id="uid39"><emphasis effect="italics"><emphasis effect="underline">Synthesis FB:</emphasis></emphasis> 
+To reconstruct the input signal <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>, the synthesis FB must restore
+the downsampled signals to their original sampling rate,
+re-modulate them to their original spectral locations, and combine them.
+Upsampling is the first stage of sampling-rate restoration.
+Recall from <link document="m32128" target-id="uid30">Equation 18 from "Fundamentals of Multirate Signal Processing"</link> (and <link document="m32128" target-id="uid31">Figure 8 from "Fundamentals of Multirate Signal Processing"</link>) that
+a downsampler-upsampler cascade creates <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn></m:mrow></m:math> additional
+uniformly-spaced spectral copies of the original baseband spectrum.
+Thus, to remove the unwanted spectral images, an “anti-imaging” lowpass
+filter is applied to each upsampler's output.
+Ideally, this lowpass filter is linear phase with magnitude response
+that is unity for <m:math overflow="scroll"><m:mrow><m:mi>ω</m:mi><m:mo>∈</m:mo><m:mo>(</m:mo><m:mo>-</m:mo><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mi>π</m:mi><m:mo>/</m:mo><m:mi>N</m:mi><m:mo>)</m:mo></m:mrow></m:math> and zero elsewhere;
+the same specifications given for the ideal analysis filter.
+(See <link target-id="uid38"/>.)
+As shown in <link target-id="uid40"/>, re-modulation is accomplished
+by shifting the <m:math overflow="scroll"><m:msup><m:mi>i</m:mi><m:mrow><m:mi>t</m:mi><m:mi>h</m:mi></m:mrow></m:msup></m:math> branch <emphasis effect="italics">up</emphasis> by <emphasis effect="italics">ω<sub>i</sub></emphasis>.
+When the analysis and synthesis filters share a common phase response,
+the re-modulator outputs can be combined coherently by a simple summation.
+Under all of these ideal conditions, the output signal <m:math overflow="scroll"><m:mrow><m:mi>u</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> is a
+potentially delayed (but otherwise perfect) copy of the input signal
+<m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>:
+<equation id="id2680996"><m:math overflow="scroll" mode="display"><m:mrow><m:mi>u</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>-</m:mo><m:mi>δ</m:mi><m:mo>)</m:mo><m:mspace width="3.33333pt"/><m:mspace width="3.33333pt"/><m:mtext>for</m:mtext><m:mspace width="4.pt"/><m:mtext>some</m:mtext><m:mspace width="4.pt"/><m:mtext>delay</m:mtext><m:mspace width="3.33333pt"/><m:mi>δ</m:mi><m:mo>.</m:mo></m:mrow></m:math></equation><figure id="uid40"><media id="uid40_media" alt="This is a large, complex flowchart which will be described from left to right, following the flow of the diagram. The flowchart begins with the expression x(n), and from this expression is a line that splits into a series of arrows each pointing to the right at a series of circles containing an x. Below each circle is an arrow pointing up, labeled e^(-jω_0n). To the right of these circles are arrows that each point to the right at a series of identical rectangles labeled H(z). To the right of these rectangles are more arrows pointing to the right at a series of circles containing a down arrow and the variable N. To the right of these circles is another series of arrows pointing to the right. At this point in the flow chart, there is a gap. To the right of the gap is another series of identical arrows as those on the left side of the gap. These arrows each point at circles that contain an up arrow and the variable N. To the right of these circles are more arrows that point at identical boxes labeled K(z). To the right of these boxes are more arrows that point at a series of circles containing an x. Below each of these circles is an arrow pointing up, labeled e^(-jω_0n). To the right of these circles are arrows that all point at a single final object, a circle containing a plus sign. To the right of this object is one final arrow pointing to the right, labeled u(n)."><image mime-type="image/png" src="../../media/img031.png" id="uid40_onlineimage" width="899"><!-- NOTE: attribute width changes image size online (pixels). original width is 899. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img031.eps" id="uid40_printimage"/></media><caption><emphasis effect="italics">N</emphasis>-band modulated analysis/synthesis filterbanks.</caption></figure></item>
+          <item id="uid41"><emphasis effect="italics">Effect of Non-Ideal Filtering:</emphasis> 
+In practice, the analysis and synthesis filters will not have ideal
+lowpass responses, and thus the reconstructed output <m:math overflow="scroll"><m:mrow><m:mi>u</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> will not
+necessarily equal a delayed version of the input <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>.
+These shortcomings typically result from filter implementations
+based on a finite number of design parameters.
+(See <link target-id="uid38"/> for a typical lowpass filter magnitude response.)
+It should be noted that, under certain conditions, it is possible
+to design sets of analysis filters <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>H</m:mi><m:mi>i</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:math> and synthesis filters
+<m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>K</m:mi><m:mi>i</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:math> with <emphasis effect="italics">finite</emphasis> parameterizations which give the
+“perfect reconstruction” (PR) property (see Vaidyanathan).
+Though such filters guarantee PR, they do not act as ideal bandpass
+filters and thus do not accomplish perfect frequency analysis.
+(Consider the length-<emphasis effect="italics">N</emphasis> DFT and DCT filter responses:
+by the orthogonal matrix argument, these are perfectly reconstructing,
+but from <link document="m32106" target-id="uid8">Figure 4 from "Introduction and Motivation"</link> and <link document="m32106" target-id="uid9">Figure 5 from "Introduction and Motivation"</link>, they are
+far from perfect bandpass filters!)
+Due to their limited frequency-selectivity, none of the currently-known
+PR filterbanks are appropriate for high-quality audio applications.
+As a result, we focus on the design of filterbanks with
+<list id="id2681251" display="block" list-type="enumerated"><item id="uid42"><emphasis effect="italics">near</emphasis>-perfect reconstruction and
+</item><item id="uid43">good frequency selectivity.
+</item></list>
+As we will see, it is possible to design practical filters with
+excellent frequency selectivity and responses so close to PR that
+the smallest quantization errors swamp out errors caused by non-PR
+filtering.
+</item>
+          <item id="uid44"><emphasis effect="italics"><emphasis effect="underline">Polyphase/DFT Implementation:</emphasis></emphasis> 
+When <m:math overflow="scroll"><m:mrow><m:mi>H</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mi>K</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow></m:math> are length-<emphasis effect="italics">M</emphasis> FIR filters, the unique elements
+in <link target-id="uid40"/> are the <emphasis effect="italics">N</emphasis> uniform-modulation coefficients
+<m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msup><m:mi>e</m:mi><m:mrow><m:mi>j</m:mi><m:mn>2</m:mn><m:mi>π</m:mi><m:mi>n</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:msup><m:mo>;</m:mo><m:mi>n</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mspace width="-0.166667em"/><m:mo>-</m:mo><m:mspace width="-0.166667em"/><m:mn>1</m:mn><m:mo>}</m:mo></m:mrow></m:math> and the <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mi>M</m:mi></m:mrow></m:math> the lowpass filter
+coefficients <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>h</m:mi><m:mi>n</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>k</m:mi><m:mi>n</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math>.
+It might not be surprising that each half of the uniformly-modulated FB
+has an implementation that requires only one <emphasis effect="italics">N</emphasis>-dimensional DFT and
+<emphasis effect="italics">M</emphasis> multiplies to process an <emphasis effect="italics">N</emphasis>-block of input samples.
+<link target-id="uid45"/> illustrates one such implementation,
+where the “polyphase” filters <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msup><m:mi>H</m:mi><m:mstyle scriptlevel="2" displaystyle="false"><m:mrow><m:mo>(</m:mo><m:mi>ℓ</m:mi><m:mo>)</m:mo></m:mrow></m:mstyle></m:msup><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msup><m:mi>K</m:mi><m:mstyle scriptlevel="2" displaystyle="false"><m:mrow><m:mo>(</m:mo><m:mi>ℓ</m:mi><m:mo>)</m:mo></m:mrow></m:mstyle></m:msup><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:math> are
+related to the “prototype” filters <m:math overflow="scroll"><m:mrow><m:mi>H</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mi>K</m:mi><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow></m:math> through the
+impulse response relations:
+<equation id="id2681628"><m:math overflow="scroll" mode="display"><m:mtable displaystyle="true"><m:mtr><m:mtd columnalign="right"><m:mrow><m:mtable><m:mtr><m:mtd columnalign="right"><m:msubsup><m:mi>h</m:mi><m:mi>m</m:mi><m:mstyle scriptlevel="2" displaystyle="false"><m:mrow><m:mo>(</m:mo><m:mi>ℓ</m:mi><m:mo>)</m:mo></m:mrow></m:mstyle></m:msubsup></m:mtd><m:mtd><m:mrow><m:mo>:</m:mo><m:mo>=</m:mo></m:mrow></m:mtd><m:mtd columnalign="left"><m:msub><m:mi>h</m:mi><m:mrow><m:mi>m</m:mi><m:mi>N</m:mi><m:mo>+</m:mo><m:mi>ℓ</m:mi></m:mrow></m:msub></m:mtd></m:mtr><m:mtr><m:mtd columnalign="right"><m:msubsup><m:mi>k</m:mi><m:mi>m</m:mi><m:mstyle scriptlevel="2" displaystyle="false"><m:mrow><m:mo>(</m:mo><m:mi>ℓ</m:mi><m:mo>)</m:mo></m:mrow></m:mstyle></m:msubsup></m:mtd><m:mtd><m:mrow><m:mo>:</m:mo><m:mo>=</m:mo></m:mrow></m:mtd><m:mtd columnalign="left"><m:msub><m:mi>k</m:mi><m:mrow><m:mi>m</m:mi><m:mi>N</m:mi><m:mo>+</m:mo><m:mi>ℓ</m:mi></m:mrow></m:msub></m:mtd></m:mtr></m:mtable><m:mspace width="1.em"/><m:mtext>for</m:mtext><m:mspace width="1.em"/><m:mi>ℓ</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>.</m:mo></m:mrow></m:mtd></m:mtr></m:mtable></m:math></equation>
+The term “polyphase” comes about because the magnitude responses of
+well-designed <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msup><m:mi>H</m:mi><m:mstyle scriptlevel="2" displaystyle="false"><m:mrow><m:mo>(</m:mo><m:mi>ℓ</m:mi><m:mo>)</m:mo></m:mrow></m:mstyle></m:msup><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:math> and <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msup><m:mi>K</m:mi><m:mstyle scriptlevel="2" displaystyle="false"><m:mrow><m:mo>(</m:mo><m:mi>ℓ</m:mi><m:mo>)</m:mo></m:mrow></m:mstyle></m:msup><m:mrow><m:mo>(</m:mo><m:mi>z</m:mi><m:mo>)</m:mo></m:mrow><m:mo>}</m:mo></m:mrow></m:math> are nearly flat,
+while the slopes of the phase response of these filters differ by
+small amounts.
+The equivalence of <link target-id="uid40"/> and <link target-id="uid45"/>
+will be established in the homework.
+<figure id="uid45"><media id="uid45_media" alt="This is a large, complex flow chart that mostly moves to the right, so it will be read from left to right, starting at the top-right. The flowchart begins with the expression x(n). From this expression is one arrow pointing to the right at a circle containing a down arrow and the variable N, and another arrow connected to the initial expression pointing down at a box labeled z^1. This establishes a pattern, where below the z^-1 box is an arrow that points to the right at a down arrow N-cirlce, and a connected arrow that continues the pattern to another z-box. To the right of each of these down-arrow N-circles is another arrow pointing to the right at boxes that are labeled from top to bottom, H^(0)(z), H^(1)(z), and so on to a final box labeled H^(N-1)(z). Each of these boxes point to the right with small arrows at a single large box labeled Conjugate DFT: √N W*_N. To the right of this large box are more small arrows in alignment with the preceding series. These arrows point at a gap, and to the right of the gap are more arrows that continue the flowchart. The arrows point at another large box with identical labeling. From this box is another series of arrows, each pointing at boxes labeled from top to bottom K^(0)(z), K^(1)(z), and so on to a final box K^(N-1)(z). To the right of these boxes are arrows pointing to the right at circles labeled with an up-arrow and the variable N. These circles are all connected to a similar pattern as the beginning of the flowchart, with boxes containing the label z^-1. The movement in this pattern, however, is upward at a final  expression in the top-right, u(n)."><image mime-type="image/png" src="../../media/img032.png" id="uid45_onlineimage" width="665"><!-- NOTE: attribute width changes image size online (pixels). original width is 665. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img032.eps" id="uid45_printimage"/></media><caption>Polyphase/DFT implementation of <emphasis effect="italics">N</emphasis>-band uniformly modulated analysis/synthesis filterbanks.</caption></figure>
+Recognize that the filter computations in <link target-id="uid45"/> occur
+on downsampled (i.e., low-rate) data, in contrast to those in
+<link target-id="uid40"/>.
+To put it another way, all but one of every <emphasis effect="italics">N</emphasis> filter outputs in
+<link target-id="uid40"/> are thrown away by the downsampler, whereas
+none of the filter outputs in <link target-id="uid45"/> are thrown away.
+This reduces the number of required filter computations by a factor
+of <emphasis effect="italics">N</emphasis>.
+Additional computational reduction occurs when the DFT is implemented
+by a fast transform.
+Below we give a concrete example.
+<example id="eip-id8920580"><title>Computational Savings of Polyphase/FFT Implementation)</title> 
+<para id="eip-id8920585">Lets take a look at how many multiplications we save by using
+the polyphase/DFT analysis filterbank in <link target-id="uid45"/>
+instead of the standard modulated filterbank in <link target-id="uid40"/>.
+Here we assume that <emphasis effect="italics">N</emphasis> is a power of 2 (see Sorensen, Jones, Heideman &amp; Burrus TASSP 87), so that the DFT can be
+implemented with a radix-2 FFT.
+With the standard structure in <link target-id="uid40"/>, modulation
+requires <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mi>N</m:mi></m:mrow></m:math> real multiplies, and filtering of the complex-valued
+modulator outputs requires <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mo>×</m:mo><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>M</m:mi></m:mrow></m:math> additional real
+multiplies, for each input point <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>.
+This gives a total of</para>
+<equation id="id2682035"><m:math overflow="scroll" mode="display"><m:mrow><m:mtable frame="solid"><m:mtr><m:mtd><m:mn>2</m:mn><m:mi>N</m:mi><m:mo>(</m:mo><m:mi>M</m:mi><m:mo>+</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mtd></m:mtr></m:mtable><m:mspace width="3.33333pt"/><m:mtext>real</m:mtext><m:mspace width="4.pt"/><m:mtext>multiplies</m:mtext><m:mspace width="4.pt"/><m:mtext>per</m:mtext><m:mspace width="4.pt"/><m:mtext>input</m:mtext><m:mo>.</m:mo></m:mrow></m:math></equation>
+<para id="eip-id8920707">In the polyphase/FFT structure of <link target-id="uid45"/>, it is more
+convenient to count the number of multiplies required for each block
+of <emphasis effect="italics">N</emphasis> inputs since each new <emphasis effect="italics">N</emphasis>-block produces one new sample at
+every filter input and one new <emphasis effect="italics">N</emphasis>-vector at the DFT input.
+Since the polyphase filters are each length-<m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>/</m:mo><m:mi>N</m:mi></m:mrow></m:math>, filtering the
+block requires <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>×</m:mo><m:mi>M</m:mi><m:mo>/</m:mo><m:mi>N</m:mi><m:mo>=</m:mo><m:mi>M</m:mi></m:mrow></m:math> real multiplies.
+Though the standard radix-2 <emphasis effect="italics">N</emphasis>-dimensional complex-valued FFT
+uses <m:math overflow="scroll"><m:mrow><m:mfrac><m:mi>N</m:mi><m:mn>2</m:mn></m:mfrac><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>N</m:mi></m:mrow></m:math> complex multiplies,
+a real-valued <emphasis effect="italics">N</emphasis>-dimensional FFT can be accomplished in <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>N</m:mi></m:mrow></m:math>
+real multiplies when <emphasis effect="italics">N</emphasis> is a power of 2.
+This gives a total of</para>
+<equation id="id2682250"><m:math overflow="scroll" mode="display"><m:mrow><m:mi>M</m:mi><m:mo>+</m:mo><m:mi>N</m:mi><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>N</m:mi><m:mspace width="3.33333pt"/><m:mtext>real</m:mtext><m:mspace width="4.pt"/><m:mtext>multiplies</m:mtext><m:mspace width="4.pt"/><m:mtext>per</m:mtext><m:mspace width="4.pt"/><m:mi>N</m:mi><m:mspace width="4.pt"/><m:mtext>inputs,</m:mtext><m:mspace width="4.pt"/><m:mtext>or</m:mtext><m:mspace width="3.33333pt"/><m:mtable frame="solid"><m:mtr><m:mtd><m:mi>M</m:mi><m:mo>/</m:mo><m:mi>N</m:mi><m:mo>+</m:mo><m:msub><m:mo form="prefix">log</m:mo><m:mn>2</m:mn></m:msub><m:mi>N</m:mi></m:mtd></m:mtr></m:mtable><m:mspace width="3.33333pt"/><m:mtext>real</m:mtext><m:mspace width="4.pt"/><m:mtext>multiplies</m:mtext><m:mspace width="4.pt"/><m:mtext>per</m:mtext><m:mspace width="4.pt"/><m:mtext>input!</m:mtext></m:mrow></m:math></equation>
+<para id="eip-id8920936">Say we have <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>32</m:mn></m:mrow></m:math> frequency bands and the prototype filter is
+length <m:math overflow="scroll"><m:mrow><m:mi>M</m:mi><m:mo>=</m:mo><m:mn>512</m:mn></m:mrow></m:math> (which turn out to be the values used
+in the MPEG sub-band filter).
+Then using the formulas above, the standard implementation
+requires <m:math overflow="scroll"><m:mtable frame="solid"><m:mtr><m:mtd><m:mn>32832</m:mn></m:mtd></m:mtr></m:mtable></m:math> multiplies per input, while the polyphase/DFT
+implementation requires only <m:math overflow="scroll"><m:mtable frame="solid"><m:mtr><m:mtd><m:mn>21</m:mn></m:mtd></m:mtr></m:mtable></m:math>!</para></example>
+
+</item>
+        </list>
+
+
+
+
+
+
+
+</content>
+
+</document>

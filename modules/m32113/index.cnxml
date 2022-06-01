@@ -1,0 +1,85 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>MP3 and AAC: MDCT  Processing</title>
+<metadata>
+  <md:content-id>m32113</md:content-id><md:title>MP3 and AAC: MDCT  Processing</md:title>
+  <md:abstract>In MP3 and AAC coders, the frequency resolution of the polyphase quadrature filterbank is increased using a cascaded MDCT stage.  We describe that here, and give the details of the MDCT stage.</md:abstract>
+  <md:uuid>6c3e51c3-8d2f-43de-9057-5f6515690d36</md:uuid>
+</metadata>
+
+<content>
+
+    <section id="cid2">
+      <title>MDCT Filterbanks</title>
+      <list id="id2700136" display="block" list-type="bulleted"><item id="uid90"><emphasis effect="italics"><emphasis effect="underline">Hybrid Filter Banks:</emphasis></emphasis> 
+In more advanced audio coders such as MPEG “Layer-3” or MPEG
+“Advanced Audio Coding” (the details of which will be discussed later),
+the 32-band polyphase quadrature filterbank (PQF) is thought to not give
+adequate frequency resolution, and so an additional stage of frequency
+division is cascaded onto the output of the PQF.
+This additional frequency division is accomplished using the so-called
+“Modified DCT” (MDCT) filterbank.
+(See <link target-id="uid91"/>.)
+<figure id="uid91"><media id="uid91_media" alt="This is a flowchart with general movement to the right, beginning with a single arrow pointing to the right at a large box labeled N-band Polyphase Quadrature Filterbank. From the right edge of this bos are a series of arrows that each point at a series of boxes, all labeled MDCT. From each MDCT box there are four arrows of equal length and size pointing to the right, and these groups of arrows are labeled Q-bands."><image mime-type="image/png" src="../../media/img041.png" id="uid91_onlineimage" width="424"><!-- NOTE: attribute width changes image size online (pixels). original width is 424. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img041.eps" id="uid91_printimage"/></media><caption>Hybrid filterbank scheme used in MPEG Layer-3 (where <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>32</m:mn></m:mrow></m:math> and <emphasis effect="italics">Q</emphasis> switches bewteen 6 and 18) and MPEG AAC (where <m:math overflow="scroll"><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:mrow></m:math> and <emphasis effect="italics">Q</emphasis> switches between 128 and 1024).</caption></figure></item>
+        <item id="uid92"><emphasis effect="italics">Lapped Transforms:</emphasis> 
+The MDCT is a so-called “lapped transform.”
+At the encoder, blocks of length <m:math overflow="scroll"><m:mrow><m:mn>2</m:mn><m:mi>Q</m:mi></m:mrow></m:math> which overlap by <emphasis effect="italics">Q</emphasis> samples
+are windowed and transformed, generating <emphasis effect="italics">Q</emphasis> subband samples each.
+At the decoder, the <emphasis effect="italics">Q</emphasis> subband samples are inverse-transformed
+and windowed.
+The windowed output samples are overlapped with and added to the
+previous <emphasis effect="italics">Q</emphasis> windowed outputs to form the output stream.
+<link target-id="uid93"/> gives an intuitive view of the coding/decoding
+operation, while <link target-id="uid94"/> and <link target-id="uid95"/> specify the
+specific coder/decoder implementations used in the MPEG schemes.
+<figure id="uid93"><media id="uid93_media" alt="This is a flowchart that contains two cartesian graphs, each with four peaked waves, and two boxes, with arrows in between the objects showing movement. The first graph is labeled overlapping input windows, and contains four peaks, with bases overlapping so that the beginning of each wave begins at the midpoint of the preceding wave. Below the right half of the horizontal axis are six dashed arrows that point down at a box labeled transform. To the right of this box are four dashed arrows that point to the right at a box labeled inverse transform. Above the inverse transform box are six more dashed arrows that point up at the second graph, which is visually identical to the first graph, except that it is labeled windowed and overlapped outputs."><image mime-type="image/png" src="../../media/img042.png" id="uid93_onlineimage" width="484"><!-- NOTE: attribute width changes image size online (pixels). original width is 484. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img042.eps" id="uid93_printimage"/></media><caption>A lapped transform.</caption></figure><figure id="uid94"><media id="uid94_media" alt="This figure is a large flowchart with a general downward direction. It begins with a series of connected boxes labeled across from left to right in a pattern x(mQ- 2Q + 1), x(mQ -2Q +2) and so on to x(mQ). Below these boxes is a single arrow labeled with an asterisk that points down at a second row of connected rectangles with the series of labels w(0), w(1), and so on to w(2Q - 1). Below these rectangles is a single small arrow pointing down labeled with an equal sign, and a series of larger arrows pointing down at a large box labeled Cosine Matrix Transformation. The positions in which the larger arrows point at the large box are labeled in a series from j = 0 to j = 2Q -1. To the right of the box are a series of arrows pointing to the right at the equations that read from top to bottom, i = 0, i = 1, and so on to a final equation,  i = Q - 1."><image mime-type="image/png" src="../../media/img043.png" id="uid94_onlineimage" width="607"><!-- NOTE: attribute width changes image size online (pixels). original width is 607. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img043.eps" id="uid94_printimage"/></media><caption>MDCT filterbank: encoder implementation.</caption></figure><figure id="uid95"><media id="uid95_media" alt="This figure is a large flowchart that moves generally downward. It begins with a large box labeled Cosine matrix transformation. To the left of this box are a series of arrows pointing at the box that are labeled with the equations, i = 0,  i = 1, and so on to i = Q - 1. At the base of this box are the equations j = 0, j = 1, and so on in the series to  j = 2Q - 1. From each of these equations in the series at the base are arrows labeled with asterisks pointing at different segments of a long rectangle containing hash marks. Inside the long rectangle is the label w(0) . . . w(2Q - 1). Below this rectangle is a single arrow pointing down, labeled with an equal sign, at two connected rectangles with the same width and same number of hash marks. Each of the connected rectangles is then divided into two segments because the middle hash mark is longer. The segments, from left to right, contain the captions u_m(0) . . . u_m(Q - 1), u_m(Q) . . . u_m(2Q - 1), u_m-1(0) . . . u_m-1(Q-1), and u_m-1(Q) . . . u_m-1(2Q-1). From certain points along these rectangles are arrows pointing at a row of circles containing a plus sign. below each circle is an arrow pointing down at a final row of connected boxes, labeled u(mQ) to u(mQ + Q - 1)."><image mime-type="image/png" src="../../media/img044.png" id="uid95_onlineimage" width="623"><!-- NOTE: attribute width changes image size online (pixels). original width is 623. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img044.eps" id="uid95_printimage"/></media><caption>MDCT filterbank: decoder implementation.</caption></figure></item>
+        <item id="uid96"><emphasis effect="italics">Perfect Reconstruction:</emphasis> 
+Based on the cancellation of time-domain aliasing components, Princen, Johnson, &amp; Bradley show (in ICASSP 87 and TASSP 86 papers) that
+the MDCT acheives perfect-reconstruction when window <m:math overflow="scroll"><m:mrow><m:mo>{</m:mo><m:msub><m:mi>w</m:mi><m:mi>n</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> is
+chosen so that overlapped squared copies sum to one, i.e.,
+<equation id="id2700418"><m:math overflow="scroll" mode="display"><m:mrow><m:mn>1</m:mn><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:msubsup><m:mi>w</m:mi><m:mrow><m:mi>n</m:mi><m:mo>+</m:mo><m:mi>Q</m:mi></m:mrow><m:mn>2</m:mn></m:msubsup><m:mo>+</m:mo><m:msubsup><m:mi>w</m:mi><m:mrow><m:mi>n</m:mi></m:mrow><m:mn>2</m:mn></m:msubsup><m:mspace width="1.em"/><m:mtext>for</m:mtext><m:mspace width="1.em"/><m:mn>0</m:mn><m:mo>≤</m:mo><m:mi>n</m:mi><m:mo>≤</m:mo><m:mi>Q</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>.</m:mo></m:mrow></m:math></equation>
+The “sine” window
+<equation id="id2700501"><m:math overflow="scroll" mode="display"><m:mrow><m:msub><m:mi>w</m:mi><m:mi>n</m:mi></m:msub><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mo form="prefix">sin</m:mo><m:mfenced separators="" open="(" close=")"><m:mfrac><m:mi>π</m:mi><m:mrow><m:mn>2</m:mn><m:mi>Q</m:mi></m:mrow></m:mfrac><m:mi>n</m:mi></m:mfenced><m:mspace width="1.em"/><m:mtext>for</m:mtext><m:mspace width="1.em"/><m:mn>0</m:mn><m:mo>≤</m:mo><m:mi>n</m:mi><m:mo>≤</m:mo><m:mn>2</m:mn><m:mi>Q</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math></equation>
+is one example of a window satisfying this requirement, and it turns
+out to be the one used in MPEG Layer-3.
+</item>
+        <item id="uid97"><emphasis effect="italics"><emphasis effect="underline">Frequency Resolution:</emphasis></emphasis> 
+With a window length that is only twice the number of transform
+outputs, we cannot expect very good frequency selectivity.
+But, it turns out that this is not a problem.
+In MPEG Layer-3, sine-window MDCTs appear at the outputs of a 32-band
+PQF where frequency selectivity is not a critical issue due to the
+limited frequency resolution of the human ear.
+In MPEG AAC, a 4-band PQF in conjunction with an optimized MDCT window
+function gives frequency selectivity just above that which current
+psychoacoustic models deem necessary (see M. Bosi et al., "ISO/IEC MPEG-2 Advanced Audio Coding" in JAES Oct 1997).
+</item>
+        <item id="uid98"><emphasis effect="italics"><emphasis effect="underline">Window Switching:</emphasis></emphasis> 
+Larger values of <emphasis effect="italics">Q</emphasis> lead to increased frequency resolution but
+decreased time resolution.
+Time resolution is linked to the following: error due to the
+quantization of one MDCT output is spread out over <m:math overflow="scroll"><m:mrow><m:mo>≈</m:mo><m:mn>2</m:mn><m:mi>Q</m:mi><m:mi>N</m:mi></m:mrow></m:math>
+time-domain output samples.
+For signals of a transient nature, choosing <m:math overflow="scroll"><m:mrow><m:mi>Q</m:mi><m:mi>N</m:mi></m:mrow></m:math> too high leads to
+audible “pre-echoes.”
+For less transient signals, on the other hand, the same value of <m:math overflow="scroll"><m:mrow><m:mi>Q</m:mi><m:mi>N</m:mi></m:mrow></m:math>
+might not be perceptible (and the increased frequency resolution
+might be very beneficial).
+Hence, most advanced coding schemes have a provision to switch
+between different time/frequency resolutions depending on local
+signal behavior.
+In MPEG Layer-3, for example, <emphasis effect="italics">Q</emphasis> switches between 6 and 18.
+This is accomplished using a sine window of length 36, a sine
+window of length 12, and intermediate windows which are used
+to switch between the long and short windows while retaining the
+perfect reconstruction property.
+<link target-id="uid99"/> shows an example window sequence.
+<figure id="uid99"><media id="uid99_media" alt="this figure is a graph of nine peaked waves, each beginning and ending at the horizontal axis. They have equal amplitudes, but the wavelengths decrease incrementally until the fifth wave, which has the shortest wavelength, and then they increase symmetrically back to the maximum wavelengths of the first and ninth waves. In shape, the waves are not sinusoidal, most resembling a parabolic shape, except for the third and seventh waves, which begin with a wide ascension to maximum amplitude on the outside, continue with a horizontal segment at their local maxima, and then descend sharply with wavelengths comparable to the fourth and sixth waves."><image mime-type="image/png" src="../../media/img045.png" id="uid99_onlineimage" width="471"><!-- NOTE: attribute width changes image size online (pixels). original width is 471. --></image><image for="pdf" mime-type="application/postscript" src="../../media/img045.eps" id="uid99_printimage"/></media><caption>Example MDCT window sequence for MPEG Layer-3.</caption></figure></item>
+      </list>
+</section>
+
+
+
+</content>
+
+</document>

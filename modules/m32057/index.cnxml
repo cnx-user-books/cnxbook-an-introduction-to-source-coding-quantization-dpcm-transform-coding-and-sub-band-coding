@@ -1,0 +1,33 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Quantization</title>
+  <metadata>
+  <md:content-id>m32057</md:content-id><md:title>Quantization</md:title>
+  <md:abstract>This module introduces the topic of quantization and prefaces the discussion of later modules in the course on source coding.</md:abstract>
+  <md:uuid>5bf2385b-0f47-4483-946a-2e6f8b591322</md:uuid>
+</metadata>
+
+<content>
+    
+    
+    
+      <list id="id158129" display="block" list-type="bulleted"><item id="uid1">Given a continuous-time and continuous-amplitude signal <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>t</m:mi><m:mo>)</m:mo></m:mrow></m:math>,
+processing and storage by modern digital hardware requires
+discretization in both time and amplitude,
+as accomplished by an analog-to-digital converter (ADC).
+</item>
+        <item id="uid2">We will typically work with discrete-time quantities <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math> (indexed
+by “time” variable <emphasis effect="italics">n</emphasis>) which we assume were sampled ideally and
+without aliasing.
+</item>
+        <item id="uid3">Here we discuss various ways of discretizing the amplitude of <m:math overflow="scroll"><m:mrow><m:mi>x</m:mi><m:mo>(</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow></m:math>
+so that it may be represented by a finite set of numbers.
+This is generally a lossy operation, and so we analyze the
+performance of various quantization schemes and design quantizers
+that are optimal under certain assumptions.
+A good reference for much of this material is the textbook by Jayant and Noll.
+</item>
+      </list>
+      
+  </content>
+
+</document>

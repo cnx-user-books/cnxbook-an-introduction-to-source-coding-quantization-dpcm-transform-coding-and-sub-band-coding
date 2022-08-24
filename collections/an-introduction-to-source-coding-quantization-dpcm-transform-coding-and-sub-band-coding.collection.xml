@@ -1,3 +1,54 @@
-<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en" type="Course">  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">  <md:content-id>col11121</md:content-id>  <md:title>An Introduction to Source-Coding: Quantization, DPCM, Transform Coding, and Sub-band Coding</md:title>      <md:license url="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License 3.0</md:license>  <md:language>en</md:language>        <md:uuid>b6387028-5ef5-4dbc-a7eb-ee9ea96d1b94</md:uuid>
-<md:slug>an-introduction-to-source-coding-quantization-dpcm-transform-coding-and-sub-band-coding</md:slug>
-</metadata>  <col:content>                        <col:subcollection>        <md:title>Quantization</md:title>                                <col:content>                    <col:module document="m32057"/>                            <col:module document="m32058"/>                            <col:module document="m32059"/>                            <col:module document="m32060"/>                            <col:module document="m32061"/>                            <col:module document="m32074"/>                          </col:content>      </col:subcollection>                            <col:subcollection>        <md:title>DPCM</md:title>                                <col:content>                    <col:module document="m32063"/>                            <col:module document="m32070"/>                            <col:module document="m32120"/>                            <col:module document="m32140"/>                          </col:content>      </col:subcollection>                            <col:subcollection>        <md:title>Transform Coding</md:title>                                <col:content>                    <col:module document="m32135"/>                            <col:module document="m32123"/>                            <col:module document="m32146"/>                            <col:module document="m32093"/>                            <col:module document="m32087"/>                            <col:module document="m32100"/>                          </col:content>      </col:subcollection>                            <col:subcollection>        <md:title>Subband Coding</md:title>                                <col:content>                    <col:module document="m32106"/>                            <col:module document="m32128"/>                            <col:module document="m32143"/>                            <col:module document="m32148"/>                            <col:module document="m32113"/>                          </col:content>      </col:subcollection>      </col:content></col:collection>
+<?xml version="1.0"?>
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en" type="Course" authors="Phil Schniter">
+  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+    <md:content-id>col11121</md:content-id>
+    <md:title>An Introduction to Source-Coding: Quantization, DPCM, Transform Coding, and Sub-band Coding</md:title>
+    <md:license url="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License 3.0</md:license>
+    <md:language>en</md:language>
+    <md:uuid>b6387028-5ef5-4dbc-a7eb-ee9ea96d1b94</md:uuid>
+    <md:slug>an-introduction-to-source-coding-quantization-dpcm-transform-coding-and-sub-band-coding</md:slug>
+  </metadata>
+  <col:content>
+    <col:subcollection>
+      <md:title>Quantization</md:title>
+      <col:content>
+        <col:module document="m32057"/>
+        <col:module document="m32058"/>
+        <col:module document="m32059"/>
+        <col:module document="m32060"/>
+        <col:module document="m32061"/>
+        <col:module document="m32074"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>DPCM</md:title>
+      <col:content>
+        <col:module document="m32063"/>
+        <col:module document="m32070"/>
+        <col:module document="m32120"/>
+        <col:module document="m32140"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Transform Coding</md:title>
+      <col:content>
+        <col:module document="m32135"/>
+        <col:module document="m32123"/>
+        <col:module document="m32146"/>
+        <col:module document="m32093"/>
+        <col:module document="m32087"/>
+        <col:module document="m32100"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Subband Coding</md:title>
+      <col:content>
+        <col:module document="m32106"/>
+        <col:module document="m32128"/>
+        <col:module document="m32143"/>
+        <col:module document="m32148"/>
+        <col:module document="m32113"/>
+      </col:content>
+    </col:subcollection>
+  </col:content>
+</col:collection>
